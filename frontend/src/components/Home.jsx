@@ -3,6 +3,7 @@ import Creators_home from '../home/Creators_home'
 import Devotional from '../home/Devotional'
 import Hero from '../home/Hero'
 import Trending from '../home/Trending'
+import { Toast } from 'react-hot-toast'
 
 function Home() {
   return (

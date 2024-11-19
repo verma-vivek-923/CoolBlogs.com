@@ -89,4 +89,4 @@ console.log(admins)
   );
 }
 
-export default Creators_hom
+export default Creators_home

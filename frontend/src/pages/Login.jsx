@@ -42,7 +42,7 @@ const Login = () => {
       );
       // console.log(data);
       toast.success("LogIn Successfull");
-      // window.location.pathname = "/";
+      window.location.pathname = "/";
       // console.log(window.location());
       
 
