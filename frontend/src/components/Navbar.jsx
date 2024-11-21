@@ -19,11 +19,11 @@ function Navbar() {
       {/* Desktop */}
       <div >
         <ul className='hidden md:flex space-x-4'>
-        <Link className='hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/">HOME</Link>
-        <Link className='hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/blogs">BLOGS</Link>
-        <Link className='hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/creators">CREATORS</Link>
-        <Link className='hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/about">ABOUT</Link>
-        <Link className='hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/contact">CONTACT US</Link>
+        <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/">HOME</Link>
+        <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/blogs">BLOGS</Link>
+        <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/creators">CREATORS</Link>
+        <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/about">ABOUT</Link>
+        <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/contact">CONTACT US</Link>
         </ul>
         <div className='block md:hidden' onClick={()=>setShow(!show)}>{show?<IoIosCloseCircleOutline size={24}/>:<IoMenuOutline size={24}/>}</div>
       </div>
