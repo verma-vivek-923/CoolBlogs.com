@@ -9,7 +9,7 @@ const router=express.Router();
 
 router.post("/create",isAuthenticated, isAdmin("admin"), createBlog)
 router.delete("/delete/:id",isAuthenticated, isAdmin("admin"), deleteBlog)
-router.get("/allblogs", getAllBlogs)
+router.get("/allblogs",getAllBlogs)
 router.post("/singleblog/:id",isAuthenticated, singleBlog)
 router.put("/updateblog/:id",isAuthenticated,isAdmin("admin"),updateBlog)
 

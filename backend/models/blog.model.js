@@ -32,6 +32,10 @@ const blog_schema=mongoose.Schema({
         type:String,
     
     },
+    createdAt:{
+        type:Date,
+        default:Date.now
+    },
     createdBy:{
         type:mongoose.Schema.ObjectId,
         ref:"user"

@@ -1,9 +1,20 @@
 import React from 'react'
+import { useAuth } from '../context/AuthProvider'
+import MyProfile from '../dashboard/MyProfile'
+import Slider from '../dashboard/slider'
 
 function Dashboard() {
+  const {profile,isAuthenticated}=useAuth();
+  console.log(profile,isAuthenticated);
+
   return (
-    <div>
-      <h1>dashboard</h1>
+    <div  className='w-full flex min-h-screen'>
+      <div className='w-1/3'>
+        <Slider/>
+      </div>
+      <div>
+
+      </div>
     </div>
   )
 }

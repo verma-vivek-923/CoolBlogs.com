@@ -13,6 +13,7 @@ export const isAuthenticated=async (req,res,next)=>{
         const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY);
         console.log("decoded",decoded)
         console.log("dId",decoded.userId)
+        
         const user_find=await user.findById(decoded.userId);
         
         if(!user_find){

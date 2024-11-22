@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <div className="flex flex-col relative items-center  justify-center min-h-screen bg-slate-100">
-      <Link to={"/"} className="w-full absolute top-4 left-4 px-2 md:px-10 flex  items-center space-x-1" >
+      <Link to={"/"} className=" absolute top-4 left-4 px-2 md:px-10 flex  items-center space-x-1" >
             <IoHome /><span>Home</span>
         </Link>
       <h1 className="text-4xl font-bold  mb-4">Cool<span className='text-blue-600'>Blogs</span></h1>

@@ -25,11 +25,15 @@ function Navbar() {
         <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/about">ABOUT</Link>
         <Link className=' hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded' to="/contact">CONTACT US</Link>
         </ul>
-        <div className='block md:hidden' onClick={()=>setShow(!show)}>{show?<IoIosCloseCircleOutline size={24}/>:<IoMenuOutline size={24}/>}</div>
+        <div className='md:hidden flex space-x-2'>
+        {/* <Link to="/dashboard" className='bg-blue-600 text-sm text-white font-semibold hover:bg-blue-800 duration-300 px-2 py-1 rounded'>DASHBOARD</Link> */}
+        <Link to="/login" className=' text-base text-gray-900 tracking-wider md:border border-gray-900  hover:text-white hover:bg-red-800 duration-300 px-2 py-1 rounded'>LogIn</Link>
+        <div className='block md:hidden' onClick={()=>setShow(!show)}>{show?<IoIosCloseCircleOutline size={32}/>:<IoMenuOutline size={32}/>}</div>
+      </div>
       </div>
       <div className='hidden md:flex space-x-2'>
-        <Link to="/dashboard" className='bg-blue-600 text-sm text-white font-semibold hover:bg-blue-800 duration-300 px-2 py-1 rounded'>DASHBOARD</Link>
-        <Link to="/login" className='bg-red-600 text-sm text-white font-semibold hover:bg-red-800 duration-300 px-2 py-1 rounded'>LOGIN</Link>
+        {/* <Link to="/dashboard" className='bg-blue-600 text-sm text-white font-semibold hover:bg-blue-800 duration-300 px-2 py-1 rounded'>DASHBOARD</Link> */}
+        <Link to="/login" className=' text-base text-gray-900 tracking-wider border border-gray-900 font-semibold hover:text-white hover:bg-red-800 duration-300 px-2  rounded'>LogIn</Link>
       </div>
     </div>
     {/* Mobile */}

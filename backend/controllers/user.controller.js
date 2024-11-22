@@ -17,7 +17,7 @@ export let register=async(req,res)=>{
         }
 
         const { name,phone,email,role,education,password}=req.body;
-        console.log( name,phone,email,role,education,password)
+        // console.log( name,phone,email,role,education,password)
     
             let find_user=await user.findOne({email});
     

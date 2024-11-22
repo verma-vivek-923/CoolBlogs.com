@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react'
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import toast from "react-hot-toast"
 
 function Contact() {
   
@@ -10,12 +11,25 @@ function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    console.log(e.target)
+    // console.log(e);
+  
     const formData = new FormData(e.target); // Creates a FormData object from the form
     const data = Object.fromEntries(formData); // Converts FormData to a plain object
-    console.log(formData)
     console.log(data)
+
+    const userData={
+      // access_key:"abc-def-ghi",
+      name:data.name,
+      email:data.email,
+      message:data.message
+    }
+    // try {
+    //   await axios.post("https://api.web3forms.com/submit", userInfo);
+      toast.success("Message sent successfully");
+    // } catch (error) {
+    //   toast.error("An error occurred");
+    // }
+
 
   };
   return (
@@ -72,15 +86,15 @@ function Contact() {
               <ul className="space-y-4">
                 <li className="flex items-center space-x-2">
                   <FaPhone className="text-red-500" />
-                  <span>+91 9876543210</span>
+                  <span>+91 9399863365</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaEnvelope className="text-pink-500" />
-                  <span>help@learncoding.com</span>
+                  <span>vivek90203@gmail.com</span>
                 </li>
                 <li className="flex items-center space-x-2">
                   <FaMapMarkerAlt className="text-green-500" />
-                  <span>Delhi, NCR, India</span>
+                  <span>Indore, Madhya Pradesh, India</span>
                 </li>
               </ul>
 
