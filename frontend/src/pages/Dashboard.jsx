@@ -9,7 +9,7 @@ function Dashboard() {
 
   return (
     <div  className='w-full flex min-h-screen'>
-      <div className='w-1/3'>
+      <div >
         <Slider/>
       </div>
       <div>

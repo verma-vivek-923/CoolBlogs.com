@@ -24,13 +24,10 @@ export const AuthProvider = ({children}) => {
 
         const fetchProfile=async ()=>{
             try {
-                const token=Cookies.get("jwt");
-                console.log(token)
-                const ptoken=token  ? JSON.parse(token):"undefined";
-                console.log(ptoken)
-        if (ptoken) {
-            
-                const  {data}=await axios.post("http://localhost:4500/user/my-profile",
+                const token=Cookies.get('jwt')
+               
+        if (token) {          
+                const  {data}=await axios.get("http://localhost:4500/user/my-profile",
                 {
                     withCredentials: true,
                     headers: {

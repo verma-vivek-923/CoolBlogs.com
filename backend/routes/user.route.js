@@ -9,7 +9,7 @@ const router=express.Router();
 router.post("/register",register)
 router.post("/login",login)
 router.post("/logout",isAuthenticated,logout)
-router.post("/my-profile",isAuthenticated,getMyProfile)
+router.get("/my-profile",isAuthenticated,getMyProfile)
 router.post("/admins",getAllAdmin);
 
 export default router;
