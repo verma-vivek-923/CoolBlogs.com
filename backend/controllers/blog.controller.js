@@ -19,6 +19,12 @@ export const createBlog=async(req,res)=>{
         const adminName=req?.users?.name;
         const adminPhoto=req?.users?.image?.url;
         const createdBy=req?.users?._id;
+
+        if (!category || !tittle || !about) {
+            return res
+              .status(400)
+              .json({ message: "Fill All Fields" });
+          }
     
             const cloudinaryResponse=await cloudinary.uploader.upload(blogImage.tempFilePath);
             if(!cloudinaryResponse ||cloudinaryResponse.error){
@@ -76,6 +82,17 @@ export const singleBlog=async (req,res)=>{
     res.status(200).json({message:"blog are :-",find_blog})
     
 }
+
+export const getMyBlog=async (req,res)=>{
+    const created_by=req.users._id;
+    const find_user=await blog.find({createdBy:created_by});
+    
+    if(!find_user){
+        return res.status(500).json({message:"No blog Found"})
+    }
+    res.status(200).json(find_user)
+}
+
 
 export const updateBlog=async (req,res)=>{
     const {id}=req.params;

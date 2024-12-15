@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import { IoHome } from "react-icons/io5";
-
 function SignupForm() {
+  const navigateTo=useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -13,17 +14,14 @@ function SignupForm() {
   const [education, setEducation] = useState("");
   const [photo, setPhoto] = useState("");
   const [imagePreview, setImagePreview] = useState("");
+  const [loading,setLoading]=useState(false);
 
   const changephotoHandler = (e) => {
     const file = e.target.files[0];
-    // console.log(file);
-    const reader = new FileReader(); // object is created to read the contents of the file
-    // console.log(reader);
-
-    reader.readAsDataURL(file); //reads the file and converts it to a data URL (base64-encoded string). Used to display the image before it is uploaded
+    const reader = new FileReader(); // object is 
+    reader.readAsDataURL(file); 
     reader.onload = () => {
-      //triggered when the file reading is completed.
-      setImagePreview(reader.result); //reader.result contains the data URL (the base64-encoded image).
+      setImagePreview(reader.result); //reader.
       setPhoto(file);
     };
   };
@@ -38,54 +36,49 @@ function SignupForm() {
     formData.append("role", role);
     formData.append("education", education);
     formData.append("photo", photo);
-//     const formData = new FormData();
-// const fields = { name, email, password, phone: mobile, role, education, photo };
 
-// Object.entries(fields).forEach(([key, value]) => {
-//   formData.append(key, value);
-// });
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-
-    // }
-    console.log(formData);
-    try {
-      const {data} = await axios.post(
-        "http://localhost:4500/user/register",
-        formData, //sending form data to /signup endpoint
-        {
-          withCredentials: true, // This option allows sending cookies and other credentials (like authorization tokens) along with the request.
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      // console.log(data);
-      toast.success("Sign Up Successfull");
-      // window.location.pathname = "/";
-      // console.log(window.location());
-      
-
-      
-    } catch (error) {
-      const err=error.response.data.message;
-      if (err) {
-        toast.error(err+"!")
-      } else {
+    setLoading(true);
+      try {
+        const {data} = await axios.post(
+          "http://localhost:4500/user/register",
+          formData, //sending form data to /signup endpoint
+          {
+            withCredentials: true, // This option allows sending cookies and other credentials (like authorization tokens) along with the request.
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         
-      }
-      // alert("sign in error")
-    }
+        toast.success("Sign Up Successfull");
+        console.log(data.create_user);
+        setProfile(data.create_user)
+        setLoading(false)
+        navigateTo("/");
+        // window.location.pathname = "/";
+         
+      } catch (error) {
+        const err=error?.response?.data?.message;
+        if (err) {
+          toast.error(err+"!")
+        } else {
+          toast.error("sign in error");
+        }
+        setLoading(false)
+      }    
+
   };
 
   return (
     <div className="flex flex-col relative items-center justify-center min-h-screen bg-slate-100">
       
-        <Link to={"/"} className="w-full absolute top-4 left-4 px-2 md:px-10 flex items-center space-x-1" >
+        <Link to={"/"} className=" absolute top-4 left-4 px-2 md:px-10 flex items-center space-x-1" >
             <IoHome /><span>Home</span>
         </Link>
              
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">CoolBlogs</h1>
+      <h1 className="text-4xl font-bold  mb-4">
+        Cool<span className="text-blue-600">Blogs</span>
+      </h1>
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
         <h2 className="text-2xl text-center font-semibold mb-1">Create a new account</h2>
         <p className="text-gray-600 text-center mb-4">It's quick and easy.</p>
@@ -162,15 +155,18 @@ function SignupForm() {
             required
             className="w-full p-2 focus:bg-slate-100 border border-gray-300 rounded-md mb-4"
           />
-          <div   className="flex justify-between items-center ">
+          <div   className="flex  items-center ">
             <div className="w-14 h-14 rounded-full flex justify-center items-center overflow-hidden photo">
-              <img className="object-cover object-center w-full h-full"
+              {
+
+                <img className={`${imagePreview ?"block":"hidden"} object-cover  object-center w-full h-full`}
                 src={imagePreview ? `${imagePreview}` : "Image Preview"}
                 alt="Img"
-              />
+                />
+              }
             </div>
 
-            <div className="w-max">
+            <div className="w-4/5">
               <input
                 type="file"
                 className="w-full p-2 px-4 focus:bg-slate-100 focus:outline-none"
@@ -183,7 +179,31 @@ function SignupForm() {
             type="submit"
             className="w-full bg-green-600 mt-2 text-white py-2 rounded-md font-semibold hover:bg-green-700"
           >
-            Sign Up
+           {!loading?("SignUp"):(
+             <div className="flex justify-center items-center space-x-2">
+             <svg
+               className="animate-spin h-5 w-5 text-white"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+             >
+               <circle
+                 className="opacity-25"
+                 cx="12"
+                 cy="12"
+                 r="10"
+                 stroke="currentColor"
+                 strokeWidth="4"
+               ></circle>
+               <path
+                 className="opacity-75"
+                 fill="currentColor"
+                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.28.805 4.373 2.143 6.027l1.857-1.736z"
+               ></path>
+             </svg>
+             <span>Registering...</span>
+           </div>
+           )}
           </button>
           <p className="text-center mt-4">
               Already registered?{" "}

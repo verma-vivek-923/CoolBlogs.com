@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-
-const blog_schema=mongoose.Schema({
-        
+const blog_schema=mongoose.Schema({     
     tittle:{
         type:String,
         required:true
@@ -39,9 +37,6 @@ const blog_schema=mongoose.Schema({
     createdBy:{
         type:mongoose.Schema.ObjectId,
         ref:"user"
-    }
-
-
-    }
+    }   }
 )
 export const blog=mongoose.model("blogs",blog_schema)

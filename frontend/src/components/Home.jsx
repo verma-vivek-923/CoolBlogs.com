@@ -5,6 +5,7 @@ import Hero from '../home/Hero'
 import Trending from '../home/Trending'
 
 function Home() {
+     
   return (
     <div className=' px-4 py-2 border' >
       <Hero/>

@@ -31,9 +31,9 @@ function Blogs() {
            <h1 className=" text-2xl font-semibold ">Trending</h1>
            <Link to={"/blogs"} className="text-lg  hover:underline hover:font-bold hover:tracking-wider cursor-pointer duration-300">View All</Link>
       </div> */}
-      <div  className="py-4 container grid grid-cols-5 gap-y-8">
+      <div className="py-4 container grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5  gap-y-8">
         {blogs && blogs.length > 0 ? (
-          blogs.slice(0,).map((element) => {
+          blogs.slice(0).map((element) => {
             return (
               <div
                 key={element._id}
@@ -46,15 +46,14 @@ function Blogs() {
                       alt="blog"
                       className="w-full h-48 object-cover rounded-t-lg"
                     />
-                    <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
+                    {/* <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
                       {element.category}
-                    </div>
-                    <div className='absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40  transition-transform duration-300 '></div>
+                    </div> */}
+                    <div className="absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80  transition-transform duration-300 "></div>
                   </div>
                   <div className="px-2 pb-2  rounded-b-lg  flex flex-col justify-between">
                     <h1
                       className="text-lg font-bold mb-1 overflow-hidden text-ellipsis transition-all duration-300 group-hover:tracking-wider"
-                      
                       style={{ whiteSpace: "nowrap" }}
                     >
                       {element.tittle}

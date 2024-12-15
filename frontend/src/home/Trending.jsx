@@ -31,9 +31,10 @@ function Trending() {
            <h1 className=" text-2xl font-semibold ">Trending</h1>
            <Link to={"/blogs"} className="text-lg  hover:underline hover:font-bold hover:tracking-wider cursor-pointer duration-300">View All</Link>
       </div>
-      <Carousel responsive={responsive} className="py-4">
+      <div>
         {blogs && blogs.length > 0 ? (
-          blogs.slice(0, 10).map((element) => {
+      <Carousel responsive={responsive} className="py-4">
+          {blogs.slice(0, 10).map((element) => {
             return (
               <div
                 key={element._id}
@@ -73,13 +74,34 @@ function Trending() {
                 </Link>
               </div>
             );
-          })
+          })}
+          </Carousel>
         ) : (
-          <div className=" flex h-screen items-center justify-center">
-            Loading....
-          </div>
+          <div className="flex h-44 justify-center items-center space-x-2">
+             <svg
+               className="animate-spin h-5 w-5 text-slate-800"
+               xmlns="http://www.w3.org/2000/svg"
+               fill="none"
+               viewBox="0 0 24 24"
+             >
+               <circle
+                 className="opacity-25"
+                 cx="12"
+                 cy="12"
+                 r="10"
+                 stroke="currentColor"
+                 strokeWidth="4"
+               ></circle>
+               <path
+                 className="opacity-75"
+                 fill="currentColor"
+                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.28.805 4.373 2.143 6.027l1.857-1.736z"
+               ></path>
+             </svg>
+             <span>Loging In...</span>
+           </div>
         )}
-      </Carousel>
+      </div>
     </div>
   );
 }

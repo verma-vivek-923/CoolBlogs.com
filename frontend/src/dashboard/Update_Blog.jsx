@@ -1,69 +1,81 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast';
+import { useParams } from 'react-router-dom';
 
-function CreateBlog() {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
-  const [loading,setLoading]=useState(false)
+const Update_Blog = () => {
 
-  const [blogImage, setBlogImage] = useState("");
-  const [blogImagePreview, setBlogImagePreview] = useState("");
+  const {id}=useParams();
 
-  const changePhotoHandler = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setBlogImagePreview(reader.result);
-      setBlogImage(file);
-    };
-  };
+    const [title,setTitle]=useState("");
+    const [category,setCategory]=useState("");
+    const [description,setDescription]=useState("");
+    const [blogImage,setBlogImage]=useState("");
+    const [blogImagePreview,setBlogImagePreview]=useState("");
+    const [loading,setLoading]=useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const blog_data=new FormData();
-    blog_data.append("tittle",title);
-    blog_data.append("category",category);
-    blog_data.append("about",description);
-    blog_data.append("blogImage",blogImage);
+    const changePhotoHandler = (e) => {
+      try {
+        
+        const file = e.target.files[0];
+        const fileReader = new FileReader();
 
-    try {
-      const {data}=await axios.post("http://localhost:4500/blog/create",blog_data,{
-
-        withCredentials:true,
-        header:{
-          "Content-Type":"multipart/form-data",
-        },
-      });
-
-        toast.success("Blog Created");
-
-       setBlogImage("");
-       setTitle("");
-       setCategory("");
-       setDescription("");
-       setBlogImagePreview("");
-      setLoading(false);
-
-    } catch (error) {
-      console.log(error);
-      const message=error?.response?.data?.message;
-      if(message){
-        console.log(message);
-        toast.error(message);
-        setLoading(false);
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+            setBlogImagePreview(fileReader.result);
+            setBlogImage(file);
+        };
+      } catch (error) {
+        console.log(error);
+        
       }
+    };
+   
+    //fetch old data by id and put into fields automatically
+    useEffect(()=>{
+
+      const fetchData= async ()=>{
+          const {data}=await axios.get(`http://localhost:4500/blog/singleblog/${id}`,{
+            withCredentials:true,
+          })
+          setTitle(data?.find_blog?.tittle);
+          setCategory(data?.find_blog?.category);
+          setDescription(data?.find_blog?.about);
+          setBlogImage(data?.find_blog?.blogImage?.url);
+          setBlogImagePreview(data?.find_blog?.blogImage?.url);
+      }
+      fetchData();
+
+    },[])
+
+    //Submit new data to database
+    const handleSubmit=async (e)=>{
+        e.preventDefault();
+        const new_data=new FormData();
+
+        new_data.append("tittle",title);
+        new_data.append("category",category);
+        new_data.append("blogImage",blogImage);
+        new_data.append("about",description);
+
+          try {
+            const {data}=await axios.put(`http://localhost:4500/blog/updateblog/${id}`,new_data,{
+              withCredentials:true,
+            })
+            toast.success("Blog Updated Successfully") 
+          } catch (error) {
+            console.log(error);
+            toast.error(error?.response?.data?.message);
+          }
+
     }
-  }
+
 
   return (
     <div>
-      <div className="min-h-screen ">
-        <div className="max-w-xl mx-auto  p-6 border  rounded-lg shadow-2xl">
-          <h3 className="text-2xl font-semibold text-center mb-4">Create Blog</h3>
+      <div className="md:min-h-screen ">
+        <div className="max-w-xl mx-auto  p-6 border mb-8  rounded-lg shadow-2xl">
+          <h3 className="text-2xl font-semibold text-center mb-4">Update Blog</h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <label className="block text-lg">Title</label>
@@ -71,12 +83,12 @@ function CreateBlog() {
                 type="text"
                 placeholder="Enter your blog title"
                 value={title}
-                //required
+                required
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-1.5 focus:bg-slate-100 border border-gray-400   rounded-md outline-none"
+                className="w-full px-3 py-1.5 border border-gray-400   rounded-md outline-none"
               />
             </div>
-            
+
             <div className='w-full  py-2 space-y-2 flex'>
               <div className={`${blogImagePreview?'w-1/2':"w-full"} space-y-4  py-1 pr-4 pl-0`}>
 
@@ -84,12 +96,12 @@ function CreateBlog() {
                   <label className="block text-lg">Category </label>
                   <select
                     value={category}
-                    //required
+                    required
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-1 py-1 focus:bg-slate-50 border border-gray-400 rounded-md outline-none"
+                    className="w-full px-1 py-1 border border-gray-400 rounded-md outline-none"
                   >
                     <option value="">Select Category</option>
-                    <option value="devotional">Devotional</option>
+                    <option value="Devotion">Devotion</option>
                     <option value="Sports">Sports</option>
                     <option value="Coding">Coding</option>
                     <option value="Entertainment">Entertainment</option>
@@ -99,24 +111,24 @@ function CreateBlog() {
 
 
 
-                <div className="space-y-2 ">
+                {/* <div className="space-y-2 ">
                   <label className="block text-lg">Upload Image </label>
 
                   <input
                     type="file"
-                    //required
+                    required
                     onChange={changePhotoHandler}
-                    className="w-full px-1 py-1 focus:bg-slate-50 border border-gray-400   rounded-md outline-none"
+                    className="w-full px-1 py-1 border border-gray-400   rounded-md outline-none"
                   />
-                </div>
+                </div> */}
               </div>
               
               <div className=' w-1/2 '>
-                <div className={`flex ${blogImagePreview?"flex":"hidden"}  border-l border-slate-500 items-center  h-40 overflow-hidden justify-center`}>
+                <div className={`flex ${blogImagePreview?"flex":"hidden"}  border-l border-slate-500 items-center  h-full overflow-hidden justify-center`}>
                   <img
                     src={blogImagePreview ? `${blogImagePreview}` : "/imgPL.webp"}
                     alt="Image"
-                    className="w-40 md:w-52  lg:w-56  max-w-sm rounded-md object-cover"
+                    className="w-40 md:w-52 lg:w-56  max-w-sm rounded-md object-cover"
                   />
                 </div>
               </div>
@@ -125,12 +137,12 @@ function CreateBlog() {
             <div className="space-y-2">
               <label className="block text-lg">description</label>
               <textarea
-                rows="4"
+                rows="6"
                 placeholder="Write something description your blog"
                 value={description}
-                //required
+                required
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3 py-2 focus:bg-slate-200 border border-gray-400  rounded-md outline-none"
+                className="w-full px-3 py-2  border border-gray-400  rounded-md outline-none"
               />
             </div>
 
@@ -171,4 +183,4 @@ function CreateBlog() {
   )
 }
 
-export default CreateBlog
+export default Update_Blog

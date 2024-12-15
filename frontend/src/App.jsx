@@ -12,6 +12,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { useAuth } from './context/AuthProvider'
 import { Toaster } from 'react-hot-toast'
+import Update_Blog from './dashboard/Update_Blog'
+import Detail from './pages/Detail'
 
 function App() {
   const location=useLocation();
@@ -25,12 +27,14 @@ function App() {
 <Routes>
     <Route exact path="/" element={<Home/>}/>
     <Route exact path="/blogs" element={<Blogs/>}/>
+    <Route exact path="/blog/update/:id" element={<Update_Blog/>}/>
     <Route exact path="/contact" element={<Contact/>}/>
     <Route exact path="/creators" element={<Creators/>}/>
     <Route exact path="/about" element={<About/>}/>
     <Route exact path="/dashboard" element={<Dashboard/>}/>
     <Route exact path="/login" element={<Login/>}/>
     <Route exact path="/register" element={<Register/>}/>
+    <Route exact path="/blog/:id" element={<Detail />} />
 </Routes>
 <Toaster/>
 

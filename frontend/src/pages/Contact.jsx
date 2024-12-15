@@ -4,15 +4,9 @@ import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import toast from "react-hot-toast"
 
 function Contact() {
-  
-
-
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(e);
-  
+// console.log(e);
     const formData = new FormData(e.target); // Creates a FormData object from the form
     const data = Object.fromEntries(formData); // Converts FormData to a plain object
     console.log(data)

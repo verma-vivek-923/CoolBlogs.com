@@ -33,9 +33,10 @@ function Devotional() {
            <h1 className=" text-2xl font-semibold ">Devotional</h1>
            <Link to={"/blogs"} className="text-lg  hover:underline hover:font-bold hover:tracking-wider cursor-pointer duration-300">View All</Link>
       </div>
-      <Carousel responsive={responsive} className="py-4">
+      <div>
         {dev_blogs && dev_blogs.length > 0 ? (
-          dev_blogs.slice(0, 10).map((element) => {
+      <Carousel responsive={responsive} className="py-4">
+          {dev_blogs.slice(0, 10).map((element) => {
         
             return (
               <div
@@ -49,10 +50,10 @@ function Devotional() {
                       alt="blog"
                       className="w-full h-48 object-cover rounded-t-lg"
                     />
-                    <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
+                    {/* <div className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs">
                       {element.category}
-                    </div>
-                    <div className='absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-30 group-hover:opacity-80 transition-transform duration-300 '></div>
+                    </div> */}
+                    <div className='absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-80 transition-transform duration-300 '></div>
                     <h1
                       className="text-md absolute bottom-1 left-3 text-white  mb-1 overflow-hidden group-hover:text-yellow-300 transition-all duration-300 group-hover:tracking-wider"
                       
@@ -82,13 +83,34 @@ function Devotional() {
                 </Link>
               </div>
             );
-          })
+          })}
+           </Carousel>
         ) : (
-          <div className=" flex h-screen items-center justify-center">
-            Loading....
-          </div>
+          <div className="flex h-44 justify-center items-center space-x-2">
+          <svg
+            className="animate-spin h-5 w-5 text-slate-800"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.28.805 4.373 2.143 6.027l1.857-1.736z"
+            ></path>
+          </svg>
+          <span>Loading....</span>
+        </div>
         )}
-      </Carousel>
+      </div>
     </div>
   );
 }

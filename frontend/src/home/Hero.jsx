@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthProvider'
 
 function Hero() {
-
+  
   const { blogs } = useAuth();
+  console.log(blogs)
 
   return (
     <>
@@ -13,7 +14,7 @@ function Hero() {
           blogs.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 10).map((element,index) => {
             return (
 
-              <Link to={"/"} key={element._id}
+              <Link to={`/blog/${element._id}`} key={element._id}
                 className={`bg-slate-300 flex flex-col group border-2  rounded-lg shadow-lg hover:shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-200
                     ${index >=4 ? 'hidden md:flex':""}
                 `}>
@@ -35,9 +36,32 @@ function Hero() {
             )
           })
         ) : (
-          <div className=" flex h-screen items-center justify-center">
-            Loading....
-          </div>
+          // <div className=" flex w-full h-44 items-center justify-center">
+          //   <h1>Loading....</h1>
+          // </div>
+          <div className="flex h-44 col-span-full justify-center items-center space-x-2">
+          <svg
+            className="animate-spin h-5 w-5 text-slate-800"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.28.805 4.373 2.143 6.027l1.857-1.736z"
+            ></path>
+          </svg>
+          <span>Loading...</span>
+        </div>
         )}
       </div>
 

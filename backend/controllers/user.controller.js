@@ -18,9 +18,12 @@ export let register=async(req,res)=>{
 
         const { name,phone,email,role,education,password}=req.body;
         // console.log( name,phone,email,role,education,password)
+
+        if(!name || !phone || !email || !role || !education ||!password){
+                return res.status(500).json({message:"Fill All Fields"})
+        }
     
             let find_user=await user.findOne({email});
-    
             if(find_user){
                 return res.status(500).json({message:"user already exist"})
             }
