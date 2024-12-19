@@ -69,11 +69,11 @@ function Creators_home() {
                       <img
                         src={element.image.url}
                         alt="blog"
-                        className="w-full h-48 object-cover rounded-full"
+                        className="w-48 h-48 p-5 object-cover rounded-full"
                       />
 
                       <h1
-                        className="text-md  text-center bg-slate-300 px-1 mt-2 py-1 bottom-1 left-3 text-gray-800  mb-1 overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
+                        className="text-md  text-center bg-slate-300 px-1  py-1 bottom-1 left-3 text-gray-800  mb-1 overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
                         style={{ whiteSpace: "nowrap" }}
                       >
                         {element.name}

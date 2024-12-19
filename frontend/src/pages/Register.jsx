@@ -103,11 +103,12 @@ function SignupForm() {
               className="p-2 border focus:bg-slate-100 border-gray-300 rounded-md w-1/2"
             >
              <option value="">Your Education</option>
-            <option value="Graduate">Graduate</option>
-            <option value="Post_Graduate"> Post Graduate</option>
-            <option value="Ph.D."> Ph.D.</option>
-            <option value="Higher_secondary_Education"> Higher secondary Education</option>
-            <option value="secondary_Education"> secondary Education</option>
+            <option value="bca">BCA</option>
+            <option value="bsc">B.Sc.</option>
+            <option value="ba">BA</option>
+            <option value="mca"> MCA</option>
+            <option value="ma">MA</option>
+            <option value="msc">M.Sc.</option>
             </select>
           </div> 
 
@@ -176,6 +177,7 @@ function SignupForm() {
           </div>
           
           <button
+          disabled={loading}
             type="submit"
             className="w-full bg-green-600 mt-2 text-white py-2 rounded-md font-semibold hover:bg-green-700"
           >

@@ -20,7 +20,6 @@ const Login = () => {
     formData.append("password", password);
 
     setLoading(true);
-    console.log(formData);
 
     try {
       const { data } = await axios.post(
@@ -104,10 +103,15 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full p-2 focus:bg-slate-100 border border-gray-300 rounded-md mb-4"
+            className="w-full p-2 focus:bg-slate-100 border border-gray-300 rounded-md mb-2"
           />
-
+          <div className="flex justify-end px-6 mb-4">
+            <Link to={"/"}  className="text-sm cursor-pointer hover:underline hover:tracking-tight duration-300 text-blue-700" >
+              Forgot Password ?
+            </Link>
+          </div>
           <button
+          disabled={loading}
             type="submit"
             className="w-full bg-green-600 mt-2 text-white py-2 rounded-md md:font-semibold hover:bg-green-700"
           >

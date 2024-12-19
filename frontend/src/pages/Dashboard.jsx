@@ -9,11 +9,11 @@ import Update_Blog from '../dashboard/Update_Blog';
 
 function Dashboard() {
   const [component,setComponent]=useState();
-  const { profile,isAuthenticated }=useAuth();
+  const {isAuthenticated }=useAuth();
 
-  console.log(profile,isAuthenticated);
+//   console.log(profile,isAuthenticated);
 
- console.log(isAuthenticated);
+//  console.log(isAuthenticated);
   
   if(isAuthenticated===false){
     window.location.pathname="/"

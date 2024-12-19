@@ -51,6 +51,8 @@ const Update_Blog = () => {
     //Submit new data to database
     const handleSubmit=async (e)=>{
         e.preventDefault();
+        setLoading(true);
+
         const new_data=new FormData();
 
         new_data.append("tittle",title);
@@ -62,9 +64,11 @@ const Update_Blog = () => {
             const {data}=await axios.put(`http://localhost:4500/blog/updateblog/${id}`,new_data,{
               withCredentials:true,
             })
-            toast.success("Blog Updated Successfully") 
+            toast.success("Blog Updated Successfully") ;
+            setLoading(false);
           } catch (error) {
             console.log(error);
+            setLoading(false);
             toast.error(error?.response?.data?.message);
           }
 
@@ -111,16 +115,15 @@ const Update_Blog = () => {
 
 
 
-                {/* <div className="space-y-2 ">
+                <div className="space-y-2 ">
                   <label className="block text-lg">Upload Image </label>
 
                   <input
                     type="file"
-                    required
                     onChange={changePhotoHandler}
                     className="w-full px-1 py-1 border border-gray-400   rounded-md outline-none"
                   />
-                </div> */}
+                </div>
               </div>
               
               <div className=' w-1/2 '>

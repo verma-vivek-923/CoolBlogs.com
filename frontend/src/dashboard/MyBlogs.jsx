@@ -25,16 +25,11 @@ function MyBlogs() {
   }, []);
 
   const handleDelete = async (id) => {
-    console.log(id);
-
-    console.log("inside");
-
     try {
       await axios.delete(`http://localhost:4500/blog/delete/${id}`, {
         withCredentials: true,
       });
       toast.success("Blog Deleted");
-      // const updatedBlog=myBlogs.filter((key)=>{key.id !== id});
       setMyBlogs((value) => value.filter((blog) => blog._id !== id));
       // setMyBlogs(myBlogs.filter((blog) => blog.id !== id));
     } catch (error) {
@@ -75,18 +70,68 @@ function MyBlogs() {
                     Update
                   </Link>
                   <button
-                    onClick={() => handleDelete(element._id)}
+                    onClick={() =>
+                      document.getElementById("my_modal_1").showModal()
+                    }
                     className="border-2 rounded-md px-3 py-1  bg-red-500 hover:bg-red-600 text-white duration-300"
                   >
                     Delete
                   </button>
                 </div>
+                {/* <button
+                  className="btn"
+                  onClick={() =>
+                    document.getElementById("my_modal_1").showModal()
+                  }
+                >
+                  open modal
+                </button> */}
+                <dialog id="my_modal_1" className="modal">
+                  <div className="modal-box">
+                    <form method="dialog">
+                      {/* if there is a button in form, it will close the modal */}
+                      <button
+                        onClick={() =>
+                          document.getElementById("my_modal_1").close()
+                        }
+                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                      >
+                        ✕
+                      </button>
+                    </form>
+                    <h3 className="font-bold text-base md:text-lg  text-gray-800">
+                      Delete Blog
+                    </h3>
+                    <p className="py-4 text-gray-600 text-sm md:text-base">
+                      Are you sure you want to delete this blog? This action
+                      cannot be undone.
+                    </p>
+                    <div className="modal-action">
+                      <form method="dialog" className="flex justify-end space-x-4">
+                        {/* <button onClick={()=> handleDelete(element._id)} className="px-2 py-1 bg-red-400">Yes</button> */}
+                        <button
+                          onClick={()=> document.getElementById("my_modal_1").close()}
+                          className="px-4 py-1 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        >
+                          Cancel
+                        </button>
+
+                        <button
+                          onClick={()=> handleDelete(element._id)}
+                          className="px-4 py-1 bg-red-700 text-white rounded-lg hover:bg-red-900 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+                        >
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
               </Link>
             );
           })
         ) : (
-          <div className=" flex h-screen items-center justify-center">
-            Loading....
+          <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">
+            <span className="loading loading-spinner loading-lg"></span>
           </div>
         )}
       </div>

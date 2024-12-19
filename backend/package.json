@@ -17,9 +17,12 @@
     "cloudinary": "^2.5.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.21.1",
     "express-fileupload": "^1.5.1",
     "moongose": "^1.0.0",
-    "nodemon": "^3.1.7"
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.7",
+    "win-ca": "^3.5.1"
   }
 }

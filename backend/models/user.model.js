@@ -40,6 +40,8 @@ const user_schema=mongoose.Schema({
     token:{
         type:String
     },
+    otp:String,
+    otpExpires:Date,
     createdAt:{
         type:Date,
         default:Date.now

@@ -56,7 +56,7 @@ const Slider = ({ setComponent }) => {
           <img
             src={profile?.image?.url}
             alt="jj"
-            className="w-28 h-28 rounded-full bg-blue-600 border-2 border-yellow-400 mb-4"
+            className="w-28 h-28 rounded-full bg-blue-600 border-2 border-yellow-700 mb-4"
           />
           <h1 className="text-center text-md py-0.5 px-2 text-gray-800 bg-slate-300 rounded-md">
             {profile?.name}

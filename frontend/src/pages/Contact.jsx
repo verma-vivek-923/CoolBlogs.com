@@ -12,17 +12,18 @@ function Contact() {
     console.log(data)
 
     const userData={
-      // access_key:"abc-def-ghi",
+      access_key:"abc-def-ghi",
       name:data.name,
       email:data.email,
       message:data.message
     }
-    // try {
-    //   await axios.post("https://api.web3forms.com/submit", userInfo);
+    try {
+      await axios.post("https://api.web3forms.com/submit", userInfo);
       toast.success("Message sent successfully");
-    // } catch (error) {
-    //   toast.error("An error occurred");
-    // }
+    } catch (error) {
+      toast.error("An error occurred");
+    }
+
 
 
   };
