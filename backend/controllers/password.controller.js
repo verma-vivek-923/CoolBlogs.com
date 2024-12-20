@@ -1,6 +1,8 @@
 import { sendEmail } from "../config/nodemailer.js";
 import { user } from "../models/user.model.js";
 import crypto from "crypto";
+import bycrypt from "bcrypt"
+import { json } from "express";
 
 export const sendOtp = async (req, res) => {
   const { email } = req.body;
@@ -9,7 +11,7 @@ export const sendOtp = async (req, res) => {
       const find_user = await user.findOne({ email });
     
       if (!find_user) {
-        return res.status(500).json({ message: "User Not Found" });
+        return res.status(400).json({ message: "User Not Found" });
       }
     
       const user_name=find_user.name;
@@ -20,8 +22,8 @@ export const sendOtp = async (req, res) => {
     
       console.log(otp)
       console.log(email);
-    //   find_user.otp = otp;
-    //   find_user.otpExpires = Date.now() + 10 * 60 * 1000;
+      find_user.otp = otp;
+      find_user.otpExpires = Date.now() + 10 * 60 * 1000;
     
       await find_user.save();
       await sendEmail({
@@ -102,9 +104,75 @@ export const sendOtp = async (req, res) => {
         `,
 
       });
-    res.status(200).json({message:"Otp Send to "+email})
+    res.status(200).json({message:"Otp Send to "+ email})
   } catch (error) {
     console.log(error)
     res.status(500).json({message:"Error in sending",error})
   }
 };
+
+export const validateOtp= async (req,res)=>{
+     const {email,otp}=req.body;
+
+     try {
+       const find_user=await user.findOne({email});
+  
+       if(!find_user){
+        return res.status(400).json({message:"No User Found"});
+       }
+  
+       if(Date.now() > find_user.otpExpires){
+        return res.status(400).json({message:"OTP has Expired"})
+       }
+  
+       if(otp!==find_user.otp){
+        return res.status(400).json({message:"Invalid OTP"});
+       }
+       find_user.otp=null;
+       find_user.otpExpires=null;
+       find_user.isOtpVerified=true;
+       find_user.save();
+  
+       res.status(200).json({message:"Validation Successfull"});
+     } catch (error) {
+        return res.status(500).json({message:"Error in Validation",error})
+     }
+    
+}
+
+export const resetPassword =async (req,res)=>{
+    const {email,new_password,cpassword}=req.body;
+
+    try {
+            const find_user=await user.findOne({email});
+
+            if(!find_user){
+              return res.status(400).json({message:"No User Found"});
+            }
+
+            if(!find_user.isOtpVerified){
+              return res.status(400).json({message:"Verify OTP First"});
+            }
+
+            if(!new_password || !cpassword){
+              return res.status(400).json({message:"All Fields Are Required"});
+            }
+
+            if(new_password!==cpassword){
+              return res.status(400).json({message:"Password Not Matched"});
+            }
+
+            const hashed_password=await bycrypt.hash(new_password,10);
+
+            find_user.password=hashed_password;
+            find_user.isOtpVerified=null;
+            find_user.save();
+
+            res.status(200).json({message:"Password Change Successfully"});
+    } catch(error) {
+      console.log(error)
+      res.status(500).json({message:"Internal Server error",error})
+    }
+
+
+}

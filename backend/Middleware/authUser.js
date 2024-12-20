@@ -11,8 +11,8 @@ export const isAuthenticated=async (req,res,next)=>{
             return res.status(401).json({message:"User not Authenticated"});
         }
         const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY);
-        console.log("decoded",decoded)
-        console.log("dId",decoded.userId)
+        console.log("decoded",decoded);
+        console.log("dId",decoded.userId);
         
         const user_find=await user.findById(decoded.userId);
         
@@ -38,3 +38,5 @@ export const isAdmin=(...roles)=>{
         next();
     }
 }
+
+//is OTP verified

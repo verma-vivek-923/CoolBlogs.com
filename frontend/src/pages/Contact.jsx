@@ -25,7 +25,6 @@ function Contact() {
     }
 
 
-
   };
   return (
     <div >

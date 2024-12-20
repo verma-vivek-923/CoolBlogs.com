@@ -42,6 +42,7 @@ const user_schema=mongoose.Schema({
     },
     otp:String,
     otpExpires:Date,
+    isOtpVerified:Boolean,
     createdAt:{
         type:Date,
         default:Date.now
