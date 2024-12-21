@@ -12,7 +12,7 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   const [new_password, setNew_password] = useState("");
   const [cpassword, setCpassword] = useState("");
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   const [disabled, setDisabled] = useState(true);
   const [loadingSend, setLoadingSend] = useState(false);
