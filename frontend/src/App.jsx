@@ -15,6 +15,7 @@ import { Toaster } from 'react-hot-toast'
 import Update_Blog from './dashboard/Update_Blog'
 import Update_user from './dashboard/Update_user'
 import Detail from './pages/Detail'
+import ForgotPassword from './pages/ForgotPassword'
 
 function App() {
   const location=useLocation();
@@ -34,6 +35,8 @@ function App() {
     <Route exact path="/dashboard" element={<Dashboard/>}/>
     <Route exact path="/login" element={<Login/>}/>
     <Route exact path="/register" element={<Register/>}/>
+    <Route exact path="/forgot-password" element={<ForgotPassword/>}/>
+
     <Route exact path="/blog/:id" element={<Detail />} />
     <Route exact path="/blog/update/:id" element={<Update_Blog/>}/>
     <Route exact path="/user/update/:id" element={<Update_user/>}/>
