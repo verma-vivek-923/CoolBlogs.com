@@ -144,7 +144,7 @@ const ForgotPassword = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="flex-grow p-2  border focus:bg-slate-100 border-gray-300 rounded-md"
+                    className="flex-grow p-2  border focus:bg-slate-200 outline-green-900 border-gray-300 rounded-md"
                   />
                   <button
                     disabled={loadingSend}
@@ -226,7 +226,7 @@ const ForgotPassword = () => {
                     value={new_password}
                     onChange={(e) => setNew_password(e.target.value)}
                     required
-                    className="flex-grow p-2 outline-1 focus:bg-slate-200 border focus:outline-green-700 focus:ring-1 border-gray-300 rounded-md"
+                    className="flex-grow p-2 outline-1 focus:bg-slate-200 border focus:outline-green-900 focus:ring-1 border-gray-300 rounded-md"
                   />
                 </div>
 
@@ -240,7 +240,7 @@ const ForgotPassword = () => {
                     value={cpassword}
                     onChange={(e) => setCpassword(e.target.value)}
                     required
-                    className="w-full p-2 tracking-widest focus:bg-slate-200 border focus:outline-green-700 border-gray-300 rounded-md mb-2"
+                    className="w-full p-2 tracking-widest focus:bg-slate-200 border focus:outline-green-900 border-gray-300 rounded-md mb-2"
                   />
                 </div>
                 <button
