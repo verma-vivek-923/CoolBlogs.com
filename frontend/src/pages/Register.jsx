@@ -26,6 +26,10 @@ function SignupForm() {
     };
   };
 
+  const handleVerify = async (e) => {
+    e.preventDefault();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -85,7 +89,7 @@ function SignupForm() {
           Create a new account
         </h2>
         <p className="text-gray-600 text-center mb-4">It's quick and easy.</p>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleVerify}>
           <div className="flex gap-2 mb-3 justify-between">
             <select
               name="role"
@@ -236,8 +240,19 @@ function SignupForm() {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">Press ESC key or click on ✕ button to close</p>
+          <h3 className="font-bold text-lg">Verify OTP</h3>
+          <p className="py-4">OTP has been sent to your registered email. Please enter the OTP below.</p>
+          <div className="modal-action">
+            <form >
+              {/* if there is a button in form, it will close the modal */}
+              <button
+                onClick={() => handleSubmit}
+                className="px-4 py-1 bg-red-700 text-white rounded-lg hover:bg-red-900 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+              >
+               Submit
+              </button>
+            </form>
+          </div>
         </div>
       </dialog>
     </div>
