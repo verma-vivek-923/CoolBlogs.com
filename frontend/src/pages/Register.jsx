@@ -28,6 +28,7 @@ function SignupForm() {
 
   const handleVerify = async (e) => {
     e.preventDefault();
+    document.getElementById("my_modal_3").showModal();
   };
 
   const handleSubmit = async (e) => {
