@@ -25,6 +25,7 @@ const ForgotPassword = () => {
 
     const form_data = new FormData();
     form_data.append("email", email);
+    form_data.append("context", "forgot-password");
 
     try {
       const { data } = await axios.post(

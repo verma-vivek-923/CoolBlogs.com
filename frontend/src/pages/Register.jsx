@@ -11,10 +11,12 @@ function SignupForm() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [otp, setOtp] = useState("");
   const [education, setEducation] = useState("");
   const [photo, setPhoto] = useState("");
   const [imagePreview, setImagePreview] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loadingSend, setLoadingSend] = useState(false);
+  const [loadingVerify, setLoadingVerify] = useState(false);
 
   const changephotoHandler = (e) => {
     const file = e.target.files[0];
@@ -26,13 +28,81 @@ function SignupForm() {
     };
   };
 
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+    setLoadingSend(true);
+
+    if (!email || !mobile || !role || !education || !photo) {
+      toast.error("Fill All Fields");
+      setLoadingSend(false);
+      return;
+    }
+
+    const form_data = new FormData();
+    form_data.append("email", email);
+    form_data.append("context","register");
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4500/user/forgot-password",
+        form_data,
+        {
+          withCredentials: true,
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+          
+        }
+      );
+      toast.success("OTP Send to your Email");
+      setLoadingSend(false);
+      document.getElementById("my_modal_3").showModal();
+      // setDisabled(false);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      if (message) {
+        console.log(error);
+        console.log(message);
+        toast.error("Error : " + message);
+      }
+      setLoadingSend(false);
+    }
+  };
+
   const handleVerify = async (e) => {
     e.preventDefault();
-    document.getElementById("my_modal_3").showModal();
+    setLoadingVerify(true);
+
+    const form_data = new FormData();
+    form_data.append("email", email);
+    form_data.append("otp", otp);
+    form_data.append("context","register");
+
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4500/user/verifyotp",
+        form_data,
+        {
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      toast.success("Validate Succesfully");
+      await handleSubmit();
+      setLoadingVerify(false);
+      setOtp("");
+      // setDisabled(true);
+      // setShow(true);
+    } catch (error) {
+      setLoadingVerify(false);
+      const message = error?.response?.data.message;
+      toast.error(message);
+    }
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
@@ -42,7 +112,7 @@ function SignupForm() {
     formData.append("education", education);
     formData.append("photo", photo);
 
-    setLoading(true);
+    // setLoadingSend(true);
     try {
       const { data } = await axios.post(
         "http://localhost:4500/user/register",
@@ -57,10 +127,12 @@ function SignupForm() {
 
       toast.success("Sign Up Successfull");
       console.log(data.create_user);
-      setProfile(data.create_user);
-      setLoading(false);
+      // setProfile(data.create_user);
+      setLoadingSend(false);
       navigateTo("/");
-      // window.location.pathname = "/";
+      setTimeout(() => {
+        window.location.pathname = "/";
+      }, 1500);
     } catch (error) {
       const err = error?.response?.data?.message;
       if (err) {
@@ -68,7 +140,7 @@ function SignupForm() {
       } else {
         toast.error("sign in error");
       }
-      setLoading(false);
+      setLoadingSend(false);
     }
   };
 
@@ -90,7 +162,7 @@ function SignupForm() {
           Create a new account
         </h2>
         <p className="text-gray-600 text-center mb-4">It's quick and easy.</p>
-        <form onSubmit={handleVerify}>
+        <form onSubmit={handleSendOtp}>
           <div className="flex gap-2 mb-3 justify-between">
             <select
               name="role"
@@ -113,7 +185,7 @@ function SignupForm() {
               <option value="bca">BCA</option>
               <option value="bsc">B.Sc.</option>
               <option value="ba">BA</option>
-              <option value="mca"> MCA</option>
+              <option value="mca">MCA</option>
               <option value="ma">MA</option>
               <option value="msc">M.Sc.</option>
             </select>
@@ -186,11 +258,11 @@ function SignupForm() {
           </div>
 
           <button
-            disabled={loading}
+            disabled={loadingSend}
             type="submit"
             className="w-full bg-green-600 mt-2 text-white py-2 rounded-md font-semibold hover:bg-green-700"
           >
-            {!loading ? (
+            {!loadingSend ? (
               "SignUp"
             ) : (
               <div className="flex justify-center items-center space-x-2">
@@ -233,8 +305,17 @@ function SignupForm() {
       >
         open modal
       </button> */}
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box">
+      <dialog id="my_modal_3" className="modal ">
+        {/* <div className="toast toast-top toast-start">
+          <div className="alert alert-info">
+            <span>New mail arrived.</span>
+          </div>
+          <div className="alert alert-success">
+            <span>Message sent successfully.</span>
+          </div>
+        </div> */}
+      
+        <div className="modal-box">     
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
@@ -242,15 +323,41 @@ function SignupForm() {
             </button>
           </form>
           <h3 className="font-bold text-lg">Verify OTP</h3>
-          <p className="py-4">OTP has been sent to your registered email. Please enter the OTP below.</p>
-          <div className="modal-action">
-            <form >
+          <p className="py-4 text-sm">
+            {/* OTP has been sent to your registered email. Please enter the OTP
+            below. */}
+            Please Enter 6 digit OTP , Sended to your Email ({email})
+          </p>
+          <div className="">
+            <form
+              onSubmit={handleVerify}
+              className="flex flex-col items-end gap-3"
+            >
+              <input
+                type="text"
+                // disabled={disabled}
+                name={otp}
+                autoComplete="off"
+                placeholder="Enter 6 digit OTP Here"
+                value={otp}
+                onChange={(e) => {
+                  // const input = e.target.value.slice(0, 6); // Ensure max 6 digits
+                  const input = e.target.value.replace(/\D/g, ""); // Only keep numbers
+                  setOtp(input);
+                }}
+                required
+                inputMode="numeric"
+                pattern="\d{6}" // Enforces 6 digits only
+                title="Please enter a valid 6-digit OTP." // Tooltip message
+                maxLength={6} // Restricts input to 6 characters
+                className="w-full p-2 tracking-widest focus:bg-slate-100 border border-gray-300 rounded-md mb-2"
+              />
               {/* if there is a button in form, it will close the modal */}
               <button
-                onClick={() => handleSubmit}
+                // onClick={() => handleSubmit}
                 className="px-4 py-1 bg-red-700 text-white rounded-lg hover:bg-red-900 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
               >
-               Submit
+                Submit
               </button>
             </form>
           </div>
