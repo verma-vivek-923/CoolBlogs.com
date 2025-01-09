@@ -1,7 +1,7 @@
 import { sendEmail } from "../config/nodemailer.js";
 import { user } from "../models/user.model.js";
 import crypto from "crypto";
-import bycrypt from "bcrypt"
+import bycrypt from "bcryptjs"
 import { json } from "express";
 import { otp_model } from "../models/otp.model.js";
 
