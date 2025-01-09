@@ -7,10 +7,9 @@ export const  createTokenAndSaveCookies=async(userId,res)=>{
         expiresIn:"2d"
     })
     res.cookie("jwt",token,{
-        // httpOnly:true, //protect form xss
-        sameSite:"lax",
+        httpOnly:false, //protect form xss
+        sameSite:"none",
         secure:true,
-        path:"/",
     })
     await user.findByIdAndUpdate(userId,{token})
     return token;
