@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Loading from "../components/loading";
 import { IoHome } from "react-icons/io5";
 function SignupForm() {
   const navigateTo = useNavigate();
@@ -88,7 +89,7 @@ function SignupForm() {
           },
         }
       );
-      toast.success("Validate Succesfully");
+      // toast.success("Validate Succesfully");
       await handleSubmit();
       setLoadingVerify(false);
       setOtp("");
@@ -128,7 +129,7 @@ function SignupForm() {
       toast.success("Sign Up Successfull");
       console.log(data.create_user);
       // setProfile(data.create_user);
-      setLoadingSend(false);
+      // setLoadingSend(false);
       navigateTo("/");
       setTimeout(() => {
         window.location.pathname = "/";
@@ -357,7 +358,14 @@ function SignupForm() {
                 // onClick={() => handleSubmit}
                 className="px-4 py-1 bg-red-700 text-white rounded-lg hover:bg-red-900 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
               >
-                Submit
+                 {!loadingVerify ? (
+                    "Submit"
+                  ) : (
+                    <div className="flex justify-center items-center space-x-2">
+                      <Loading />
+                      <span>Signing In...</span>
+                    </div>
+                  )}
               </button>
             </form>
           </div>

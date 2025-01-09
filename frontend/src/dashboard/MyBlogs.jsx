@@ -78,14 +78,7 @@ function MyBlogs() {
                     Delete
                   </button>
                 </div>
-                {/* <button
-                  className="btn"
-                  onClick={() =>
-                    document.getElementById("my_modal_1").showModal()
-                  }
-                >
-                  open modal
-                </button> */}
+                
                 <dialog id="my_modal_1" className="modal">
                   <div className="modal-box">
                     <form method="dialog">
@@ -129,10 +122,20 @@ function MyBlogs() {
               </Link>
             );
           })
+        ) : ( myBlogs.length <= 0 ? (
+          
+          <div className="col-span-full">
+              <h1 className="text-lg">
+                It Seems like You Havent Posted any blog Yet
+              </h1>
+
+          </div>
         ) : (
-          <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">
+
+                    <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
+        )
         )}
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Loading from "../components/loading";
 import axios from "axios";
 
 function Creators_home() {
@@ -64,50 +65,58 @@ function Creators_home() {
                   key={element._id}
                   className="  rounded-lg  mx-2 overflow-hidden "
                 >
-                  <Link >
-                    <div className=" group relative ">
+                  <Link>
+                    <div className="flex flex-col gap-1 items-center border border-slate-300  justify-center shadow-md rounded-md group relative ">
                       <img
                         src={element.image.url}
                         alt="blog"
-                        className="w-48 h-48 p-5 object-cover rounded-full"
+                        className="w-32 h-32 object-cover p-2 rounded-full"
                       />
-
+                      <p className="text-sm text-gray-500 capitalize">
+                        {element.role}
+                      </p>
                       <h1
-                        className="text-md  text-center bg-slate-300 px-1  py-1 bottom-1 left-3 text-gray-800  mb-1 overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
+                        className="text-md w-full text-center capitalize bg-slate-300 px-1 rounded-sm  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
                         style={{ whiteSpace: "nowrap" }}
                       >
                         {element.name}
                       </h1>
                     </div>
+                    {/* <div className=" h-56 flex flex-col items-center justify-center  bg-slate-300 shadow-md rounded-md group relative">
+                      <img
+                        src={element.image.url}
+                        alt="name"
+                        className="w-24 h-24 rounded-full mb-4"
+                      />
+                      <h3 className="text-lg font-semibold transition-all duration-300 group-hover:tracking-wider capitalize">
+                        {element.name}
+                      </h3>
+                      <p className="text-sm text-gray-500 capitalize">
+                        {element.role}
+                      </p>
+                      <button className="mt-1 px-4 text-sm py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                        Learn more
+                      </button>
+                    </div> */}
                   </Link>
                 </div>
               );
             })}
           </Carousel>
         ) : (
-          <div className="flex h-44 justify-center items-center space-x-2">
-            <svg
-              className="animate-spin h-5 w-5 text-slate-800"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 2.28.805 4.373 2.143 6.027l1.857-1.736z"
-              ></path>
-            </svg>
-            <span>Loading....</span>
-          </div>
+          // <div className="flex h-44 justify-center items-center space-x-2">
+          //   <Loading className="!text-black"/>
+          //   <span>Loading....</span>
+          // </div>
+          <Carousel responsive={responsive} className="py-4  px-2">
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+            <div className="skeleton h-44 mx-2"></div>
+          </Carousel>
         )}
       </div>
     </div>

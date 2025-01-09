@@ -29,14 +29,14 @@ function Dashboard() {
       </div>
       <div>
             {
-              component==='My Profile' ?(
-                <MyProfile/>
+              component==='My Blogs' ?(
+                <MyBlogs/>
               ):component==="Create Blog" ?(
                   <CreateBlog/>
               ): component==="Update Blog" ?(
                   <Update_Blog/>
               ): (
-                <MyBlogs/>
+                <MyProfile/>
               )
             }
       </div>
