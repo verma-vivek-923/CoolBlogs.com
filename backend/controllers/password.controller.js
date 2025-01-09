@@ -7,7 +7,7 @@ import { otp_model } from "../models/otp.model.js";
 
 
 export const sendOtp = async (req, res) => {
-  const { email , context } = req.body;
+  const { email ,context } = req.body;
 
   try {
     let otp,user_name
@@ -21,12 +21,12 @@ export const sendOtp = async (req, res) => {
     
       user_name=find_user.name;
     
-      console.log(user_name , context)
+      // console.log(user_name , context)
     
        otp = crypto.randomInt(100000, 999999).toString();
     
-      console.log(otp)
-      console.log(email);
+      // console.log(otp)
+      // console.log(email);
       find_user.otp = otp;
       find_user.otpExpires = Date.now() + 10 * 60 * 1000;
     
@@ -40,8 +40,8 @@ export const sendOtp = async (req, res) => {
         }
 
         otp = crypto.randomInt(100000, 999999).toString();
-        console.log(otp);
-        console.log(email);
+        // console.log(otp);
+        // console.log(email);
   
         const otpEntry = new otp_model({
           email,
@@ -139,7 +139,6 @@ export const sendOtp = async (req, res) => {
 
 export const validateOtp= async (req,res)=>{
      const {email,otp,context}=req.body;
-
      try {
       let find_user;
 
@@ -148,9 +147,9 @@ export const validateOtp= async (req,res)=>{
         
       }else if(context==="register"){
        find_user=await otp_model.findOne({email});
-
       }
-  
+     
+      // console.log(find_user);
        if(!find_user){
         return res.status(400).json({message:"No User Found"});
        }
@@ -167,9 +166,6 @@ export const validateOtp= async (req,res)=>{
        find_user.isOtpVerified=true;
        find_user.save();
 
-      console.log(find_user.otp,
-          find_user.otpExpires)
-  
        res.status(200).json({message:"Validation Successfull"});
      } catch (error) {
         return res.status(500).json({message:"Error in Validation",error})
