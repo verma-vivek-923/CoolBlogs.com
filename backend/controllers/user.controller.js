@@ -96,7 +96,7 @@ export let login = async (req, res) => {
   }
 };
 export const logout = async (req, res) => {
-  res.clearCookie("jwt", { httpOnly: true });
+  res.clearCookie("jwt", { httpOnly:false });
 
   res.status(200).json({ message: "User logged out successfully" });
 };

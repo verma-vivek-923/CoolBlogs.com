@@ -27,6 +27,7 @@ function Navbar() {
           "Content-Type": "multipart/form-data",
         },
       });
+      localStorage.removeItem("user");
       // console.log(data)
       setIsAuthenticated(false);
       setTimeout(() => {
