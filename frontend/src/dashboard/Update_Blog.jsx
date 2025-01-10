@@ -35,7 +35,7 @@ const Update_Blog = () => {
     useEffect(()=>{
 
       const fetchData= async ()=>{
-          const {data}=await axios.get(`http://localhost:4500/blog/singleblog/${id}`,{
+          const {data}=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blog/singleblog/${id}`,{
             withCredentials:true,
           })
           setTitle(data?.find_blog?.tittle);
@@ -61,7 +61,7 @@ const Update_Blog = () => {
         new_data.append("about",description);
 
           try {
-            const {data}=await axios.put(`http://localhost:4500/blog/updateblog/${id}`,new_data,{
+            const {data}=await axios.put(`${import.meta.env.VITE_BACKEND_URL}/blog/updateblog/${id}`,new_data,{
               withCredentials:true,
             })
             toast.success("Blog Updated Successfully") ;

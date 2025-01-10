@@ -15,7 +15,7 @@ function Creators_home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:4500/user/admins", {
+      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/admins`, {
         withCredentials: true,
       });
       console.log(data);

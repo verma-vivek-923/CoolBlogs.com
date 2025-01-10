@@ -23,7 +23,7 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/login",
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
         formData, //sending form data to /signup endpoint
         {
           withCredentials: true, // This option allows sending cookies and other credentials (like authorization tokens) along with the request.

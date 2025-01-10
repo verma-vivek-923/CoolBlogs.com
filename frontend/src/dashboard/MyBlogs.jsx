@@ -10,12 +10,12 @@ function MyBlogs() {
     const getMyBlogs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4500/blog/my-blogs",
+          `${import.meta.env.VITE_BACKEND_URL}/blog/my-blogs`,
           {
             withCredentials: true,
           }
         );
-        console.log(data);
+        // console.log(data);
         setMyBlogs(data);
       } catch (error) {
         console.log(error);
@@ -26,7 +26,7 @@ function MyBlogs() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4500/blog/delete/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/blog/delete/${id}`, {
         withCredentials: true,
       });
       toast.success("Blog Deleted");

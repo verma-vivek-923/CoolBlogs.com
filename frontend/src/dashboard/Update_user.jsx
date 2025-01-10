@@ -35,7 +35,7 @@ const Update_user = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(
-        `http://localhost:4500/user/my-profile`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/my-profile`,
         {
           withCredentials: true,
         }
@@ -68,7 +68,7 @@ const Update_user = () => {
 
     try {
       const { data } = await axios.put(
-        `http://localhost:4500/user/updateuser/${id}`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/updateuser/${id}`,
         new_data,
         {
           withCredentials: true,
@@ -78,7 +78,7 @@ const Update_user = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      // console.log(error);
       toast.error(error?.response?.data?.message);
     }
   };

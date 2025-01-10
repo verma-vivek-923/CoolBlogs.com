@@ -12,7 +12,6 @@ function Dashboard() {
   const {isAuthenticated }=useAuth();
 
 //   console.log(profile,isAuthenticated);
-
 //  console.log(isAuthenticated);
   
   if(isAuthenticated===false){

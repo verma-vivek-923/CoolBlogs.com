@@ -17,7 +17,7 @@ export const AuthProvider = ({children}) => {
                 const token=Cookies.get('jwt');
        
         if (token) {          
-                const  {data}=await axios.get("http://localhost:4500/user/my-profile",
+                const  {data}=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/my-profile`,
                 {
                     withCredentials: true,
                     headers: {
@@ -37,7 +37,7 @@ export const AuthProvider = ({children}) => {
         }
         const fetchBlogs=async()=>{
             try {
-                const {data}=await axios.get("http://localhost:4500/blog/allblogs"); //{data}==response.data
+                const {data}=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/blog/allblogs`); //{data}==response.data
                 setBlogs(data)
                 console.log(data)
             } catch (error) {

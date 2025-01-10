@@ -12,17 +12,12 @@ function Detail() {
 
   const {profile}=useAuth();
   
-// if(blogs?.createdBy === profile?._id){
-//   console.log(blogs?.createdBy);
-//   setShow(true);
-// }
-
-  console.log(blogs);
+  // console.log(blogs);
   useEffect(() => {
     const fetchblogs = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:4500/blog/singleblog/${id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/blog/singleblog/${id}`,
 
           {
             withCredentials: true,

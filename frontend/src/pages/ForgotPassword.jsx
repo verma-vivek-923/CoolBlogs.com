@@ -29,7 +29,7 @@ const ForgotPassword = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/forgot-password",
+        `${import.meta.env.VITE_BACKEND_URL}/user/forgot-password`,
         form_data,
         {
           withCredentials: true,
@@ -44,8 +44,6 @@ const ForgotPassword = () => {
     } catch (error) {
       const message = error?.response?.data?.message;
       if (message) {
-        console.log(error);
-        console.log(message);
         toast.error("Error : " + message);
       }
       setLoadingSend(false);
@@ -59,10 +57,11 @@ const ForgotPassword = () => {
     const form_data = new FormData();
     form_data.append("email", email);
     form_data.append("otp", otp);
+    form_data.append("context","forgot-password");
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/verifyotp",
+        `${import.meta.env.VITE_BACKEND_URL}/user/verifyotp`,
         form_data,
         {
           header: {
@@ -93,7 +92,7 @@ const ForgotPassword = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/reset-password",
+       `${import.meta.env.VITE_BACKEND_URL}/user/reset-password`,
         form_data,
         {
           header: {

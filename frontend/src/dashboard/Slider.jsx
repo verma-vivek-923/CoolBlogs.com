@@ -24,7 +24,7 @@ const Slider = ({ setComponent }) => {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get("http://localhost:4500/user/logout", {
+      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
         withCredentials: true,
         headers: {
           "Content-Type": "multipart/form-data",

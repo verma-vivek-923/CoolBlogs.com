@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthProvider";
 
 function MyProfile() {
   const { profile } = useAuth();
-  console.log(profile);
+  // console.log(profile);
   return (
     <div className="min-h-screen flex flex-col mt-0  ">
        <h3 className="text-2xl font-semibold text-center pt-4">My Profile</h3>

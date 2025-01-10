@@ -45,7 +45,7 @@ function SignupForm() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/forgot-password",
+        `${import.meta.env.VITE_BACKEND_URL}/user/forgot-password`,
         form_data,
         {
           withCredentials: true,
@@ -81,7 +81,7 @@ function SignupForm() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/verifyotp",
+        `${import.meta.env.VITE_BACKEND_URL}/user/verifyotp`,
         form_data,
         {
           header: {
@@ -116,7 +116,7 @@ function SignupForm() {
     // setLoadingSend(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:4500/user/register",
+        `${import.meta.env.VITE_BACKEND_URL}/user/register`,
         formData, //sending form data to /signup endpoint
         {
           withCredentials: true, // This option allows sending cookies and other credentials (like authorization tokens) along with the request.

@@ -31,7 +31,7 @@ function CreateBlog() {
     blog_data.append("blogImage",blogImage);
 
     try {
-      const {data}=await axios.post("http://localhost:4500/blog/create",blog_data,{
+      const {data}=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/blog/create`,blog_data,{
 
         withCredentials:true,
         header:{
@@ -49,10 +49,10 @@ function CreateBlog() {
       setLoading(false);
 
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       const message=error?.response?.data?.message;
       if(message){
-        console.log(message);
+        // console.log(message);
         toast.error(message);
         setLoading(false);
       }
