@@ -82,7 +82,7 @@ function Navbar() {
           </div>
           <div className="flex  items-center ">
             <div>
-              {!token ? (
+              {token ? (
                 <div className="dropdown dropdown-content dropdown-bottom dropdown-hover flex justify-center ">
                   <Link
                     className={`flex border-2 border-orange-700 overflow-hidden  bg-blue-600 h-9 w-9 text-sm text-white font-semibold hover:bg-blue-800 duration-300 rounded-full`}
