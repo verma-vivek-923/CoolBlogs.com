@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthProvider'
 import CreateBlog from '../dashboard/CreateBlog';
 import MyBlogs from '../dashboard/MyBlogs';
 import MyProfile from '../dashboard/MyProfile'
-import Slider from '../dashboard/slider'
+import Slider from '../dashboard/Slider'
 import Update_Blog from '../dashboard/Update_Blog';
 
 function Dashboard() {

@@ -1,30 +1,11 @@
 import React from "react";
 import { useAuth } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 function Blogs() {
   const { blogs } = useAuth();
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 6,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-    },
-  };
+  
   return (
     <div className=" container mx-auto mt-12">
       {/* <div className="w-full px-4 py-1 md:px-12 flex justify-between items-center bg-blue-300  rounded-md ">
