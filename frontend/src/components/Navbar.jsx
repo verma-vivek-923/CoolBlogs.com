@@ -6,7 +6,7 @@ import { TbLogin2, TbLogout } from "react-icons/tb";
 import { FaUsersLine, FaPhoneVolume, FaRegCircleUser } from "react-icons/fa6";
 import { IoMdInformationCircle, IoIosCloseCircleOutline } from "react-icons/io";
 import { IoHome, IoCreateOutline, IoMenuOutline } from "react-icons/io5";
-import Cookies from "universal-cookie";
+import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 
