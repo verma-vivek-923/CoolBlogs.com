@@ -12,7 +12,7 @@ import axios from "axios";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
-  const token = Cookies.get("jwt");
+  const token = Cookies.get('jwt');
   const [show, setShow] = useState(false);
 
   console.log(token);
