@@ -24,7 +24,8 @@ export const AuthProvider = ({children}) => {
                       "Content-Type": "application/json",
                     },
             });
-                console.log(data)
+                console.log(data);
+                console.log(token);
                 setProfile(data.user_data);
                 setIsAuthenticated(true)
                 console.log(profile,isAuthenticated);
