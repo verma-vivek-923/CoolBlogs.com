@@ -26,9 +26,12 @@ function MyBlogs() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/blog/delete/${id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/blog/delete/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
       toast.success("Blog Deleted");
       setMyBlogs((value) => value.filter((blog) => blog._id !== id));
       // setMyBlogs(myBlogs.filter((blog) => blog.id !== id));
@@ -78,7 +81,7 @@ function MyBlogs() {
                     Delete
                   </button>
                 </div>
-                
+
                 <dialog id="my_modal_1" className="modal">
                   <div className="modal-box">
                     <form method="dialog">
@@ -100,17 +103,22 @@ function MyBlogs() {
                       cannot be undone.
                     </p>
                     <div className="modal-action">
-                      <form method="dialog" className="flex justify-end space-x-4">
+                      <form
+                        method="dialog"
+                        className="flex justify-end space-x-4"
+                      >
                         {/* <button onClick={()=> handleDelete(element._id)} className="px-2 py-1 bg-red-400">Yes</button> */}
                         <button
-                          onClick={()=> document.getElementById("my_modal_1").close()}
+                          onClick={() =>
+                            document.getElementById("my_modal_1").close()
+                          }
                           className="px-4 py-1 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-gray-500"
                         >
                           Cancel
                         </button>
 
                         <button
-                          onClick={()=> handleDelete(element._id)}
+                          onClick={() => handleDelete(element._id)}
                           className="px-4 py-1 bg-red-700 text-white rounded-lg hover:bg-red-900 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
                         >
                           Delete
@@ -122,20 +130,16 @@ function MyBlogs() {
               </Link>
             );
           })
-        ) : ( myBlogs.length <= 0 ? (
-          
+        ) : myBlogs.length <= 0 ? (
           <div className="col-span-full">
-              <h1 className="text-lg">
-                It Seems like You Havent Posted any blog Yet
-              </h1>
-
+            <h1 className="text-lg">
+              It Seems like You Havent Posted any blog Yet
+            </h1>
           </div>
         ) : (
-
-                    <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">
+          <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">
             <span className="loading loading-spinner loading-lg"></span>
           </div>
-        )
         )}
       </div>
     </div>

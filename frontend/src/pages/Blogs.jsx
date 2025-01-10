@@ -74,8 +74,8 @@ function Blogs() {
             );
           })
         ) : (
-          <div className=" flex h-screen items-center justify-center">
-            Loading....
+          <div className=" flex h-screen w-full  col-span-full items-start justify-center">
+            <span className="loading loading-spinner loading-lg"></span>
           </div>
         )}
       </div>
