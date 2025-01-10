@@ -25,7 +25,7 @@ export const AuthProvider = ({children}) => {
                     },
             });
                 console.log(data);
-                console.log(token);
+                // console.log(token);
                 setProfile(data.user_data);
                 setIsAuthenticated(true)
                 console.log(profile,isAuthenticated);
