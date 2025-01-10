@@ -30,6 +30,7 @@ export const AuthProvider = ({children}) => {
                 console.log(profile,isAuthenticated);
         }else{
             setIsAuthenticated(false);
+            console.log("isau"+isAuthenticated);
         }
             } catch (error) {
                 console.log(error)
