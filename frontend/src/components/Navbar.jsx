@@ -15,6 +15,7 @@ function Navbar() {
   const token = Cookies.get("jwt");
   const [show, setShow] = useState(false);
 
+  console.log(token);
   const handleLogout = async (e) => {
     e.preventDefault();
     setShow(!show);
