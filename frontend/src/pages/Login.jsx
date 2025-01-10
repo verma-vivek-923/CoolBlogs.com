@@ -35,6 +35,7 @@ const Login = () => {
       setLoading(false);
       // setIsAuthenticated(true);
       toast.success("LogIn Successfull", { duration: 3000 });
+      localStorage.setItem("user","loggedIn");
       navigateTo("/");
       setRole("");
       setPassword("");

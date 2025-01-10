@@ -127,9 +127,10 @@ function SignupForm() {
       );
 
       toast.success("Sign Up Successfull");
-      console.log(data.create_user);
+      // console.log(data.create_user);
       // setProfile(data.create_user);
       // setLoadingSend(false);
+      localStorage.setItem("user","loggedIn");
       navigateTo("/");
       setTimeout(() => {
         window.location.pathname = "/";
