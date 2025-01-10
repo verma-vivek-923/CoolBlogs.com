@@ -10,6 +10,7 @@ export const  createTokenAndSaveCookies=async(userId,res)=>{
         httpOnly:false, //protect form xss
         sameSite:"none",
         secure:true,
+        path:"/",
     })
     await user.findByIdAndUpdate(userId,{token})
     return token;
