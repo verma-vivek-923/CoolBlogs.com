@@ -9,7 +9,6 @@ import { IoHome, IoCreateOutline, IoMenuOutline } from "react-icons/io5";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { set } from "mongoose";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
