@@ -17,7 +17,7 @@ function Dashboard() {
   if(isAuthenticated===false){
     window.location.pathname="/"
     toast.error("Login to Continue")
-    console.log(isAuthenticated);
+    //console.log(isAuthenticated);
   } 
 
 

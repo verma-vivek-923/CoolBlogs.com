@@ -10,7 +10,7 @@ function Creators_home() {
   const { blogs } = useAuth();
   const [admins, setAdmins] = useState([]);
 
-  console.log(blogs);
+  //console.log(blogs);
   const dev_blogs = blogs?.filter((key) => key.category === "devotional");
 
   useEffect(() => {
@@ -18,12 +18,12 @@ function Creators_home() {
       const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/admins`, {
         withCredentials: true,
       });
-      console.log(data);
+      //console.log(data);
       setAdmins(data);
     };
     fetchData();
   }, []);
-  console.log(admins);
+  //console.log(admins);
 
   const responsive = {
     superLargeDesktop: {
@@ -76,7 +76,7 @@ function Creators_home() {
                         {element.role}
                       </p>
                       <h1
-                        className="text-md w-full text-center capitalize bg-slate-300 px-1 rounded-sm  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
+                        className="text-md w-full text-center capitalize truncate bg-slate-300 px-1 rounded-sm  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
                         style={{ whiteSpace: "nowrap" }}
                       >
                         {element.name}

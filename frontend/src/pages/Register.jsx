@@ -62,8 +62,8 @@ function SignupForm() {
     } catch (error) {
       const message = error?.response?.data?.message;
       if (message) {
-        console.log(error);
-        console.log(message);
+        //console.log(error);
+        //console.log(message);
         toast.error("Error : " + message);
       }
       setLoadingSend(false);

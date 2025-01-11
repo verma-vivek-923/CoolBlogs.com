@@ -44,7 +44,7 @@ const Login = () => {
         window.location.pathname = "/";
       }, 1500);
     } catch (error) {
-      const err = error.response.data.message;
+      const err = error?.response?.data?.message;
       if (err) {
         toast.error(err + "!");
       } else {

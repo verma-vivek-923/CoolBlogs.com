@@ -15,7 +15,7 @@ function MyBlogs() {
             withCredentials: true,
           }
         );
-        // console.log(data);
+        // //console.log(data);
         setMyBlogs(data);
       } catch (error) {
         console.log(error);
@@ -36,7 +36,7 @@ function MyBlogs() {
       setMyBlogs((value) => value.filter((blog) => blog._id !== id));
       // setMyBlogs(myBlogs.filter((blog) => blog.id !== id));
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 

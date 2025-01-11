@@ -5,7 +5,7 @@ import { RiArrowDownDoubleLine } from "react-icons/ri";
 
 function Hero() {
   const { blogs } = useAuth();
-  console.log(blogs);
+  //console.log(blogs);
 
   return (
     <>
@@ -30,7 +30,7 @@ function Hero() {
                       className="w-full  h-40 object-cover"
                     />
                     <div className="absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-75 group-hover:opacity-100 transition-transform duration-300 "></div>
-                    <h1 className="absolute bottom-1 left-3 text-white text-xl  group-hover:text-yellow-300 transition-all duration-300 group-hover:tracking-wider">
+                    <h1 className="absolute bottom-1 left-3 capitalize text-white text-xl  group-hover:text-yellow-300 transition-all duration-300 group-hover:tracking-wider">
                       {element.tittle}
                     </h1>
                   </div>
@@ -42,7 +42,7 @@ function Hero() {
                         alt="user"
                       />
                     </div>
-                    <p className="text-md font-semibold text-gray-800  ">
+                    <p className="text-md font-semibold text-gray-800  capitalize truncate">
                       {element.adminName}
                     </p>
                   </div>

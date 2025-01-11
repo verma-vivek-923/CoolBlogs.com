@@ -10,12 +10,12 @@ function Creators() {
       const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/admins`, {
         withCredentials: true,
       });
-      console.log(data);
+      //console.log(data);
       setAdmins(data);
     };
     fetchData();
   }, []);
-  console.log(admins);
+  //console.log(admins);
 
   return (
     <div className="min-h-screen mt-0  ">
@@ -39,7 +39,7 @@ function Creators() {
                       {element.role}
                     </p>
                     <h1
-                      className="text-md truncate text-center bg-slate-300 px-1  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
+                      className="text-md capitalize truncate text-center bg-slate-300 px-1  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
                       style={{ whiteSpace: "nowrap" }}
                     >
                       {element.name}

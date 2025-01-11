@@ -25,7 +25,7 @@ function Detail() {
             },
           }
         );
-        console.log(data);
+        //console.log(data);
         setblogs(data.find_blog);
       } catch (error) {
         console.log(error);
@@ -56,7 +56,7 @@ function Detail() {
 
           <div>
             <div className="flex justify-between px-4">
-              <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold text-indigo-800">
+              <h1 className="text-xl md:text-2xl lg:text-3xl capitalize font-semibold text-indigo-800">
                 {blogs?.tittle}
               </h1>
               <Link
@@ -72,7 +72,7 @@ function Detail() {
                 alt="author_avatar"
                 className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
               />
-              <p className="text-xs  font-semibold text-gray-700 ">
+              <p className="text-xs  capitalize font-semibold text-gray-700 ">
                 {blogs.adminName}
               </p>
               <span className="font-light">|</span>

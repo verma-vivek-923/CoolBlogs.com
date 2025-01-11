@@ -30,13 +30,18 @@ const Slider = ({ setComponent }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      // console.log(data)
+      // //console.log(data)
       setIsAuthenticated(false);
+      localStorage.removeItem("user");
       window.location.pathname = "/";
       toast.success("Logout Succesfully");
     } catch (error) {
-      console.log(error);
-      toast.error(error);
+      const err = error?.response?.data?.message;
+      if (err) {
+        toast.error(err + "!");
+      } else {
+        toast.error(" error");
+      }
     }
   };
 

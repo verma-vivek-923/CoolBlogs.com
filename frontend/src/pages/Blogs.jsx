@@ -34,7 +34,7 @@ function Blogs() {
                   </div>
                   <div className="px-2 pb-2  rounded-b-lg  flex flex-col justify-between">
                     <h1
-                      className="text-lg font-bold mb-1 overflow-hidden text-ellipsis transition-all duration-300 group-hover:tracking-wider"
+                      className="text-lg font-bold mb-1 capitalize truncate overflow-hidden text-ellipsis transition-all duration-300 group-hover:tracking-wider"
                       style={{ whiteSpace: "nowrap" }}
                     >
                       {element.tittle}
@@ -45,7 +45,7 @@ function Blogs() {
                         alt="author_avatar"
                         className="w-8 h-8 rounded-full"
                       />
-                      <p className="text-sm font-semibold text-gray-800  ">
+                      <p className="text-sm font-semibold text-gray-800 capitalize truncate ">
                         {element.adminName}
                       </p>
                     </div>

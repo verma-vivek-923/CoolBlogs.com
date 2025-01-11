@@ -15,7 +15,8 @@ function Navbar() {
   const token = Cookies.get('jwt') || localStorage.getItem("user");
   const [show, setShow] = useState(false);
 
-  console.log(token);
+  // //console.log(token);
+
   const handleLogout = async (e) => {
     e.preventDefault();
     setShow(!show);
@@ -28,15 +29,21 @@ function Navbar() {
         },
       });
       localStorage.removeItem("user");
-      // console.log(data)
+      // ////console.log(data)
       setIsAuthenticated(false);
       setTimeout(() => {
         window.location.pathname = "/";
       }, 2000);
       toast.success("Logout Succesfully");
     } catch (error) {
-      console.log(error);
-      toast.error(error);
+      //console.log(error);
+      const err = error?.response?.data?.message;
+      if (err) {
+        toast.error(err + "!");
+      } else {
+        toast.error("sign in error");
+      }
+    ;
     }
   };
   return (

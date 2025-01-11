@@ -67,7 +67,7 @@ const Update_Blog = () => {
             toast.success("Blog Updated Successfully") ;
             setLoading(false);
           } catch (error) {
-            console.log(error);
+            //console.log(error);
             setLoading(false);
             toast.error(error?.response?.data?.message);
           }

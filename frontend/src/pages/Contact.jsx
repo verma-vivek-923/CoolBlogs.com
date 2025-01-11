@@ -9,7 +9,7 @@ function Contact() {
 // console.log(e);
     const formData = new FormData(e.target); // Creates a FormData object from the form
     const data = Object.fromEntries(formData); // Converts FormData to a plain object
-    console.log(data)
+    //console.log(data)
 
     const userData={
       access_key:"abc-def-ghi",

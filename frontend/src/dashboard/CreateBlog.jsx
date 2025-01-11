@@ -49,10 +49,10 @@ function CreateBlog() {
       setLoading(false);
 
     } catch (error) {
-      // console.log(error);
+      // //console.log(error);
       const message=error?.response?.data?.message;
       if(message){
-        // console.log(message);
+        // ////console.log(message);
         toast.error(message);
         setLoading(false);
       }

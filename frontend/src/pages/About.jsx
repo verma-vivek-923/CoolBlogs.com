@@ -14,7 +14,7 @@ function About() {
         </strong>{" "}
         a proficient full stack developer with a robust skill set spanning both
         front-end and back-end technologies. With a passion for building
-        dynamic, responsive, and user-friendly web applications, Akhil excels in
+        dynamic, responsive, and user-friendly web applications,   excels in
         crafting seamless digital experiences.
       </p>
       <h2 className="font-semibold text-blue-800 text-xl">
@@ -45,23 +45,16 @@ function About() {
         the fast-evolving tech landscape.
       </p>
       <br />
-      <span>
-        Akhil K is dedicated to leveraging his expertise to contribute to
-        innovative projects and drive technological advancements. Whether
-        working on front-end interfaces or back-end logic, he is passionate
-        about delivering exceptional digital solutions that meet user needs and
-        exceed client expectations.
-      </span>
       <h2 className="font-semibold text-blue-800 text-xl">
         Personal Interests and Inspiration:
       </h2>
       <p>
-        Beyond his professional achievements, Akhil is a big fan of cricket and
+        Beyond his professional achievements,  a big fan of cricket and
         holds immense admiration for <strong> King Kohli.</strong> His favorite
         person and biggest inspiration is his twin brother,{" "}
         <strong>Ankush.</strong> Their friendly rivalry and deep bond have
-        significantly shaped Akhil’s journey. Ankush is not only a great
-        competitor but also a steadfast friend, constantly motivating Akhil to
+        significantly shaped  journey. Ankush is not only a great
+        competitor but also a steadfast friend, constantly motivating   to
         strive for excellence.
       </p>
     </div>

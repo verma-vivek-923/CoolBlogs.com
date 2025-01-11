@@ -55,7 +55,7 @@ function Devotional() {
                     </div> */}
                     <div className='absolute w-full h-full inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70 group-hover:opacity-80 transition-transform duration-300 '></div>
                     <h1
-                      className="text-md absolute bottom-1 left-3 text-white  mb-1 overflow-hidden group-hover:text-yellow-300 transition-all duration-300 group-hover:tracking-wider"
+                      className="text-md absolute capitalize truncate bottom-1 left-3 text-white  mb-1 overflow-hidden group-hover:text-yellow-300 transition-all duration-300 group-hover:tracking-wider"
                       
                       style={{ whiteSpace: "nowrap" }}
                     >
