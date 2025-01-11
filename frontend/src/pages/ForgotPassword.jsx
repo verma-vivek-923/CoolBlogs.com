@@ -135,7 +135,7 @@ const ForgotPassword = () => {
                 Forgot Password
               </h2>
               <form onSubmit={handleSendOtp}>
-                <div className="flex items-center gap-1 mb-3 min-w-full justify-center">
+                <div className="flex items-center gap-1 mb-3  justify-center">
                   <input
                     type="text"
                     aria-label="Search"
