@@ -39,6 +39,8 @@ export const sendOtp = async (req, res) => {
           await otp_model.deleteOne({email});
         }
 
+        user_name="User";
+
         otp = crypto.randomInt(100000, 999999).toString();
         // console.log(otp);
         // console.log(email);

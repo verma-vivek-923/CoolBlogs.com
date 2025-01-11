@@ -3,10 +3,11 @@ import { toast } from "react-hot-toast";
 import Loading from "../components/loading";
 import { IoHome } from "react-icons/io5";
 import { FaArrowLeft } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const ForgotPassword = () => {
+  const navigateTo = useNavigate();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [new_password, setNew_password] = useState("");
@@ -101,6 +102,8 @@ const ForgotPassword = () => {
       );
       setLoadingSubmit(false);
       toast.success("Passsword Changed Successfully");
+      navigateTo("/");
+      // window.location.pathname="/login";
     } catch (error) {
       setLoadingSubmit(false);
       const msg = error?.response?.data?.message;
