@@ -134,11 +134,11 @@ const ForgotPassword = () => {
               <h2 className="text-2xl mt-4 text-center font-semibold ">
                 Forgot Password
               </h2>
-              <form onSubmit={handleSendOtp}>
+              <form onSubmit={handleSendOtp} >
                 <div className="flex items-center gap-1 mb-3  justify-center">
                   <input
                     type="text"
-                    aria-label="Search"
+                    // aria-label="Search"
                     disabled={!disabled}
                     name={email}
                     autoComplete="off"
@@ -151,7 +151,7 @@ const ForgotPassword = () => {
                   <button
                     disabled={loadingSend}
                     type="submit"
-                    className="bg-green-600 h-full  rounded-md px-2 py-2 border-2 text-sm md:text-base text-white hover:bg-green-700"
+                    className="bg-green-600 rounded-md px-2 py-1 md:py-2 border-2 text-xs md:text-base text-white hover:bg-green-700"
                   >
                     {!loadingSend ? (
                       "Send OTP"
