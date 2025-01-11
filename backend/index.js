@@ -25,7 +25,7 @@ app.use(cors({
 // file upload logic
 app.use(fileUpload({
   useTempFiles:true,
-  tempFileDir:"/temp/"
+  tempFileDir:"/tmp/"
 }))
 
 //connect mongoDb
