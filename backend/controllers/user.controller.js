@@ -95,10 +95,16 @@ export let login = async (req, res) => {
     res.status(400).json({ message: "Internal Server Error" });
   }
 };
-export const logout = async (req, res) => {
-  res.clearCookie("jwt", { httpOnly:false });
 
-  res.status(200).json({ message: "User logged out successfully" });
+
+
+export const logout = async (req, res) => {
+  try{
+    await res.clearCookie("jwt");
+    res.status(200).json({ message: "User logged out successfully" });
+  }catch(error){
+    return res.status(500).json({ message: "Internal servel error" });
+  }
 };
 
 export const getMyProfile = async (req, res) => {
