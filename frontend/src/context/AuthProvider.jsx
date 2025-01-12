@@ -16,6 +16,8 @@ export const AuthProvider = ({children}) => {
             try {
                 const token=Cookies.get('jwt');
                 const islog=localStorage.getItem("user");
+
+                console.log("this is token ",token);
        
         if (token || islog) {          
                 const  {data}=await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/my-profile`,
