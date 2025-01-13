@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BsPlusLg } from "react-icons/bs";
+import { CiEdit } from "react-icons/ci";
 
-function MyBlogs() {
+const MyBlogs=({ setComponent })=> {
   const [myBlogs, setMyBlogs] = useState([]);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     const getMyBlogs = async () => {
@@ -24,6 +27,7 @@ function MyBlogs() {
     getMyBlogs();
   }, []);
 
+  
   const handleDelete = async (id) => {
     try {
       await axios.delete(
@@ -131,10 +135,18 @@ function MyBlogs() {
             );
           })
         ) : myBlogs.length <= 0 ? (
-          <div className="col-span-full">
+          <div className=" col-span-full">
             <h1 className="text-lg">
               It Seems like You Havent Posted any blog Yet
             </h1>
+            <button
+              onClick={() => setComponent("Create Blog")}
+              className={`border-2 flex items-center  gap-2 rounded-md px-2 py-2 bg-green-600 hover:bg-green-700 mt-5 text-white duration-300`}
+              >
+              {/* <BsPlusLg size={20} /> */}
+              <CiEdit  size={20}/> 
+              Create Blog
+            </button>
           </div>
         ) : (
           <div className=" flex h-screen w-full absolute left-0 top-0 items-center justify-center">

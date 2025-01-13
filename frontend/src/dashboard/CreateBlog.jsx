@@ -90,6 +90,7 @@ function CreateBlog() {
                   >
                     <option value="">Select Category</option>
                     <option value="devotional">Devotional</option>
+                    <option value="technology">Technonogy</option>
                     <option value="Sports">Sports</option>
                     <option value="Coding">Coding</option>
                     <option value="Entertainment">Entertainment</option>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { toast } from 'react-hot-toast';
+import { useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider'
 import CreateBlog from '../dashboard/CreateBlog';
 import MyBlogs from '../dashboard/MyBlogs';
@@ -8,12 +9,15 @@ import Slider from '../dashboard/Slider'
 import Update_Blog from '../dashboard/Update_Blog';
 
 function Dashboard() {
-  const [component,setComponent]=useState();
+  const location=useLocation();
+  const initial_component=location.state?.active_component || undefined;
+  const [component,setComponent]=useState(initial_component);
   const {isAuthenticated }=useAuth();
 
 //   console.log(profile,isAuthenticated);
 //  console.log(isAuthenticated);
-  
+// console.log(component)  
+
   if(isAuthenticated===false){
     window.location.pathname="/"
     toast.error("Login to Continue")
@@ -29,7 +33,7 @@ function Dashboard() {
       <div>
             {
               component==='My Blogs' ?(
-                <MyBlogs/>
+                <MyBlogs setComponent={setComponent}/>
               ):component==="Create Blog" ?(
                   <CreateBlog/>
               ): component==="Update Blog" ?(
