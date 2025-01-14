@@ -12,6 +12,7 @@ function Blogs() {
            <h1 className=" text-2xl font-semibold ">Trending</h1>
            <Link to={"/blogs"} className="text-lg  hover:underline hover:font-bold hover:tracking-wider cursor-pointer duration-300">View All</Link>
       </div> */}
+      <h3 className="text-2xl font-semibold text-center pt-4">All Blogs</h3>
       <div className="py-4 container grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5  gap-y-8">
         {blogs && blogs.length > 0 ? (
           blogs.slice(0).map((element) => {
