@@ -24,12 +24,18 @@ export const createBlog = async (req, res) => {
     }
 
     const cloudinaryResponse = await cloudinary.uploader.upload(
-      blogImage.tempFilePath
+      blogImage.tempFilePath,
+      {
+        folder: "Blog_web/blogs/new_blogs",
+      }
     );
+
     if (!cloudinaryResponse || cloudinaryResponse.error) {
       console.log("cloud error");
     }
 
+
+    console.log(cloudinaryResponse);
     const create_blog = {
       tittle,
       about,
@@ -39,7 +45,7 @@ export const createBlog = async (req, res) => {
       createdBy,
       blogImage: {
         public_id: cloudinaryResponse.public_id,
-        url: cloudinaryResponse.url,
+        url: cloudinaryResponse.secure_url,
       },
     };
     const blog_data = await blog.create(create_blog);
@@ -113,7 +119,7 @@ export const updateBlog = async (req, res) => {
     const cloudinary_response = await cloudinary.uploader.upload(
       new_image.tempFilePath,
       {
-        folder: "blog_app",
+        folder: "Blog_web/blogs/updated_blogs",
       }
     );
 

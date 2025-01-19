@@ -28,7 +28,10 @@ export let register = async (req, res) => {
     }
 
     const cloudinaryResponse = await cloudinary.uploader.upload(
-      photo.tempFilePath
+      photo.tempFilePath,
+      {
+        folder: "Blog_web/user_data/new_data",
+      }
     );
     if (!cloudinaryResponse || cloudinaryResponse.error) {
       return res.status(500).json({ message: "Cloud Error.Try Again Letter" });
@@ -46,7 +49,7 @@ export let register = async (req, res) => {
         password: hashed_pass,
         image: {
           public_id: cloudinaryResponse.public_id,
-          url: cloudinaryResponse.url,
+          url: cloudinaryResponse.secure_url,
         },
       });
       await create_user.save();
@@ -133,7 +136,7 @@ export const updateUser = async (req, res) => {
     const cloudinary_response = await cloudinary.uploader.upload(
       new_image.tempFilePath,
       {
-        folder: "user_data",
+        folder: "Blog_web/user_data/updated_data",
       }
     );
 

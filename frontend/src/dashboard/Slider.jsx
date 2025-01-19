@@ -94,7 +94,7 @@ const Slider = ({ setComponent }) => {
                 handleComponent("My Blogs")
               } else {
                 setShow(!show);
-                document.getElementById("my_modal_1").showModal();
+                document.getElementById("my_modal_2").showModal();
               }
             }}
             className="flex justify-start focus:border focus:border-blue-400 rounded-md items-center  hover:text-blue-500 hover:tracking-wider hover:underline hover:font-bold duration-300 border-r-transparent  py-2 px-6 w-full  space-x-2"
@@ -116,12 +116,12 @@ const Slider = ({ setComponent }) => {
         </div>
 
         {/* Show Warning: Unauthorized user access */}
-        <dialog id="my_modal_1" className="modal">
+        <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
               <button
-                onClick={() => document.getElementById("my_modal_1").close()}
+                onClick={() => document.getElementById("my_modal_2").close()}
                 className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
               >
                 ✕
@@ -136,7 +136,7 @@ const Slider = ({ setComponent }) => {
             <div className="modal-action">
               <form method="dialog" className="flex justify-end space-x-4">
                 <button
-                  onClick={() => document.getElementById("my_modal_1").close()}
+                  onClick={() => document.getElementById("my_modal_2").close()}
                   className="px-4 py-1 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   Cancel

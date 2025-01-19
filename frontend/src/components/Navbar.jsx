@@ -12,7 +12,7 @@ import axios from "axios";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
-  const token = Cookies.get('jwt') || localStorage.getItem("user");
+  const token = Cookies.get("jwt") || localStorage.getItem("user");
   const [show, setShow] = useState(false);
 
   // //console.log(token);
@@ -22,12 +22,15 @@ function Navbar() {
     setShow(!show);
 
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/user/logout`,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       localStorage.removeItem("user");
       // ////console.log(data)
       setIsAuthenticated(false);
@@ -43,7 +46,6 @@ function Navbar() {
       } else {
         toast.error("sign in error");
       }
-    ;
     }
   };
   return (
@@ -90,17 +92,20 @@ function Navbar() {
           </div>
           <div className="flex  items-center ">
             <div>
-              {token ? (
-                <div className="dropdown dropdown-content dropdown-bottom dropdown-hover flex justify-center ">
+              {token && profile ? (
+                <div className="dropdown dropdown-content dropdown-bottom dropdown-hover flex justify-center mr-2">
                   <Link
                     className={`flex border-2 border-orange-700 overflow-hidden  bg-blue-600 h-9 w-9 text-sm text-white font-semibold hover:bg-blue-800 duration-300 rounded-full`}
                   >
-                    <img src={profile?.image?.url} alt={"#"}  className="object-cover object-center rounded-full" />
+                    <img
+                      src={profile?.image?.url}
+                      className="object-cover object-center rounded-full"
+                    />
                   </Link>
-                  {/* <div tabIndex={0} role="button" className="btn m-1">Click</div> */}
+
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu bg-base-100 rounded-lg z-[1]   shadow"
+                    className="dropdown-content menu bg-base-100 rounded-lg z-[1]  shadow"
                   >
                     <Link
                       onClick={() => setShow(!show)}
