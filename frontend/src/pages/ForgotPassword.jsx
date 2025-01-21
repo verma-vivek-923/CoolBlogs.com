@@ -134,11 +134,11 @@ const ForgotPassword = () => {
               <h2 className="text-2xl mt-4 text-center font-semibold ">
                 Forgot Password
               </h2>
-              <form onSubmit={handleSendOtp} className="flex items-center gap-1 mb-3  justify-center">
-                {/* <div className="flex items-center gap-1 mb-3  justify-center"> */}
+              <form onSubmit={handleSendOtp} >
+                <div className="flex items-center gap-1 mb-3  justify-center">
                   <input
                     type="text"
-                    aria-label="Search"
+                    // aria-label="Search"
                     disabled={!disabled}
                     name={email}
                     autoComplete="off"
@@ -146,12 +146,12 @@ const ForgotPassword = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="flex-grow p-2  border focus:bg-slate-200 outline-green-900 border-gray-300 rounded-md"
+                    className="w-full p-2  border focus:bg-slate-200 outline-green-900 border-gray-300 rounded-md"
                   />
                   <button
                     disabled={loadingSend}
                     type="submit"
-                    className="bg-green-600 rounded-md px-2 py-1 md:py-2 border-2 text-xs md:text-base text-white hover:bg-green-700"
+                    className="bg-green-600 rounded-md inline-flex md:flex-shrink-0 px-2 py-1 md:py-2 border-2 text-xs md:text-base text-white hover:bg-green-700"
                   >
                     {!loadingSend ? (
                       "Send OTP"
@@ -162,7 +162,7 @@ const ForgotPassword = () => {
                       </div>
                     )}
                   </button>
-                {/* </div> */}
+                </div>
               </form>
 
               <form onSubmit={handleVerify}>
