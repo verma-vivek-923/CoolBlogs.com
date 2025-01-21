@@ -12,7 +12,7 @@ import axios from "axios";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
-  const token = Cookies.get("jwt") || localStorage.getItem("user");
+  const token = Cookies.get("jwt") || localStorage.getItem("user") && profile;
   const [show, setShow] = useState(false);
 
   // //console.log(token);
@@ -92,7 +92,7 @@ function Navbar() {
           </div>
           <div className="flex  items-center ">
             <div>
-              {token && profile ? (
+              {token ? (
                 <div className="dropdown dropdown-content dropdown-bottom dropdown-hover flex justify-center mr-2">
                   <Link
                     className={`flex border-2 border-orange-700 overflow-hidden  bg-blue-600 h-9 w-9 text-sm text-white font-semibold hover:bg-blue-800 duration-300 rounded-full`}
