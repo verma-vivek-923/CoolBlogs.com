@@ -134,11 +134,11 @@ const ForgotPassword = () => {
               <h2 className="text-2xl mt-4 text-center font-semibold ">
                 Forgot Password
               </h2>
-              <form onSubmit={handleSendOtp} >
-                <div className="flex items-center gap-1 mb-3  ">
+              <form onSubmit={handleSendOtp} className="flex items-center gap-1 mb-3  justify-center">
+                {/* <div className="flex items-center gap-1 mb-3  justify-center"> */}
                   <input
                     type="text"
-                    // aria-label="Search"
+                    aria-label="Search"
                     disabled={!disabled}
                     name={email}
                     autoComplete="off"
@@ -162,7 +162,7 @@ const ForgotPassword = () => {
                       </div>
                     )}
                   </button>
-                </div>
+                {/* </div> */}
               </form>
 
               <form onSubmit={handleVerify}>
