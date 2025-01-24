@@ -15,7 +15,7 @@ function Navbar() {
   const token = Cookies.get("jwt") || localStorage.getItem("user") && profile;
   const [show, setShow] = useState(false);
 
-  // //console.log(token);
+  console.log("token:" + Cookies.get("jwt"));
 
   const handleLogout = async (e) => {
     e.preventDefault();
