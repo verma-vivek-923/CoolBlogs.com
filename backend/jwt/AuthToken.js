@@ -14,6 +14,7 @@ export const  createTokenAndSaveCookies=async(userId,res)=>{
         maxAge: 7 * 24 * 60 * 60 * 1000, // 2 days in milliseconds
         
     })
+    console.log("Cookie set:", res.getHeaders()); 
     await user.findByIdAndUpdate(userId,{token})
     return token;
 }
