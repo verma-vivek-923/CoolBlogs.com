@@ -12,11 +12,10 @@ import axios from "axios";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
-  // const token = Cookies.get("jwt") || localStorage.getItem("user") && profile;
-  const token=document.cookie;
+  const token = Cookies.get("jwt") || localStorage.getItem("user") && profile;
   const [show, setShow] = useState(false);
 
-  console.log("token:"+token);
+  // //console.log(token);
 
   const handleLogout = async (e) => {
     e.preventDefault();
