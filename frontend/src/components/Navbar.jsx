@@ -16,7 +16,7 @@ function Navbar() {
   const token=document.cookie;
   const [show, setShow] = useState(false);
 
-  console.log(token);
+  console.log("token:"+token);
 
   const handleLogout = async (e) => {
     e.preventDefault();
