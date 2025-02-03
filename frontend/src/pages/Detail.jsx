@@ -68,7 +68,7 @@ function Detail() {
             </div>
             <div className="flex  space-x-2 mt-4 items-center">
               <img
-                src={blogs.adminPhoto}
+                src={blogs?.adminPhoto}
                 alt="author_avatar"
                 className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
               />
@@ -87,7 +87,7 @@ function Detail() {
             <div className="mt-3 border-t border-gray-300" />
           </div>
           <div className="mt-6 mb-12 text-gray-600">
-            {blogs.about}
+            {blogs?.about}
           </div>
         </div>
       </div>

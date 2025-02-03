@@ -8,18 +8,28 @@ import { IoMdInformationCircle, IoIosCloseCircleOutline } from "react-icons/io";
 import { IoHome, IoCreateOutline, IoMenuOutline } from "react-icons/io5";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
+import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
+import { HiMiniMagnifyingGlass } from "react-icons/hi2";
+import { SlMagnifier } from "react-icons/sl";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import axios from "axios";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
-  const token = Cookies.get("jwt") || localStorage.getItem("user") && profile;
+  const token = Cookies.get("jwt") || (localStorage.getItem("user") && profile);
   const [show, setShow] = useState(false);
 
   // //console.log(token);
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    // console.log('loffed');
+  }
+
   const handleLogout = async (e) => {
     e.preventDefault();
     setShow(!show);
+
 
     try {
       const { data } = await axios.get(
@@ -56,7 +66,7 @@ function Navbar() {
             Cool<span className="text-blue-600">Blogs</span>
           </div>
           {/* Desktop */}
-          <div>
+          <div className="flex ">
             <ul className="hidden md:flex space-x-4">
               <Link
                 className=" hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded"
@@ -90,7 +100,37 @@ function Navbar() {
               </Link>
             </ul>
           </div>
-          <div className="flex  items-center ">
+          <div className=" absolute right-[7.5rem]">
+            <form
+              onSubmit={handleSearch}
+              className="hidden lg:flex input overflow-hidden input-bordered focus-within:outline-none focus-within:border-blue-700 items-center h-8 pr-0 gap-2"
+            >
+              <input type="text" className="" placeholder="Search" />
+              {/* <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                className="h-4 w-4 opacity-70"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                  clipRule="evenodd"
+                />
+              </svg> */}
+              <button
+                type="submit"
+                className="absolute right-0  bg-blue-600 w-10 text-white h-full rounded-sm rounded-r-lg hover:bg-blue-800 duration-300 flex items-center justify-center"
+              >
+                <FaMagnifyingGlass size={12} />
+              </button>
+            </form>
+            <button className="block  md:hidden">
+              <HiMiniMagnifyingGlass size={24} />
+            </button>
+          </div>
+
+          <div className="flex relative  items-center ">
             <div>
               {token ? (
                 <div className="dropdown dropdown-content dropdown-bottom dropdown-hover flex justify-center mr-2">

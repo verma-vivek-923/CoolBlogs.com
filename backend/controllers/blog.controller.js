@@ -145,3 +145,12 @@ export const updateBlog = async (req, res) => {
 
        res.status(200).json({message:"Blog updated Successfully",updated_blog})
 };
+
+export const getSearchedBlog=async (req,res)=>{
+   const {text}=req.params;
+
+   const find_blog=await blog.find({tittle:{$regex:`\\b${text}`, $options:"i"}});
+  //  console.log(find_blog);
+   res.status(200).json({message:"success",find_blog});
+
+}
