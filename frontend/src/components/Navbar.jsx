@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { ImBlogger } from "react-icons/im";
 import { TbLogin2, TbLogout } from "react-icons/tb";
@@ -18,18 +18,24 @@ function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
   const token = Cookies.get("jwt") || (localStorage.getItem("user") && profile);
   const [show, setShow] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  const navigateTo=useNavigate();
 
   // //console.log(token);
-
   const handleSearch = async (e) => {
     e.preventDefault();
-    // console.log('loffed');
-  }
-
+  
+    console.log(searchText);
+   
+    if (searchText) {
+        navigateTo(`/blog/search?query=${searchText.trim()}`)
+    }
+  };
+  
   const handleLogout = async (e) => {
     e.preventDefault();
     setShow(!show);
-
 
     try {
       const { data } = await axios.get(
@@ -103,24 +109,18 @@ function Navbar() {
           <div className=" absolute right-[7.5rem]">
             <form
               onSubmit={handleSearch}
-              className="hidden lg:flex input overflow-hidden input-bordered focus-within:outline-none focus-within:border-blue-700 items-center h-8 pr-0 gap-2"
+              className="hidden lg:flex border-2 input overflow-hidden input-bordered focus-within:outline-none focus-within:border-blue-700 items-center h-8 pr-0 gap-2"
             >
-              <input type="text" className="" placeholder="Search" />
-              {/* <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clipRule="evenodd"
-                />
-              </svg> */}
+              <input
+                type="text"
+                onChange={(e) => setSearchText(e.target.value)}
+                className=""
+                placeholder="Search"
+              />
+
               <button
                 type="submit"
-                className="absolute right-0  bg-blue-600 w-10 text-white h-full rounded-sm rounded-r-lg hover:bg-blue-800 duration-300 flex items-center justify-center"
+                className="absolute right-0  bg-blue-700 w-10 text-white h-full rounded-sm rounded-r-lg hover:bg-blue-800 duration-300 flex items-center justify-center"
               >
                 <FaMagnifyingGlass size={12} />
               </button>

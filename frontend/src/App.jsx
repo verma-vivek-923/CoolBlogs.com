@@ -40,6 +40,7 @@ function App() {
     <Route exact path="/blog/:id" element={<Detail />} />
     <Route exact path="/blog/update/:id" element={<Update_Blog/>}/>
     <Route exact path="/user/update/:id" element={<Update_user/>}/>
+    <Route exact path="/blog/search" elememt={<Search_blogs/>}/>
 </Routes>
 <Toaster/>
 
