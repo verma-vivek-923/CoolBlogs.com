@@ -16,6 +16,7 @@ import Update_Blog from './dashboard/Update_Blog'
 import Update_user from './dashboard/Update_user'
 import Detail from './pages/Detail'
 import ForgotPassword from './pages/ForgotPassword'
+import SearchBlogs from './pages/SearchBlogs'
 
 function App() {
   const location=useLocation();
@@ -40,6 +41,7 @@ function App() {
     <Route exact path="/blog/:id" element={<Detail />} />
     <Route exact path="/blog/update/:id" element={<Update_Blog/>}/>
     <Route exact path="/user/update/:id" element={<Update_user/>}/>
+    <Route eaxct path="/blog/search" element={<SearchBlogs/>} />
 </Routes>
 <Toaster/>
 

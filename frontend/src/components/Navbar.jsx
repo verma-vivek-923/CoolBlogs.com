@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { ImBlogger } from "react-icons/im";
 import { TbLogin2, TbLogout } from "react-icons/tb";
@@ -13,30 +13,23 @@ import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { SlMagnifier } from "react-icons/sl";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import axios from "axios";
+import { FiArrowLeft } from "react-icons/fi";
+import Searchbar from "../pages/Searchbar";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
   const token = Cookies.get("jwt") || (localStorage.getItem("user") && profile);
   const [show, setShow] = useState(false);
+  const [showBar, setShowBar] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [screen, setScreen] = useState(false);
 
-  const navigateTo=useNavigate();
+  const navigateTo = useNavigate();
+  const location = useLocation();
 
-  // //console.log(token);
-  const handleSearch = async (e) => {
-    e.preventDefault();
-  
-    console.log(searchText);
-   
-    if (searchText) {
-        navigateTo(`/blog/search?query=${searchText.trim()}`)
-    }
-  };
-  
   const handleLogout = async (e) => {
     e.preventDefault();
     setShow(!show);
-
     try {
       const { data } = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/user/logout`,
@@ -64,6 +57,28 @@ function Navbar() {
       }
     }
   };
+
+  // console.log("screen",screen);
+  // console.log("show",show);
+
+
+  const handleBack = (e) => {
+    // e.preventDefault()
+    if (location.pathname === "/blog/search") {
+      navigateTo(-1);
+    } else {
+      setShowBar(false);
+      setScreen(false);
+    }
+  };
+
+  useEffect(() => {
+      if(location.pathname !=="/blog/search"){
+        setShowBar(false)
+      }
+   setScreen(false);
+  }, [location.pathname]);
+
   return (
     <>
       <nav className="sticky top-0 left-0 bg-inherit shadow-xl px-2 py-1 border z-50">
@@ -107,28 +122,27 @@ function Navbar() {
             </ul>
           </div>
           <div className=" absolute right-[7.5rem]">
-            <form
-              onSubmit={handleSearch}
-              className="hidden lg:flex border-2 input overflow-hidden input-bordered focus-within:outline-none focus-within:border-blue-700 items-center h-8 pr-0 gap-2"
-            >
-              <input
-                type="text"
-                onChange={(e) => setSearchText(e.target.value)}
-                className=""
-                placeholder="Search"
-              />
+            <div className="hidden mr-8 lg:flex">
+              <Searchbar />
+            </div>
 
-              <button
-                type="submit"
-                className="absolute right-0  bg-blue-700 w-10 text-white h-full rounded-sm rounded-r-lg hover:bg-blue-800 duration-300 flex items-center justify-center"
-              >
-                <FaMagnifyingGlass size={12} />
-              </button>
-            </form>
-            <button className="block  md:hidden">
+            <button
+              onClick={() => {
+                setShowBar(!showBar);
+                setShow(false);
+                setScreen(!screen)
+              }}
+              className="block  md:hidden"
+            >
               <HiMiniMagnifyingGlass size={24} />
             </button>
           </div>
+
+          {/* {showBar && (
+            <div className="flex w-full absolute -bottom-0 left-0">
+              <Searchbar />
+            </div>
+          )} */}
 
           <div className="flex relative  items-center ">
             <div>
@@ -186,13 +200,13 @@ function Navbar() {
                 <IoMenuOutline
                   className="swap-off"
                   size={32}
-                  onClick={() => setShow(!show)}
+                  onClick={() => {setShow(!show);setScreen(!screen)}}
                 />
 
                 <IoIosCloseCircleOutline
                   className="swap-on"
                   size={32}
-                  onClick={() => setShow(!show)}
+                  onClick={() => {setShow(!show);setScreen(!screen)}}
                 />
               </label>
             </div>
@@ -292,12 +306,24 @@ function Navbar() {
             </div>
           </>
         )}
+
+        {showBar && (
+          <div className="w-full px-2 pr-4 bg-slate-100 absolute top-0 left-0 flex gap-2 mt-2 items-center justify-center">
+            <FiArrowLeft onClick={handleBack} size={32} />
+            <Searchbar />
+          </div>
+        )}
       </nav>
+  
       <div
-        onClick={() => setShow(!show)}
+        onClick={() => {
+          setShow(false);
+          setShowBar(false);
+          setScreen(false)
+        }}
         className={`${
-          show ? "block" : "hidden"
-        } fixed top-0  left-0 h-screen w-full opacity-40 bg-slate-900 z-40`}
+          (show || showBar ) && screen ? "block" : "hidden"
+        } fixed top-0  left-0 h-screen w-full opacity-40 bg-slate-900 z-30`}
       ></div>
     </>
   );
