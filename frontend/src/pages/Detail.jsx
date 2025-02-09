@@ -58,12 +58,12 @@ function Detail() {
           <IoHome />
           <span>Home</span>
         </Link>
-        <div className="group w-full bg-white max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
+        <div className="group w-full mt-2 bg-white max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
           {blogs && Object.keys(blogs).length > 0 ? (
             <div>
               <div className="relative ">
                 <img
-                  className="w-full h-96 object-cover rounded-lg mb-2 group-hover:h-96 transition-all ease-in-out"
+                  className="w-full h-80 object-cover rounded-lg mb-2 group-hover:h-96 transition-all ease-in-out"
                   src={blogs?.blogImage?.url}
                   alt="blog image"
                 />
@@ -91,7 +91,7 @@ function Detail() {
                     className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
                   />
                   <p className="text-xs  capitalize font-semibold text-gray-700 ">
-                    {blogs.adminName}
+                  By: {blogs.adminName}
                   </p>
                   <span className="font-light">|</span>
                   <span className="text-sm ">
