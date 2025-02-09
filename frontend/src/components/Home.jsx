@@ -23,7 +23,7 @@ function Home({setComponent}) {
       <Devotional />
       <Creators_home />
 
-    {/* { isAuthenticated &&
+    { isAuthenticated &&
      <div className=" fixed group bg-blue-600 hover:bg-blue-800 text-white rounded-lg right-10 lg:right-12  bottom-8">
         <button onClick={handleClick} className="flex items-center p-2">
           <LuPlus size={32} />
@@ -32,7 +32,7 @@ function Home({setComponent}) {
           </p>
         </button>
       </div>
-    }  */}
+    } 
     </div>
   );
 }
