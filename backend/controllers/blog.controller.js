@@ -34,7 +34,6 @@ export const createBlog = async (req, res) => {
       console.log("cloud error");
     }
 
-
     console.log(cloudinaryResponse);
     const create_blog = {
       tittle,
@@ -140,8 +139,21 @@ export const updateBlog = async (req, res) => {
   const updated_blog = await blog.findByIdAndUpdate(
     id,
     { $set: updatedData },
-    { new: true ,runValidators:true }
+    { new: true, runValidators: true }
   );
 
-       res.status(200).json({message:"Blog updated Successfully",updated_blog})
+  res.status(200).json({ message: "Blog updated Successfully", updated_blog });
+};
+
+export const getSearchedBlog = async (req, res) => {
+  const { text } = req.params;
+
+  const find_blog = await blog.find({
+    $or: [
+      { tittle: { $regex: `\\b${text}`, $options: "i" } },
+      { category: { $regex: `\\b${text}`, $options: "i" } },
+    ],
+  });
+  //  console.log(find_blog);
+  res.status(200).json({find_blog });
 };

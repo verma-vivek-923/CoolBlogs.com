@@ -12,7 +12,6 @@ export const  createTokenAndSaveCookies=async(userId,res)=>{
         secure:true,
         path:"/",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 2 days in milliseconds
-        domain: "cool-blogs-com.vercel.app", // Root domain
         
     })
     await user.findByIdAndUpdate(userId,{token})
