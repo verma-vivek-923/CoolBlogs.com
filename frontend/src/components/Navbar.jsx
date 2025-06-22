@@ -12,8 +12,8 @@ import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { SlMagnifier } from "react-icons/sl";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import axios from "axios";
 import { FiArrowLeft } from "react-icons/fi";
+import axios from "axios";
 import Searchbar from "../pages/Searchbar";
 
 function Navbar() {
@@ -61,7 +61,6 @@ function Navbar() {
   // console.log("screen",screen);
   // console.log("show",show);
 
-
   const handleBack = (e) => {
     // e.preventDefault()
     if (location.pathname === "/blog/search") {
@@ -73,10 +72,10 @@ function Navbar() {
   };
 
   useEffect(() => {
-      if(location.pathname !=="/blog/search"){
-        setShowBar(false)
-      }
-   setScreen(false);
+    if (location.pathname !== "/blog/search") {
+      setShowBar(false);
+    }
+    setScreen(false);
   }, [location.pathname]);
 
   return (
@@ -122,15 +121,15 @@ function Navbar() {
             </ul>
           </div>
           <div className=" absolute right-[7.5rem]">
-            <div className="hidden mr-8 lg:flex">
+            {/* <div className="hidden mr-8 lg:flex">
               <Searchbar />
-            </div>
+            </div> */}
 
             <button
               onClick={() => {
                 setShowBar(!showBar);
                 setShow(false);
-                setScreen(!screen)
+                setScreen(!screen);
               }}
               className="block  md:hidden"
             >
@@ -144,6 +143,8 @@ function Navbar() {
             </div>
           )} */}
 
+
+            {/* //Dashboard Navigation and Profile  */}
           <div className="flex relative  items-center ">
             <div>
               {token ? (
@@ -152,7 +153,7 @@ function Navbar() {
                     className={`flex border-2 border-orange-700 overflow-hidden  bg-blue-600 h-9 w-9 text-sm text-white font-semibold hover:bg-blue-800 duration-300 rounded-full`}
                   >
                     <img
-                      src={profile?.image?.url}
+                      src={profile?.image?.url || "img"}
                       className="object-cover object-center rounded-full"
                     />
                   </Link>
@@ -164,8 +165,8 @@ function Navbar() {
                     <Link
                       onClick={() => setShow(!show)}
                       smooth="true"
-                      className={`${
-                        !token ? "hidden" : "flex"
+                      className={`${""
+                        // !token ? "hidden" : "flex"
                       }  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2  text-sm md:text-base  rounded`}
                       to="/dashboard"
                     >
@@ -175,8 +176,8 @@ function Navbar() {
                     <Link
                       onClick={handleLogout}
                       smooth="true"
-                      className={`${
-                        !token ? "hidden" : "flex"
+                      className={`${""
+                        // !token ? "hidden" : "flex" 
                       }  items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2  text-sm md:text-base  rounded`}
                     >
                       <TbLogout size={14} />
@@ -184,15 +185,17 @@ function Navbar() {
                     </Link>
                   </ul>
                 </div>
-              ) : (
+             ) : ( 
                 <Link
                   to="/login"
                   className={`block text-base text-gray-900 tracking-wider md:border border-gray-900 md:font-semibold hover:text-white hover:bg-red-800 duration-300 px-2  rounded`}
                 >
                   LogIn
                 </Link>
-              )}
+               )} 
             </div>
+
+            {/* //hamburger menu Button for mobile */}
             <div className={` block md:hidden`}>
               <label className="btn btn-circle swap swap-rotate">
                 <input type="checkbox" checked={show} />
@@ -200,13 +203,19 @@ function Navbar() {
                 <IoMenuOutline
                   className="swap-off"
                   size={32}
-                  onClick={() => {setShow(!show);setScreen(!screen)}}
+                  onClick={() => {
+                    setShow(!show);
+                    setScreen(!screen);
+                  }}
                 />
 
                 <IoIosCloseCircleOutline
                   className="swap-on"
                   size={32}
-                  onClick={() => {setShow(!show);setScreen(!screen)}}
+                  onClick={() => {
+                    setShow(!show);
+                    setScreen(!screen);
+                  }}
                 />
               </label>
             </div>
@@ -314,15 +323,15 @@ function Navbar() {
           </div>
         )}
       </nav>
-  
+
       <div
         onClick={() => {
           setShow(false);
           setShowBar(false);
-          setScreen(false)
+          setScreen(false);
         }}
         className={`${
-          (show || showBar ) && screen ? "block" : "hidden"
+          (show || showBar) && screen ? "block" : "hidden"
         } fixed top-0  left-0 h-screen w-full opacity-40 bg-slate-900 z-30`}
       ></div>
     </>

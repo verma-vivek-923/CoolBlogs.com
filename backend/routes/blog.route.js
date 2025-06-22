@@ -1,8 +1,9 @@
 // import user from '../controllers/user.controller.js';
 import  express, { application }  from 'express';
-import { createBlog, deleteBlog, getAllBlogs, getMyBlog, getSearchedBlog, singleBlog, updateBlog } from '../controllers/blog.controller.js';
+import { createBlog,  deleteBlog, getAllBlogs, getMyBlog, getSearchedBlog, singleBlog, updateBlog } from '../controllers/blog.controller.js';
 import {  } from '../controllers/user.controller.js';
 import { isAdmin, isAuthenticated } from '../Middleware/authUser.js';
+import { createComment, likeBlog } from '../controllers/blog_activity.controller.js';
 
 
 const router=express.Router();
@@ -14,6 +15,13 @@ router.get("/singleblog/:id", singleBlog);
 router.get("/my-blogs",isAuthenticated,isAdmin("admin"),getMyBlog)
 router.get("/search/:text",getSearchedBlog)
 router.put("/updateblog/:id",isAuthenticated,isAdmin("admin"),updateBlog)
+
+//handle like
+router.post("/:blogid/like-blog",isAuthenticated,likeBlog);
+
+//handle commment
+
+router.post("/:blogid/comment",isAuthenticated,createComment)
 
 
 export default router;
