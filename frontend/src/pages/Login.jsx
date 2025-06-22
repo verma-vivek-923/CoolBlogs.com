@@ -68,7 +68,7 @@ const Login = () => {
       </h1>
       <div className="bg-white rounded-lg shadow-lg p-6 w-full mb-10 max-w-md">
         <h2 className="text-2xl text-center font-semibold mb-1">
-          Login to CoolBlogs
+          Login to Found-Hub
         </h2>
         <p className="text-gray-600 text-center mb-4">It's quick and easy.</p>
         <form onSubmit={handleSubmit}>

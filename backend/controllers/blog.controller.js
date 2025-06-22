@@ -157,3 +157,31 @@ export const getSearchedBlog = async (req, res) => {
   //  console.log(find_blog);
   res.status(200).json({find_blog });
 };
+
+// export const likeBlog= async (req,res) => {
+//        const {blogid}=req.params;
+//        const userId=req.user._id;
+
+//        const find_blog=await blog.findById(blogid)
+
+//        if(!find_blog){
+//         return res.status.json({message:"Blog Not Found"})
+//        }
+
+//        const find_loged_user=await user.findById(userId);
+
+//        if(find_loged_user.likedby,includes(blogid)){
+//         find_blog.likes -=1;
+//         // find_blog.lokedby=
+
+
+//        }else{
+//         find_blog.likedby.push(user)
+//        }
+
+//        await find_blog.save();
+// }
+
+// export const createComment= async (req,res) => {
+   
+// }

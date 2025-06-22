@@ -72,7 +72,7 @@ function Creators_home() {
                         alt="blog"
                         className="w-32 h-32 object-cover p-2 rounded-full"
                       />
-                      <p className="text-sm text-gray-500 capitalize">
+                      <p className="text-sm  text-gray-500 capitalize">
                         {element.role}
                       </p>
                       <h1
