@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { PiShareFatDuotone } from "react-icons/pi";
+import toast from "react-hot-toast";
+import { IoMdPrint } from "react-icons/io";
+import {} from "react-to-print";
 
 const ShareButton = ({ values: { url, tittle } }) => {
-
- const [task, setTask] = useState("");
+  const [shareLink, setShareLink] = useState(url);
+  const [copied, setCopied] = useState(false);
 
   const handleNativeShare = async () => {
+    document.getElementById("my_modal_2").close();
     try {
       const shareData = await navigator.share({
         url,
@@ -17,9 +21,26 @@ const ShareButton = ({ values: { url, tittle } }) => {
     }
   };
 
-  const handleShare=()=>{
+  const handleCopyLink = async () => {
+    console.log("link");
+    try {
+      const link = await navigator.clipboard.writeText(url);
+      toast.success("link Copied ");
+      setCopied(true);
 
-  }
+      setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+      toast.error("failed to copy link");
+    }
+  };
+
+  const handlePrint = () => {
+    document.getElementById("my_modal_2").close();
+    window.print();
+  };
 
   return (
     <div>
@@ -34,9 +55,9 @@ const ShareButton = ({ values: { url, tittle } }) => {
 
       {/* Open the modal using document.getElementById('ID').showModal() method */}
 
-      <dialog id="my_modal_2" className="modal">
-        <div className="modal-box bg-[#121212]">
-          <h3 className="font-bold text-lg">Share</h3>
+      <dialog id="my_modal_2" className="modal ">
+        <div className="modal-box space-y-2 ">
+          <h2 className="font-bold text-[#212121] mb-2 text-xl">Share</h2>
           {/* <p className="py-4">{tittle}</p> */}
 
           {/* <div className="w-full h-[20px] px-4 py-1">
@@ -44,23 +65,50 @@ const ShareButton = ({ values: { url, tittle } }) => {
             <button className="">Copy Link</button>
           </div> */}
 
-          <div className="flex items-center border border-gray-600 rounded-full w-full max-w-2xl mx-auto shadow-inner">
+          <div className="flex   items-center border border-[#0d0d0d]/70 rounded-md w-full  shadow-inner">
             <input
               type="text"
+              disabled={true}
               placeholder="Write Your Task"
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
-              className="flex-grow bg-transparent outline-none px-4 py-2   rounded-full "
+              value={shareLink}
+              onChange={(e) => setShareLink(e.target.value)}
+              className="flex-grow bg-transparent text-[#0d0d0d] text-md outline-none px-2 lg:px-4 py-1   rounded-md "
             />
             <button
-              onClick={handleShare}
-              className="ml-2 px-6 py-2 bg-[#00ffcc] text-black font-semibold rounded-full shadow-md hover:scale-105 transition-transform"
+              onClick={handleCopyLink}
+              className=" px-2 py-2 bg-[#212121] text-sm flex items-center hover:bg-[#0d0d0d] text-gray-200 font-semibold rounded-md shadow-md  scale-105 hover:scale-110 transition-transform"
             >
-              Copy Link
+              {copied ? "✔️ Copied" : "Copy Link"}
             </button>
           </div>
+
+          <div className="py-2 flex flex-col items-center space-y-2  w-full">
+            <div
+              onClick={handleNativeShare}
+              className="w-full border hover:border-2 border-gray-800/40 px-4 py-1 flex hover:bg-gray-600/20 bg-gray-400/20 rounded-md justify-start items-center space-x-2 hover:tracking-widest hover:scale-105 duration-200 "
+            >
+              <PiShareFatDuotone size={20} />
+              <h1 className="text-lg">Share</h1>
+            </div>
+            <div
+              onClick={handlePrint}
+              className="w-full border hover:border-2 border-gray-800/40 px-4 py-1 flex hover:bg-gray-600/20 bg-gray-400/20 rounded-md justify-start items-center space-x-2 hover:tracking-widest hover:scale-105 duration-200 "
+            >
+              <IoMdPrint size={20} />
+              <h1 className="text-lg">Print</h1>
+            </div>
+          </div>
+
+          <form method="dialog" className="modal-backdrop ">
+            <button className="btn btn-sm btn-circle btn-gray-800  absolute right-2 top-2">
+              ✕
+            </button>
+            {/* <button>close</button> */}
+          </form>
         </div>
-        <form method="dialog" className="modal-backdrop">
+
+        <form method="dialog" className="modal-backdrop ">
+          {/* <button className="btn btn-sm btn-circle btn-ghost  absolute right-2 top-2">✕</button> */}
           <button>close</button>
         </form>
       </dialog>
