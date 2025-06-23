@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { HiMiniMagnifyingGlass } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const Searchbar = () => {
           onChange={(e) => setSearchText(e.target.value)}
           className="w-full h-12 "
           placeholder="Search"
-          
+          list="suggestion"
         />
 
         <button
@@ -38,6 +38,13 @@ const Searchbar = () => {
         >
           <FaMagnifyingGlass size={12} />
         </button>
+
+        <datalist id="suggestion">
+          <option>Bussiness</option>
+          <option>cricket</option>
+          <option>Sports</option>
+          <option>Music</option>
+        </datalist>
       </form>
       {/* <button onClick={()=>setShowBar(!showBar)} className="block  md:hidden">
         <HiMiniMagnifyingGlass size={24} />
