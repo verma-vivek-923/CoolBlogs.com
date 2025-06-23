@@ -2,6 +2,7 @@ import { user } from "../models/user.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import { blog } from "../models/blog.model.js";
 import mongoose from "mongoose";
+import { comment_model } from "../models/comment.model.js";
 
 // Handle likes
 
@@ -58,4 +59,27 @@ export const likeBlog = async (req, res) => {
   }
 };
 
-export const createComment = async (req, res) => {};
+export const createComment = async (req, res) => {
+//     const {comment}=req.body;
+
+// const {blogId}=req.params;
+// const userId=req.users._id;
+
+// console.log(blogId,userId,comment)
+
+// try {
+
+//   const new_comment= new comment_model({
+//          comment,
+//          blogId,
+//          createdBy:userId
+//   })
+
+//   await comment_model.save();
+
+  
+// } catch (error) {
+  
+// }
+
+};

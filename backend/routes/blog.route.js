@@ -21,7 +21,7 @@ router.post("/:blogid/like-blog",isAuthenticated,likeBlog);
 
 //handle commment
 
-router.post("/:blogid/comment",isAuthenticated,createComment)
+router.post("/:blogid/add-comment",isAuthenticated,createComment)
 
 
 export default router;

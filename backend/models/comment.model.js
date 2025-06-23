@@ -7,22 +7,28 @@ const comment_Schema = mongoose.Schema({
   },
 
   blogId: {
-    type: mongoose.Schema.objectId,
+    type : mongoose.Schema.ObjectId,
     required: true,
     ref: "blog",
   },
 
   commmentedBy: {
-    type: mongoose.Schema.objectId,
+    type: mongoose.Schema.ObjectId,
     required: true,
     ref: "user",
   },
 
-  nextedComment:{
-    type: mongoose.Schema.objectId,
+  parentCommentId:{
+     type: mongoose.Schema.ObjectId,
     ref: "comment",
     default:null
-  }
+  },
+
+  nextedComment:[{
+    type: mongoose.Schema.ObjectId,
+    ref: "comment",
+    default:null
+  }]
 
 },{timestamps:true});
 

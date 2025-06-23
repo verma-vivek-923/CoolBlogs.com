@@ -121,9 +121,9 @@ function Navbar() {
             </ul>
           </div>
           <div className=" absolute right-[7.5rem]">
-            {/* <div className="hidden mr-8 lg:flex">
+            <div className="hidden mr-8 lg:flex">
               <Searchbar />
-            </div> */}
+            </div>
 
             <button
               onClick={() => {
@@ -221,6 +221,7 @@ function Navbar() {
             </div>
           </div>
         </div>
+
         {/* Mobile */}
         {show && (
           <>
