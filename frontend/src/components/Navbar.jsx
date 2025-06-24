@@ -167,7 +167,7 @@ function Navbar() {
                       smooth="true"
                       className={`${""
                         // !token ? "hidden" : "flex"
-                      }  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2  text-sm md:text-base  rounded`}
+                      } flex  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2  text-sm md:text-base  rounded`}
                       to="/dashboard"
                     >
                       <FaRegCircleUser size={14} />
@@ -178,7 +178,7 @@ function Navbar() {
                       smooth="true"
                       className={`${""
                         // !token ? "hidden" : "flex" 
-                      }  items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2  text-sm md:text-base  rounded`}
+                      } flex items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2  text-sm md:text-base  rounded`}
                     >
                       <TbLogout size={14} />
                       <span>Log Out</span>

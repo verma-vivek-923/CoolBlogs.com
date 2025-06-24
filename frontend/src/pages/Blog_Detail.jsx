@@ -65,7 +65,7 @@ function Detail() {
 
   return (
     <div>
-      <div className="min-h-screen flex relative justify-center pt-8 items-start">
+      <div className="min-h-screen min-w-screen flex relative justify-center pt-8 items-start">
         <Link
           to={"/"}
           className=" absolute  top-4  left-4 px-2 md:px-10 flex  items-center space-x-1"
@@ -136,7 +136,8 @@ function Detail() {
                       <span className="font-light">|</span>
 
                       {/* Comment Button */}
-                      <CommentButton />
+                      <CommentButton blogId="678576edf2d4146953c63cc6" userId="673f1361d8b40e1c40ec7c21" />
+
 
                       {/* <div
                         className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"
