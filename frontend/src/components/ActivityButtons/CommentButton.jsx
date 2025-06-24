@@ -154,14 +154,14 @@ const CommentButton = () => {
           </div>
 
           {/* Comment List */}
-          <div className="mt-6 px-4 space-y-2 py-1 rounded bg-gray-100">
+          <div className="mt-6 h-[50vh] px-4 space-y-2 py-1 overflow-y-auto rounded bg-gray-100">
             {getMainComment()?.map((comment) => {
                   // console.log(comment);
                   // console.log(users[comment.commmentedBy]);
                   return (
                     <div
                       key={comment._id}
-                      className="flex border-l   border-gray-400 px-4 py-1 flex-col "
+                      className="flex border-l   border-gray-400 px-2 md:px-4 py-1 flex-col "
                     >
                       <div className="flex items-center">
                         <h1 className="text-md font-semibold ">
@@ -178,7 +178,7 @@ const CommentButton = () => {
                 
                       }}
                         className={`${isDisable(comment.replies.length) ? "text-gray-400" :"text-blue-900"} hover:underline duration-300  mr-auto`}>
-                         {!showReply[comment._id] ? "View Replies" : "Hide Replies"}  (<span>{comment?.replies?.length}</span>)
+                         {!showReply[comment._id] ? "View Replies" : "Hide Replies"} (<span>{comment?.replies?.length}</span>)
                         </button>
 
 
@@ -235,7 +235,7 @@ const CommentButton = () => {
           </div>
         </div>
 
-        {/* <button className="px-2 py-1  rounded-full hover:bg-gray-800/20 duration-300 absolute right-0 top-0">✕</button> */}
+        {/* <button className="px-4 py-1 text-md bg-base-300 border border-gray-400   duration-300 absolute right-2 -top-7">✕</button> */}
       </div>
     </div>
   );
