@@ -7,6 +7,8 @@ const CommentButton = () => {
   const [loading, setLoading] = useState(false);
   const [allComments, setAllComments] = useState();
   const [showReply, setShowReply] = useState({});
+  const [replyBox, setReplyBox] = useState();
+  const [newReply, setNewReply] = useState();
 
   const textareaRef = useRef(null);
 
@@ -83,7 +85,6 @@ const CommentButton = () => {
   const getMainComment = (comment) =>
     allComments?.filter((c) => c.parentId === null);
 
-
   const getReply = (comment) =>
     allComments?.filter((c) => c.parentId === comment._id);
 
@@ -96,7 +97,7 @@ const CommentButton = () => {
   const handlePost = () => {};
   const handleCancel = () => {};
 
-  const isDisable=(commLen)=>commLen > 0 ? false :true ;
+  const isDisable = (commLen) => (commLen > 0 ? false : true);
 
   return (
     <div className="dropdown dropdown-end dropdown-bottom  ">
@@ -156,82 +157,142 @@ const CommentButton = () => {
           {/* Comment List */}
           <div className="mt-6 h-[50vh] px-4 space-y-2 py-1 overflow-y-auto rounded bg-gray-100">
             {getMainComment()?.map((comment) => {
-                  // console.log(comment);
-                  // console.log(users[comment.commmentedBy]);
-                  return (
-                    <div
-                      key={comment._id}
-                      className="flex border-l   border-gray-400 px-2 md:px-4 py-1 flex-col "
-                    >
-                      <div className="flex items-center">
-                        <h1 className="text-md font-semibold ">
-                          @ {users[comment.commmentedBy]} |{" "}
-                        </h1>
-                        <h2 className="text-sm">| 1 day ago</h2>
-                      </div>
-                      <p className="text-sm px-4">{comment.comment}</p>
+              // console.log(comment);
+              // console.log(users[comment.commmentedBy]);
+              return (
+                <div
+                  key={comment._id}
+                  className="flex border-l   border-gray-400 px-2 md:px-4 py-1 flex-col "
+                >
+                  <div className="flex items-center">
+                    <h1 className="text-md font-semibold ">
+                      @ {users[comment.commmentedBy]} |{" "}
+                    </h1>
+                    <h2 className="text-sm">| 1 day ago</h2>
+                  </div>
+                  <p className="text-sm px-4">{comment.comment}</p>
 
-                      <div className="space-x-2 mt-2 flex items-center justify-end mx-0 md:mx-4">
-                        <button 
-                        disabled={isDisable(comment.replies.length)  }
-                        onClick={()=>{setShowReply( {...showReply,[comment._id]:!showReply[comment._id]} )
-                
+                  <div className="space-x-2 mt-2 flex items-center justify-end mx-0 md:mx-4">
+                    <button
+                      disabled={isDisable(comment.replies.length)}
+                      onClick={() => {
+                        setReplyBox(!comment._id);
+                        setShowReply({
+                          ...showReply,
+                          [comment._id]: !showReply[comment._id],
+                        });
                       }}
-                        className={`${isDisable(comment.replies.length) ? "text-gray-400" :"text-blue-900"} hover:underline duration-300  mr-auto`}>
-                         {!showReply[comment._id] ? "View Replies" : "Hide Replies"} (<span>{comment?.replies?.length}</span>)
-                        </button>
+                      className={`${
+                        isDisable(comment.replies.length)
+                          ? "text-gray-400"
+                          : "text-blue-900"
+                      } hover:underline duration-300  mr-auto`}
+                    >
+                      {!showReply[comment._id]
+                        ? "View Replies"
+                        : "Hide Replies"}{" "}
+                      (<span>{comment?.replies?.length}</span>)
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        console.log(replyBox)
+                        setReplyBox(comment._id );
+                        setShowReply({
+                          ...showReply,
+                          [comment._id]: true,
+                        });
+                      }}
+                      className="hover:underline duration-300 text-green-900"
+                    >
+                      Reply
+                    </button>
+
+                    <button className="hover:underline duration-300 text-blue-900">
+                      Edit
+                    </button>
+
+                    <button className="hover:underline duration-300 text-red-900">
+                      Delete
+                    </button>
+                  </div>
+
+                  {/* Replies if available */}
 
 
-                        <button className="hover:underline duration-300 text-green-900">
-                          Reply
-                        </button>
+                      {/* reply box */}
+                  {showReply[comment._id] && (
+                    <div
+                   
+                    className="space-y-1 scale-90 transition-all  duration-300">
+                      {replyBox === comment._id && (
+                        <div className=" w-[90%] ml-auto mb-4 gap-2 border-x-1  flex flex-col justify-between items-center border-gray-900  ">
+                          <div className="flex  w-full rounded focus-within:border-2 transition-all duration-100 focus-within:border-blue-800  border border-gray-800 overflow-auto justify-start items-center">
+                            <textarea
+                              // type="text"
 
+                              name={newReply}
+                              placeholder="Type a Comment"
+                              value={newReply}
+                              rows={2}
+                              onChange={(e) => setNewReply(e.target.value)}
+                              className="input resize-y h-7  flex-grow  rounded-md  "
+                            />
+                          </div>
 
-                        <button className="hover:underline duration-300 text-blue-900">
-                          Edit
-                        </button>
-
-                        <button className="hover:underline duration-300 text-red-900">
-                          Delete
-                        </button>
-                      </div>
-
-                      {/* Replies if available */}
-
-                      {showReply[comment._id] && (
-                        <div className="space-y-1 scale-92 transition-all  duration-300">
-                          {getReply(comment).map((reply) => (
-                            <div
-                              key={reply._id}
-                              className="flex border-l mx-4   border-gray-400 px-4  flex-col "
+                          <div className="flex w-full space-x-4 pr-2 items-center justify-end">
+                            <button
+                              onClick={()=>{
+                                console.log("first")
+                                setReplyBox(!comment._id);
+                                // setNewReply("")
+                              }}
+                              className="px-2 text-sm text-blue-800 border-2 border-blue-800 hover:bg-gray-400 hover:text-gray-800 rounded-[.25rem] duration-300"
                             >
-                              <div className="flex items-center">
-                                <h1 className="text-md font-semibold ">
-                                  @ {users[reply.commmentedBy]} |{" "}
-                                </h1>
-                                <h2 className="text-sm">| 1 day ago</h2>
-                              </div>
-                              <p className="text-sm px-4">{reply.comment}</p>
-
-                              <div className="space-x-2 flex items-center justify-end pr-4">
-                                <button className="hover:underline duration-300 text-green-900">
-                                  Reply
-                                </button>
-                                <button className="hover:underline duration-300 text-blue-900">
-                                  Edit
-                                </button>
-                                <button className=" hover:underline duration-300 text-red-900">
-                                  Delete
-                                </button>
-                              </div>
-                            </div>
-                          ))}
+                              CANCEL
+                            </button>
+                            <button
+                              // onClick={handlePost}
+                              className=" flex items-center px-2 text-sm bg-blue-800 text-base-100 border-2 hover:bg-gray-400 hover:text-gray-800 duration-300 border-blue-800 rounded-[.25rem] space-x-1"
+                            >
+                              <span>POST</span> <MdOutlineSend size={14} />
+                            </button>
+                          </div>
                         </div>
                       )}
+
+                      {getReply(comment).map((reply) => (
+                        <div
+                          key={reply._id}
+                          className="flex border-l mx-4   border-gray-400 px-4  flex-col "
+                        >
+                          <div className="flex items-center">
+                            <h1 className="text-md font-semibold ">
+                              @ {users[reply.commmentedBy]} |{" "}
+                            </h1>
+                            <h2 className="text-sm">| 1 day ago</h2>
+                          </div>
+                          <p className="text-sm px-4">{reply.comment}</p>
+
+                          <div className="space-x-2 flex items-center justify-end pr-4">
+                            <button className="hover:underline duration-300 text-green-900">
+                              Reply
+                            </button>
+
+                            <button className="hover:underline duration-300 text-blue-900">
+                              Edit
+                            </button>
+                            <button className=" hover:underline duration-300 text-red-900">
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  );
-                })
-            }
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
