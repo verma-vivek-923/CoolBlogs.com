@@ -1,29 +1,43 @@
 import mongoose from "mongoose";
 
-const comment_Schema = mongoose.Schema({
-  comment: {
-    type: String,
-    required: true,
+const comment_Schema = mongoose.Schema(
+  {
+    comment: {
+      type: String,
+      required: true,
+    },
+
+    blogId: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+      ref: "blog",
+    },
+
+    commentedBy: {
+      type: mongoose.Schema.ObjectId,
+      required: true,
+      ref: "user",
+    },
+
+    parentId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "comment",
+      default: null,
+    },
+
+    replies: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "comment",
+      },
+    ],
+
+    modifyAt: {
+      type: Date,
+      default: null,
+    },
   },
-
-  blogId: {
-    type: mongoose.Schema.objectId,
-    required: true,
-    ref: "blog",
-  },
-
-  commmentedBy: {
-    type: mongoose.Schema.objectId,
-    required: true,
-    ref: "user",
-  },
-
-  nextedComment:{
-    type: mongoose.Schema.objectId,
-    ref: "comment",
-    default:null
-  }
-
-},{timestamps:true});
+  { timestamps: true }
+);
 
 export const comment_model = mongoose.model("Comments", comment_Schema);
