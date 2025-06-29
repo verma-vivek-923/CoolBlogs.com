@@ -25,7 +25,7 @@ const ShareButton = ({ values: { url, tittle } }) => {
     <div>
       <div
         onClick={() => document.getElementById("my_modal_2").showModal()}
-        className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"
+        className="tooltip active:scale-90 flex items-center hover:bg-gray-600/15 p-2 rounded-md"
         data-tip="Share"
       >
         {/* <PiHeartStraightDuotone  /> */}
@@ -44,7 +44,7 @@ const ShareButton = ({ values: { url, tittle } }) => {
             <button className="">Copy Link</button>
           </div> */}
 
-          <div className="flex items-center border border-gray-600 rounded-full w-full max-w-2xl mx-auto shadow-inner">
+          <div className="flex  items-center border border-gray-600 rounded-full w-full max-w-2xl mx-auto shadow-inner">
             <input
               type="text"
               placeholder="Write Your Task"

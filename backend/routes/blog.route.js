@@ -22,7 +22,7 @@ router.post("/:blogid/like-blog",isAuthenticated,likeBlog);
 //handle commment
 router.post("/:blogId/add-comment",isAuthenticated,createComment)
 
-router.post("/:blogId/get-all-comment",getAllComment);
+router.get("/:blogId/get-all-comment",getAllComment);
 
 router.put("/:blogId/edit-comment",isAuthenticated,editComment);
 router.delete("/:blogId/delete-comment",isAuthenticated,deleteComment);

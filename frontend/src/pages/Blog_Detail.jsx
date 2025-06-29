@@ -73,7 +73,7 @@ function Detail() {
           <IoHome />
           <span>Home</span>
         </Link>
-        <div className=" w-full mt-2 bg-white max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
+        <div className=" w-full mt-2 bg-white relative max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
           {blogs && Object.keys(blogs).length > 0 ? (
             <div>
               {/* //Blog Image Section */}
@@ -128,7 +128,7 @@ function Detail() {
                   {/* Like Share and Comment buttons */}
                   <div className="ml-auto">
                   
-                    <ul className="menu p-2 md:mr-4 lg:mr-6 items-center cursor-pointer menu-horizontal space-x-2  rounded-md ">
+                    <ul className="menu  p-2 md:mr-4 lg:mr-6 items-center cursor-pointer menu-horizontal space-x-2  rounded-md ">
 
                       {/* Like Button */}
                       <LikeButton values={{user:profile,blog:blogs}} />
@@ -136,7 +136,7 @@ function Detail() {
                       <span className="font-light">|</span>
 
                       {/* Comment Button */}
-                      <CommentButton blogId="678576edf2d4146953c63cc6" userId="673f1361d8b40e1c40ec7c21" />
+                      <CommentButton values={ {blogId:blogs?._id, userId:profile?._id}} />
 
 
                       {/* <div

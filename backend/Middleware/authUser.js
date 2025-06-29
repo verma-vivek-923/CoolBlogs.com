@@ -4,8 +4,10 @@ import { user } from '../models/user.model.js';
 //Authentication
 export const isAuthenticated=async (req,res,next)=>{
     try {
-        const token=req.cookies.jwt;
-        // console.log(token)
+    
+        const token= req.cookies.jwt;
+        
+        console.log(token)
 
         if(!token){
             console.log("User not Authenticated")

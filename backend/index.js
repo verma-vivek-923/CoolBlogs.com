@@ -40,6 +40,7 @@ try{
 app.get('/', function (req, res) {
   res.send('Hello World')
 })
+
 app.use('/user',userRoute)
 app.use('/blog',blogRoute)
 

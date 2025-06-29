@@ -16,7 +16,7 @@ const comment_Schema = mongoose.Schema(
     commentedBy: {
       type: mongoose.Schema.ObjectId,
       required: true,
-      ref: "user",
+      ref: "users",
     },
 
     parentId: {
