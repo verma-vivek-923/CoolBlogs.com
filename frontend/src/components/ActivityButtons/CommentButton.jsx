@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { PiMessengerLogoDuotone } from "react-icons/pi";
+import {
+  PiDotsThreeOutlineVerticalDuotone,
+  PiMessengerLogoDuotone,
+} from "react-icons/pi";
 import { MdOutlineSend } from "react-icons/md";
 import { useActivity } from "../../context/BlogActivityProvider";
 import axiosInstance from "../../utilities/axiosInstance";
@@ -11,72 +14,10 @@ import {
 } from "date-fns";
 import moment from "moment";
 import toast from "react-hot-toast";
-
-const users = {
-  "673f1361d8b40e1c40ec7c21": "Alice",
-  "674705a6cce52dab882d2c77": "Bob",
-  "6782b7cc048ecd587b2d2d1d": "Charlie",
-};
-
-const initialComments = [
-  {
-    _id: "1",
-    comment: "Great post!",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "673f1361d8b40e1c40ec7c21",
-    parentId: null,
-    replies: [],
-  },
-  {
-    _id: "2",
-    comment: "Very informative, thanks.",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "674705a6cce52dab882d2c77",
-    parentId: null,
-    replies: ["5", "7"],
-  },
-  {
-    _id: "3",
-    comment: "I like the way you explained it.",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "6782b7cc048ecd587b2d2d1d",
-    parentId: null,
-    replies: [],
-  },
-  {
-    _id: "4",
-    comment: "Can you elaborate more?",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "673f1361d8b40e1c40ec7c21",
-    parentId: null,
-    replies: ["6"],
-  },
-  {
-    _id: "5",
-    comment: "Nice article!",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "674705a6cce52dab882d2c77",
-    parentId: "2",
-    replies: [],
-  },
-  // Replies
-  {
-    _id: "6",
-    comment: "Sure! I’ll update it soon.",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "6782b7cc048ecd587b2d2d1d",
-    parentId: "4", // reply to comment 4
-    replies: [],
-  },
-  {
-    _id: "7",
-    comment: "Agree with you!",
-    blogId: "678576edf2d4146953c63cc6",
-    commmentedBy: "673f1361d8b40e1c40ec7c21",
-    parentId: "2", // reply to comment 2
-    replies: [],
-  },
-];
+import { useAuth } from "../../context/AuthProvider";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { HiReply } from "react-icons/hi";
 
 const CommentButton = ({ values: { blogId, userId } }) => {
   const [newComment, setNewComment] = useState();
@@ -88,6 +29,9 @@ const CommentButton = ({ values: { blogId, userId } }) => {
   const [replyBox, setReplyBox] = useState({});
   const [newReply, setNewReply] = useState();
   const [showBox, setShowBox] = useState(false);
+  const [showEditPannel, setShowEditPannel] = useState(false);
+
+  const { profile } = useAuth();
 
   const { fetchAllComment, postComment, editComment, deleteComment } =
     useActivity();
@@ -115,6 +59,10 @@ const CommentButton = ({ values: { blogId, userId } }) => {
 
   const handlePost = async (new_Comment = newComment, parent_id = null) => {
     // e.preventDefault();
+    if (!profile) {
+      return toast.error("Please Login To Comment !!");
+    }
+
     if (!new_Comment) {
       return;
     }
@@ -177,6 +125,10 @@ const CommentButton = ({ values: { blogId, userId } }) => {
 
   const isDisable = (commLen) => (commLen > 0 ? false : true);
 
+  const isAuthor = (comment) => {
+    return comment?.commentedBy?._id === profile?._id;
+  };
+
   return (
     <>
       <div className=" dropdown dropdown-end dropdown-bottom ">
@@ -230,7 +182,12 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                   </button>
                   <button
                     onClick={() => handlePost()}
-                    className="active:scale-95 flex items-center px-2 text-sm bg-blue-800 text-base-100 border-2 hover:bg-gray-400 hover:text-gray-800 duration-300 border-blue-800 rounded-[.25rem] space-x-1"
+                    className={`${
+                      profile
+                        ? "hover:bg-gray-400 hover:text-gray-800"
+                        : "bg-gray-400/40 text-gray-800/40 border-none "
+                    } active:scale-95 flex items-center px-2 text-sm bg-blue-800 text-base-100 border-2  duration-300 border-blue-800 rounded-[.25rem] space-x-1"
+                `}
                   >
                     <span>POST</span> <MdOutlineSend size={14} />
                   </button>
@@ -316,46 +273,98 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                               : "text-blue-900"
                           } active:scale-95  hover:underline duration-300  mr-auto`}
                         >
+                         
                           {!showReply[comment._id]
                             ? "View Replies"
                             : "Hide Replies"}{" "}
                           (<span>{comment?.replies?.length}</span>)
                         </button>
 
-                        <button
-                          onClick={() => {
-                            //  (replyBox);
-                            setReplyBox({
-                              [comment._id]: !replyBox[comment._id],
-                            });
-                            setShowReply({
-                              ...showReply,
-                              [comment._id]: true,
-                            });
-                          }}
-                          className="active:scale-95 hover:underline duration-300 text-green-900"
-                        >
-                          Reply
-                        </button>
+                        {console.log(isAuthor(comment))}
+                        {profile && (
+                          <>
+                            {/* Reply Button */}
+                            <button
+                              disabled={!isAuthor(comment)}
+                              onClick={() => {
+                                //  (replyBox);
+                                setReplyBox({
+                                  [comment._id]: !replyBox[comment._id],
+                                });
+                                setShowReply({
+                                  ...showReply,
+                                  [comment._id]: true,
+                                });
+                              }}
+                              className={` active:scale-95 flex items-center gap-1 hover:underline duration-300 text-green-900 `}
+                            >
+                               <HiReply />
+                              Reply
+                            </button>
 
-                        <button
-                          onClick={() => {
-                            setEditText(comment?.comment);
-                            setEditField({
-                              [comment._id]: !editField[comment._id],
-                            });
-                          }}
-                          className="hover:underline duration-300 text-blue-900"
-                        >
-                          {!editField[comment._id] ? "Edit" : "Cancel"}
-                        </button>
+                            {console.log(showEditPannel)}
+                            <div className=" dropdown ">
+                              <div
+                                role="button"
+                                onClick={() =>
+                                  setShowEditPannel({
+                                    [comment._id]: !showEditPannel[comment._id],
+                                  })
+                                }
+                                className="p-1 z-50"
+                              >
+                                <PiDotsThreeOutlineVerticalDuotone />
+                              </div>
 
-                        <button
-                          onClick={() => handleDelete(comment._id)}
-                          className="active:scale-95  hover:underline duration-300 text-red-900"
-                        >
-                          Delete
-                        </button>
+                              {showEditPannel[comment._id] && (
+                                <ul className="fixed  right-4 bg-gray-300  z-40 w-max px-1 py-2 rounded-md shadow-sm">
+                                  {/* Edit Button  */}
+
+                                  <button
+                                    disabled={isAuthor()}
+                                    onClick={() => {
+                                      setEditText(comment?.comment);
+                                      setEditField({
+                                        [comment._id]: !editField[comment._id],
+                                      });
+                                    }}
+                                    className={`${
+                                      isAuthor(comment)
+                                        ? "text-blue-900"
+                                        : "text-gray-400"
+                                    } active:scale-95 flex items-center gap-1 px-2 pr-4 py-1 hover:bg-blue-500/30 w-full rounded-md hover:underline duration-300 `}
+                                  >
+                                    <MdOutlineModeEditOutline />
+                                    {!editField[comment._id]
+                                      ? "EDIT"
+                                      : "CANCEL"}
+                                  </button>
+
+                                  {/* Delete Button */}
+                                  <button
+                                    disabled={isAuthor()}
+                                    onClick={() => handleDelete(comment._id)}
+                                    className={`${
+                                      isAuthor(comment)
+                                        ? "text-red-900"
+                                        : " text-gray-400"
+                                    } active:scale-95 flex items-center gap-1 px-2 pr-4 py-1 hover:bg-red-400/20 w-full rounded-md  hover:underline duration-300 `}
+                                  >
+                                    <MdDelete />
+                                    DELETE
+                                  </button>
+                                </ul>
+                              )}
+
+                              {/* {showEditPannel && (
+                                <div
+                                  onClick={() => setShowEditPannel(false)}
+                                  className="fixed top-0 left-0 bg-red-800/40  z-10 w-full h-full"
+                                ></div>
+                              )} */}
+                            </div>
+                          </>
+                        )}
                       </div>
 
                       {/* Replies if available */}
@@ -449,29 +458,41 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                                 </div>
                               )}
 
-                              <div className="space-x-2 flex items-center justify-end pr-4">
-                                <button
-                                  onClick={() => {
-                                    comment;
-                                    setEditText(reply?.comment);
-                                    setEditField({
-                                      [reply._id]: !editField[reply._id],
-                                    });
-                                    editField;
-                                  }}
-                                  className="active:scale-95 hover:underline duration-300 text-blue-900"
-                                >
-                                  {!editField[reply._id] ? "Edit" : "Cancel"}
-                                </button>
-                                <button
-                                  onClick={() =>
-                                    handleDelete(reply._id, comment._id)
-                                  }
-                                  className="active:scale-95  hover:underline duration-300 text-red-900"
-                                >
-                                  Delete
-                                </button>
-                              </div>
+                              {profile && (
+                                <div className="space-x-2 flex items-center justify-end pr-4">
+                                  <button
+                                    disabled={!isAuthor(reply)}
+                                    onClick={() => {
+                                      comment;
+                                      setEditText(reply?.comment);
+                                      setEditField({
+                                        [reply._id]: !editField[reply._id],
+                                      });
+                                      editField;
+                                    }}
+                                    className={`${
+                                      isAuthor(reply)
+                                        ? "text-blue-900"
+                                        : " text-gray-400"
+                                    }  active:scale-95 hover:underline duration-300 `}
+                                  >
+                                    {!editField[reply._id] ? "Edit" : "Cancel"}
+                                  </button>
+
+                                  <button
+                                    onClick={() =>
+                                      handleDelete(reply._id, comment._id)
+                                    }
+                                    className={`${
+                                      isAuthor(reply)
+                                        ? "text-red-900"
+                                        : "text-gray-400"
+                                    } active:scale-95  hover:underline duration-300 `}
+                                  >
+                                    Delete
+                                  </button>
+                                </div>
+                              )}
                             </div>
                           ))}
                         </div>
