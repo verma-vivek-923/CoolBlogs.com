@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 .env
+
+import React, { useEffect, useState } fr.js
