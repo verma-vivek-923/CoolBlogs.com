@@ -18,6 +18,7 @@ import { useAuth } from "../../context/AuthProvider";
 import { MdOutlineModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { HiReply } from "react-icons/hi";
+import CircleLoad from "../Loadings/CircleLoad";
 
 const CommentButton = ({ values: { blogId, userId } }) => {
   const [newComment, setNewComment] = useState();
@@ -67,6 +68,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
       return toast.error("Please Login To Comment !!");
     }
 
+    setLoading(true)
     if (!new_Comment) {
       return;
     }
@@ -78,6 +80,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
     setAllComments([posted_Comment, ...allComments]);
     setNewComment("");
     setNewReply("");
+    setLoading(false);
   };
 
   const handleEdit = async (comment_Id) => {
@@ -193,7 +196,17 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                     } active:scale-95 flex items-center px-2 text-sm bg-blue-800 text-base-100 border-2  duration-300 border-blue-800 rounded-[.25rem] space-x-1"
                 `}
                   >
-                    <span>POST</span> <MdOutlineSend size={14} />
+                    {!loading ? (
+                      <>
+                       <span>POST</span> <MdOutlineSend size={14} />
+                      </>
+                      
+                    ) : (
+                        <div>
+                          <CircleLoad/>
+                        </div>
+                    ) }
+                   
                   </button>
                 </div>
               </div>
