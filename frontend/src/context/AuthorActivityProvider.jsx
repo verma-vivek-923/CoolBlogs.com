@@ -1,0 +1,30 @@
+import React, { createContext, useContext, useState } from 'react'
+import axiosInstance from '../utilities/axiosInstance';
+
+
+const AuthorContext=createContext();
+
+export const AuthorActivityProvider = ({children}) => {
+  const [isFollowed,setIsFollowed]=useState();
+
+  const followAuthor=async (author_Id)=>{
+     
+    const {data}=await  axiosInstance.post(`/user/${author_Id}/follow`);
+
+    console.log(data);
+    setIsFollowed(!isFollowed);
+  }
+    
+// useEffect(() => {
+//  setIsFollowed(autho?r.followedBy?.includes(profile._id)) 
+
+// }, [])
+
+  return (
+    <AuthorContext.Provider value={{followAuthor,isFollowed}}>
+       {children}
+    </AuthorContext.Provider>
+  )
+}
+
+export const authorActivity=()=>useContext(AuthorContext)

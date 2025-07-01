@@ -84,6 +84,8 @@ export const singleBlog = async (req, res) => {
     return res.status(400).json({ message: "Blog Not Found" });
   }
 
+  await find_blog.populate("createdBy")
+
   res.status(200).json({ message: "blog are :-", find_blog });
 };
 
