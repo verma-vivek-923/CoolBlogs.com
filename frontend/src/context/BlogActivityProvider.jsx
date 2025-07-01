@@ -21,8 +21,81 @@ export const BlogActivityProvider = ({ children }) => {
     }
   };
 
+  const fetchAllComment = async (blogId) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/blog/${blogId}/get-all-comment`
+      );
+      return data.all_comment;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const postComment = async (newComment, blogId, parentId) => {
+    try {
+      const postData = {
+        comment: newComment,
+        parentId,
+      };
+      console.log(newComment);
+      console.log(parentId);
+      console.log(blogId);
+      console.log(postData);
+
+      const { data } = await axiosInstance.post(
+        `/blog/${blogId}/add-comment`,
+        postData
+      );
+
+      // console.log(data)
+      return data.new_comment;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const editComment = async (edited_Comment, comment_Id, blogId) => {
+    const edited_Data = {
+      newText: edited_Comment,
+      commentId: comment_Id,
+    };
+
+    const { data } = await axiosInstance.put(
+      `/blog/${blogId}/edit-comment`,
+      edited_Data
+    );
+
+    console.log(data);
+
+    return data?.updated_comment;
+  };
+
+  const deleteComment = async (comment_Id, parent_Id, blogId) => {
+    // console.log(comment_Id, parent_Id);
+    const delete_data = {
+      commentId: comment_Id,
+    };
+
+    const { data } =await axiosInstance.delete(
+      `/blog/${blogId}/delete-comment`,
+     { data:delete_data}
+    );
+
+    console.log(data);
+    return data.all_comment
+  };
+
   return (
-    <ActivityContext.Provider value={{ likeBlog }}>
+    <ActivityContext.Provider
+      value={{
+        likeBlog,
+        fetchAllComment,
+        postComment,
+        editComment,
+        deleteComment,
+      }}
+    >
       {children}
     </ActivityContext.Provider>
   );

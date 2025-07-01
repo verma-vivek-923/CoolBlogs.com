@@ -65,7 +65,7 @@ function Detail() {
 
   return (
     <div>
-      <div className="min-h-screen flex relative justify-center pt-8 items-start">
+      <div className="min-h-screen min-w-screen flex relative justify-center pt-8 items-start">
         <Link
           to={"/"}
           className=" absolute  top-4  left-4 px-2 md:px-10 flex  items-center space-x-1"
@@ -73,7 +73,7 @@ function Detail() {
           <IoHome />
           <span>Home</span>
         </Link>
-        <div className=" w-full mt-2 bg-white max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
+        <div className=" w-full mt-2 bg-white relative max-w-3xl p-4 shadow-2xl rounded-md  mx-auto">
           {blogs && Object.keys(blogs).length > 0 ? (
             <div>
               {/* //Blog Image Section */}
@@ -128,7 +128,7 @@ function Detail() {
                   {/* Like Share and Comment buttons */}
                   <div className="ml-auto">
                   
-                    <ul className="menu p-2 md:mr-4 lg:mr-6 items-center cursor-pointer menu-horizontal space-x-2  rounded-md ">
+                    <ul className="menu  p-2 md:mr-4 lg:mr-6 items-center cursor-pointer menu-horizontal space-x-2  rounded-md ">
 
                       {/* Like Button */}
                       <LikeButton values={{user:profile,blog:blogs}} />
@@ -136,7 +136,8 @@ function Detail() {
                       <span className="font-light">|</span>
 
                       {/* Comment Button */}
-                      <CommentButton />
+                      <CommentButton values={ {blogId:blogs?._id, userId:profile?._id}} />
+
 
                       {/* <div
                         className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"

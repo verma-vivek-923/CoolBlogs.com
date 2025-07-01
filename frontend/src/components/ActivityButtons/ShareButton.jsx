@@ -46,7 +46,7 @@ const ShareButton = ({ values: { url, tittle } }) => {
     <div>
       <div
         onClick={() => document.getElementById("my_modal_2").showModal()}
-        className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"
+        className="tooltip active:scale-90 flex items-center hover:bg-gray-600/15 p-2 rounded-md"
         data-tip="Share"
       >
         {/* <PiHeartStraightDuotone  /> */}

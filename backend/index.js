@@ -32,6 +32,7 @@ app.use(fileUpload({
 try{
   mongoose.connect(mongo_url)
   console.log("connected to database")
+  console.log(mongo_url)
 }catch(error){
   console.log("Error",error)
 }
@@ -39,6 +40,7 @@ try{
 app.get('/', function (req, res) {
   res.send('Hello World')
 })
+
 app.use('/user',userRoute)
 app.use('/blog',blogRoute)
 

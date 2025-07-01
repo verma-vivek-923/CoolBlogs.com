@@ -3,7 +3,7 @@ import  express, { application }  from 'express';
 import { createBlog,  deleteBlog, getAllBlogs, getMyBlog, getSearchedBlog, singleBlog, updateBlog } from '../controllers/blog.controller.js';
 import {  } from '../controllers/user.controller.js';
 import { isAdmin, isAuthenticated } from '../Middleware/authUser.js';
-import { createComment, likeBlog } from '../controllers/blog_activity.controller.js';
+import { createComment, deleteComment, editComment, getAllComment, likeBlog } from '../controllers/blog_activity.controller.js';
 
 
 const router=express.Router();
@@ -20,8 +20,11 @@ router.put("/updateblog/:id",isAuthenticated,isAdmin("admin"),updateBlog)
 router.post("/:blogid/like-blog",isAuthenticated,likeBlog);
 
 //handle commment
+router.post("/:blogId/add-comment",isAuthenticated,createComment)
 
-router.post("/:blogid/add-comment",isAuthenticated,createComment)
+router.get("/:blogId/get-all-comment",getAllComment);
 
+router.put("/:blogId/edit-comment",isAuthenticated,editComment);
+router.delete("/:blogId/delete-comment",isAuthenticated,deleteComment);
 
 export default router;
