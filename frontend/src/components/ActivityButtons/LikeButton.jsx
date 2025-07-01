@@ -41,7 +41,7 @@ const LikeButton = ({ values: { user, blog } }) => {
     <div>
       <div
         onClick={handleLike}
-        className="tooltip flex active:scale-95 items-center hover:bg-gray-600/15 p-2 rounded-md"
+        className="lg:tooltip flex active:scale-95 items-center hover:bg-gray-600/15 p-2 rounded-md"
         data-tip="Like"
       >
         <PiHeartStraightDuotone

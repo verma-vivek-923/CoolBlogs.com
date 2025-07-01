@@ -140,7 +140,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
           onClick={() => setShowBox(!showBox)}
           className={`${
             showBox ? "bg-gray-800/20" : ""
-          } active:scale-90 duration-200 tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md`}
+          } active:scale-90 duration-200 lg:tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md`}
           data-tip="Comment"
         >
           <PiMessengerLogoDuotone size={20} /> &nbsp;{allComments.length}
