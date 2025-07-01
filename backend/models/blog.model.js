@@ -45,7 +45,7 @@ const blog_schema = mongoose.Schema({
   },
   createdBy: {
     type: mongoose.Schema.ObjectId,
-    ref: "user",
+    ref: "users",
   },
 });
 export const blog = mongoose.model("blogs", blog_schema);

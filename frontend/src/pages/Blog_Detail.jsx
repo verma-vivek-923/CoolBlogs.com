@@ -22,6 +22,7 @@ function Detail() {
   const [isLiked, setIsLiked] = useState();
   const [show, setShow] = useState();
   const [loading, setLoading] = useState();
+  const [followers,setFollowers]= useState();
 
   const { likeBlog } = useActivity();
 
@@ -44,13 +45,17 @@ function Detail() {
             },
           }
         );
-        // console.log(data);
+        console.log(data.find_blog);
         setblogs(data.find_blog);
+
+        setFollowers(data.find_blog?.createdBy?.followedBy?.length)
+    
       } catch (error) {
         // console.log(error);
       }
     };
     fetchblogs();
+
   }, [id]);
 
   useEffect(() => {
@@ -60,6 +65,8 @@ function Detail() {
       setShow(false);
     }
   }, [blogs, profile]);
+
+
 
   return (
     <div>
@@ -103,29 +110,29 @@ function Detail() {
                 </div>
 
                 {/* Blog Creator , Created Time and like comment seection */}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between mt-4">
-                  <div className="flex  space-x-2  items-center">
+                <div className="flex w-full flex-col md:flex-row items-start md:items-center justify-between mt-4">
+                  <div className="flex w-full md:w-1/2 space-x-1  items-center">
                     <img
                       src={blogs?.adminPhoto}
                       alt="author_avatar"
                       className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
                     />
                     <div className="flex items-start leading-none justify-center flex-col ">
-                      <p className="text-xs  capitalize font-semibold text-gray-700 ">
+                      <p className="text-xs  capitalize  text-gray-700 ">
                         By: {blogs.adminName}
                       </p>
-                      <span className="text-[10px]">{20} Followers</span>
+                      <span className="text-[10px]">{followers} Followers</span>
                     </div>
                     <span className="font-light">|</span>
-                    <span className="text-sm ">
+                    <span className="text-[10px] lg:text-sm ">
                       {new Date(blogs?.createdAt).toLocaleDateString("en-GB", {
                         day: "2-digit",
                         month: "2-digit",
                         year: "numeric",
                       })}
                     </span>
-                    <div>
-                      <AuthorFollowButton />
+                    <div className="ml-auto">
+                      <AuthorFollowButton values={{author:blogs?.createdBy}} />
                     </div>
                   </div>
 
