@@ -14,7 +14,7 @@ const ShareButton = ({ values: { url, tittle } }) => {
       const shareData = await navigator.share({
         url,
         title: tittle,
-        text: "A Blog that can sharre",
+        text: "",
       });
     } catch (error) {
       console.log(error);
