@@ -38,11 +38,15 @@ const CommentButton = ({ values: { blogId, userId } }) => {
 
   const textareaRef = useRef(null);
 
-  useEffect(async () => {
-    const all_comment = await fetchAllComment(blogId);
+  useEffect(() => {
 
-    setAllComments(all_comment);
-    //  (all_comment);
+    const getAllComment= async ()=>{
+      const all_comment = await fetchAllComment(blogId);
+  
+      setAllComments(all_comment);
+      //  (all_comment);
+    }
+    getAllComment();
   }, []);
 
   const getMainComment = (comment) =>
