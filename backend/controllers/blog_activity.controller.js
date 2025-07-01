@@ -1,7 +1,5 @@
 import { user } from "../models/user.model.js";
-import { v2 as cloudinary } from "cloudinary";
 import { blog } from "../models/blog.model.js";
-import mongoose from "mongoose";
 import { comment_model } from "../models/comment.model.js";
 
 // Handle likes
@@ -97,7 +95,7 @@ export const createComment = async (req, res) => {
       await parent_comment.save();
     }
     res.status(200).json({ message: "success", new_comment });
-  } catch (error) {
+  } catch (error) { 
     console.log(error);
     res.status(500).json({ message: "Unsuccess", error });
   }
@@ -128,10 +126,6 @@ export const editComment = async (req, res) => {
   try {
     const { commentId, newText } = req.body;
     const userId = req.users._id;
-
-    console.log(commentId);
-    console.log(newText);
-    console.log(userId);
 
     const find_comment = await comment_model.findById(commentId);
 

@@ -14,6 +14,7 @@ import { useActivity } from "../context/BlogActivityProvider";
 import LikeButton from "../components/ActivityButtons/LikeButton";
 import CommentButton from "../components/ActivityButtons/CommentButton";
 import ShareButton from "../components/ActivityButtons/ShareButton";
+import AuthorFollowButton from "../components/AuthorButtons/AuthorFollowButton";
 
 function Detail() {
   const { id } = useParams();
@@ -58,10 +59,7 @@ function Detail() {
     } else {
       setShow(false);
     }
-
-
   }, [blogs, profile]);
-
 
   return (
     <div>
@@ -112,9 +110,12 @@ function Detail() {
                       alt="author_avatar"
                       className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
                     />
-                    <p className="text-xs  capitalize font-semibold text-gray-700 ">
-                      By: {blogs.adminName}
-                    </p>
+                    <div className="flex items-start leading-none justify-center flex-col ">
+                      <p className="text-xs  capitalize font-semibold text-gray-700 ">
+                        By: {blogs.adminName}
+                      </p>
+                      <span className="text-[10px]">{20} Followers</span>
+                    </div>
                     <span className="font-light">|</span>
                     <span className="text-sm ">
                       {new Date(blogs?.createdAt).toLocaleDateString("en-GB", {
@@ -123,21 +124,23 @@ function Detail() {
                         year: "numeric",
                       })}
                     </span>
+                    <div>
+                      <AuthorFollowButton />
+                    </div>
                   </div>
 
                   {/* Like Share and Comment buttons */}
                   <div className="ml-auto">
-                  
                     <ul className="menu  p-2 md:mr-4 lg:mr-6 items-center cursor-pointer menu-horizontal space-x-2  rounded-md ">
-
                       {/* Like Button */}
-                      <LikeButton values={{user:profile,blog:blogs}} />
-                    
+                      <LikeButton values={{ user: profile, blog: blogs }} />
+
                       <span className="font-light">|</span>
 
                       {/* Comment Button */}
-                      <CommentButton values={ {blogId:blogs?._id, userId:profile?._id}} />
-
+                      <CommentButton
+                        values={{ blogId: blogs?._id, userId: profile?._id }}
+                      />
 
                       {/* <div
                         className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"
@@ -149,7 +152,12 @@ function Detail() {
                       <span className="font-light">|</span>
 
                       {/* Share Button */}
-                      <ShareButton values={{url:window.location.href,tittle:blogs?.tittle}}/>
+                      <ShareButton
+                        values={{
+                          url: window.location.href,
+                          tittle: blogs?.tittle,
+                        }}
+                      />
                       {/* <div
                         className="tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md"
                         data-tip="Comment"
