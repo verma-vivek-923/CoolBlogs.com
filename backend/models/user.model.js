@@ -40,14 +40,14 @@ const user_schema = mongoose.Schema({
   followings: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
       default: null,
     },
   ],
   followedBy: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
     },
   ],
 

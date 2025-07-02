@@ -50,7 +50,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
   }, []);
 
   const getMainComment = (comment) =>
-    allComments?.filter((c) => c.parentId === null);
+    allComments?.filter((c) => c?.parentId === null);
 
   const getReply = (comment) =>
     allComments?.filter((c) => c.parentId === comment._id);
@@ -145,8 +145,9 @@ const CommentButton = ({ values: { blogId, userId } }) => {
               showBox ? "bg-gray-800/20" : ""
             } active:scale-90 duration-200 flex items-center hover:bg-gray-600/15 p-2 rounded-md`}
           >
-            <PiMessengerLogoDuotone size={20} /> &nbsp;{allComments.length}
-            {/* <span>0</span> */}
+            <PiMessengerLogoDuotone size={20} />
+             &nbsp;{allComments?.length}
+            {/* <span>{allComments.length}</span> */}
           </div>
         </div>
 

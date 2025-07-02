@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useActivity } from "../../context/BlogActivityProvider";
 import { PiHeartStraightDuotone } from "react-icons/pi";
 import toast from "react-hot-toast";
+// import { motion,AnimateNumber } from "motion/react"
 
 const LikeButton = ({ values: { user, blog } }) => {
   const [likes, setLikes] = useState(blog?.likes);
@@ -15,7 +16,7 @@ const LikeButton = ({ values: { user, blog } }) => {
   // Handle like Click
   const handleLike = async () => {
     if (!user) {
-       toast.error("Login First to Like");
+      toast.error("Login First to Like");
     }
 
     const data = await likeBlog(blog?._id, user?._id);
@@ -42,15 +43,15 @@ const LikeButton = ({ values: { user, blog } }) => {
       <div
         onClick={handleLike}
         className=" flex flex-row active:scale-95 items-center hover:bg-gray-600/15 p-2 rounded-md"
-       
       >
         <PiHeartStraightDuotone
-          className={`${isLiked ? "text-red-800" : ""}`}
+          className={`${isLiked ? "text-red-800 " : ""}`}
           size={20}
         />{" "}
         &nbsp;{likes}
-
-        {/* <span>0</span> */}
+        {/* <span className="countdown">{likes}</span> */}
+        {/* <AnimateNumber>{likes}</AnimateNumber> */}
+       
       </div>
     </div>
   );

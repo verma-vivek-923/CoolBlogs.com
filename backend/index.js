@@ -51,6 +51,6 @@ cloudinary.config({
   api_secret:  process.env.CLOUD_SECRET_KEY // Click 'View API Keys' above to copy your API secret
 });
 
-app.listen(port,()=>{
+app.listen(port,'0.0.0.0',()=>{
     console.log("App is listening on port",port)
 })
