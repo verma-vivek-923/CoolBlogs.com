@@ -40,13 +40,12 @@ const CommentButton = ({ values: { blogId, userId } }) => {
   const textareaRef = useRef(null);
 
   useEffect(() => {
-
-    const getAllComment= async ()=>{
+    const getAllComment = async () => {
       const all_comment = await fetchAllComment(blogId);
-  
+
       setAllComments(all_comment);
       //  (all_comment);
-    }
+    };
     getAllComment();
   }, []);
 
@@ -68,7 +67,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
       return toast.error("Please Login To Comment !!");
     }
 
-    setLoading(true)
+    setLoading(true);
     if (!new_Comment) {
       return;
     }
@@ -139,15 +138,16 @@ const CommentButton = ({ values: { blogId, userId } }) => {
   return (
     <>
       <div className=" dropdown dropdown-end dropdown-bottom ">
-        <div
-          onClick={() => setShowBox(!showBox)}
-          className={`${
-            showBox ? "bg-gray-800/20" : ""
-          } active:scale-90 duration-200 lg:tooltip flex items-center hover:bg-gray-600/15 p-2 rounded-md`}
-          data-tip="Comment"
-        >
-          <PiMessengerLogoDuotone size={20} /> &nbsp;{allComments.length}
-          {/* <span>0</span> */}
+        <div className="lg:tooltip " data-tip="Comment">
+          <div
+            onClick={() => setShowBox(!showBox)}
+            className={`${
+              showBox ? "bg-gray-800/20" : ""
+            } active:scale-90 duration-200 flex items-center hover:bg-gray-600/15 p-2 rounded-md`}
+          >
+            <PiMessengerLogoDuotone size={20} /> &nbsp;{allComments.length}
+            {/* <span>0</span> */}
+          </div>
         </div>
 
         {showBox && (
@@ -198,15 +198,13 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                   >
                     {!loading ? (
                       <>
-                       <span>POST</span> <MdOutlineSend size={14} />
+                        <span>POST</span> <MdOutlineSend size={14} />
                       </>
-                      
                     ) : (
-                        <div>
-                          <CircleLoad/>
-                        </div>
-                    ) }
-                   
+                      <div>
+                        <CircleLoad />
+                      </div>
+                    )}
                   </button>
                 </div>
               </div>
@@ -290,7 +288,6 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                               : "text-blue-900"
                           } active:scale-95  hover:underline duration-300  mr-auto`}
                         >
-                         
                           {!showReply[comment._id]
                             ? "View Replies"
                             : "Hide Replies"}{" "}
@@ -315,7 +312,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                               }}
                               className={` active:scale-95 flex items-center gap-1 hover:underline duration-300 text-green-900 `}
                             >
-                               <HiReply />
+                              <HiReply />
                               Reply
                             </button>
 

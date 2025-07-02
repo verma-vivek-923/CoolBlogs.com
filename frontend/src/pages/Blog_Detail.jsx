@@ -111,7 +111,7 @@ function Detail() {
 
                 {/* Blog Creator , Created Time and like comment seection */}
                 <div className="flex w-full flex-col md:flex-row items-start md:items-center justify-between mt-4">
-                  <div className="flex w-full md:w-1/2 space-x-1  items-center">
+                  <div className="flex  space-x-1  items-center">
                     <img
                       src={blogs?.adminPhoto}
                       alt="author_avatar"
