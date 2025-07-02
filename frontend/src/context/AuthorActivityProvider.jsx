@@ -7,17 +7,17 @@ const AuthorContext=createContext();
 export const AuthorActivityProvider = ({children}) => {
   const [isFollowed,setIsFollowed]=useState();
 
+  const followAuthor=async (author_Id)=>{
   try {
-     const followAuthor=async (author_Id)=>{
      
     const {data}=await  axiosInstance.post(`/user/${author_Id}/follow`);
 
     setIsFollowed(!isFollowed);
     return data
-  }
   } catch (error) {
     console.log(error)
   }
+}
  
     
 // useEffect(() => {
