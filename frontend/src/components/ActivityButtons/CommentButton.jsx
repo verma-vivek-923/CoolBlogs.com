@@ -19,6 +19,7 @@ import { MdOutlineModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { HiReply } from "react-icons/hi";
 import CircleLoad from "../Loadings/CircleLoad";
+import { AnimatePresence, motion } from "motion/react"
 
 const CommentButton = ({ values: { blogId, userId } }) => {
   const [newComment, setNewComment] = useState();
@@ -138,6 +139,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
   return (
     <>
       <div className=" dropdown dropdown-end dropdown-bottom ">
+
         <div className="lg:tooltip " data-tip="Comment">
           <div
             onClick={() => setShowBox(!showBox)}
@@ -151,8 +153,16 @@ const CommentButton = ({ values: { blogId, userId } }) => {
           </div>
         </div>
 
+<AnimatePresence initial={false}>
         {showBox && (
-          <div className="absolute duration-500 right-0 card border border-gray-400  translate-x-[20%] translate-y-[1%] bg-base-300 rounded-md z-20  shadow-md">
+          <motion.div 
+           initial={{opacity:0,scale:0, x: '20%', y: '1%'}}
+           animate={{opacity:1,scale:1, x: '20%', y: '1%'}}
+          exit={{opacity:0, scale:0, x: '20%', y: '1%'}}
+          style={{ transformOrigin: 'calc(100% - 25%) 10px' }}
+         transition={{duration:0.1}}
+
+          className="absolute duration-500 right-0    left 0 card border border-gray-400  translate-x-[20%] translate-y-[1%] bg-base-300 rounded-md z-20  shadow-md">
             <div className="px-4 py-4 pb-4 ">
               <div className="w-[85dvw] md:w-[50vw] lg:w-[30vw]  gap-2 border-x-1    flex flex-col justify-between items-center border-gray-900  ">
                 <div className="flex  w-full  focus-within:border-2 transition-all duration-100 focus-within:border-blue-800 rounded-sm border border-gray-800 overflow-auto justify-start items-center">
@@ -386,7 +396,11 @@ const CommentButton = ({ values: { blogId, userId } }) => {
 
                       {/* reply box */}
                       {showReply[comment._id] && (
-                        <div className="space-y-1 scale-90 transition-all  duration-300">
+                        <motion.div 
+                        transition={{duration:0.2}}
+                       
+
+                        className="space-y-1 scale-90 transition-all  duration-300">
                           {replyBox[comment._id] && (
                             <div className=" w-[90%] ml-auto mb-4 gap-2 border-x-1  flex flex-col justify-between items-center border-gray-900  ">
                               <div className="flex  w-full rounded focus-within:border-2 transition-all duration-100 focus-within:border-blue-800  border border-gray-800 overflow-auto justify-start items-center">
@@ -510,7 +524,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                               )}
                             </div>
                           ))}
-                        </div>
+                        </motion.div>
                       )}
                     </div>
                   );
@@ -518,8 +532,10 @@ const CommentButton = ({ values: { blogId, userId } }) => {
               </div>
             </div>
             {/* <button className="px-4 py-1 text-md bg-base-300 border border-gray-400   duration-300 absolute right-2 -top-7">✕</button> */}
-          </div>
+          </motion.div>
         )}
+
+</AnimatePresence>
 
         {showBox && (
           <div

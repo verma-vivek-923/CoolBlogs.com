@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useActivity } from "../../context/BlogActivityProvider";
 import { PiHeartStraightDuotone } from "react-icons/pi";
 import toast from "react-hot-toast";
+import { RiHeartFill } from "react-icons/ri";
 // import { motion,AnimateNumber } from "motion/react"
 
 const LikeButton = ({ values: { user, blog } }) => {
@@ -44,14 +45,20 @@ const LikeButton = ({ values: { user, blog } }) => {
         onClick={handleLike}
         className=" flex flex-row active:scale-95 items-center hover:bg-gray-600/15 p-2 rounded-md"
       >
-        <PiHeartStraightDuotone
-          className={`${isLiked ? "text-red-800 " : ""}`}
-          size={20}
-        />{" "}
+        {isLiked ? (
+          <RiHeartFill       
+            className={`${isLiked ? "text-red-800 " : ""}`}
+            size={20}
+          />
+        ) : (
+          <PiHeartStraightDuotone
+            className={`${isLiked ? "text-red-800 " : ""}`}
+            size={20}
+          />
+        )}
         &nbsp;{likes}
         {/* <span className="countdown">{likes}</span> */}
         {/* <AnimateNumber>{likes}</AnimateNumber> */}
-       
       </div>
     </div>
   );
