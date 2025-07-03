@@ -446,7 +446,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                                 <h1 className="text-md font-semibold ">
                                   @ {reply?.commentedBy?.name} |{" "}
                                 </h1>
-                                <h2 className="text-sm">| 1 day ago</h2>
+                                <h2 className="text-sm"> | {moment(reply.createdAt).fromNow()}</h2>
                               </div>
 
                               {/* <p className="text-sm px-4">{reply.comment}</p> */}
