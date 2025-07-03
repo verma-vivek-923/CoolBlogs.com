@@ -3,6 +3,7 @@ import { PiShareFatDuotone } from "react-icons/pi";
 import toast from "react-hot-toast";
 import { IoMdPrint } from "react-icons/io";
 import {} from "react-to-print";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 const ShareButton = ({ values: { url, tittle } }) => {
   const [shareLink, setShareLink] = useState(url);
@@ -72,13 +73,13 @@ const ShareButton = ({ values: { url, tittle } }) => {
               placeholder="Write Your Task"
               value={shareLink}
               onChange={(e) => setShareLink(e.target.value)}
-              className="flex-grow bg-transparent text-[#0d0d0d] text-md outline-none px-2 lg:px-4 py-1   rounded-md "
+              className="flex-grow bg-transparent w-full text-[#0d0d0d] text-md outline-none px-2 lg:px-4 py-1   rounded-md "
             />
             <button
               onClick={handleCopyLink}
-              className=" px-2 py-2 bg-[#212121] text-sm flex items-center hover:bg-[#0d0d0d] text-gray-200 font-semibold rounded-md shadow-md  scale-105 hover:scale-110 transition-transform"
+              className=" px-2 py-1 bg-[#212121] text-sm flex items-center hover:bg-[#0d0d0d] text-gray-200 font-semibold rounded-md shadow-md  scale-105 hover:scale-110 "
             >
-              {copied ? "✔️ Copied" : "Copy Link"}
+              {copied ?"✔️ Copied": "Copy Link"}
             </button>
           </div>
 
