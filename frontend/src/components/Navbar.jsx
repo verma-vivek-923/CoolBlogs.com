@@ -15,6 +15,7 @@ import { FaMagnifyingGlass } from "react-icons/fa6";
 import { FiArrowLeft } from "react-icons/fi";
 import axios from "axios";
 import Searchbar from "../pages/Searchbar";
+import { motion } from "motion/react";
 
 function Navbar() {
   const { profile, setIsAuthenticated } = useAuth();
@@ -80,14 +81,14 @@ function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 left-0 bg-inherit shadow-xl px-2 py-1 border z-50">
+      <nav className="sticky top-0 left-0 bg-inherit shadow-xl px-2 py-1 border z-[50]">
         <div className="flex justify-between items-center container mx-auto ">
           <div className="font-semibold pl-4 text-xl">
             Cool<span className="text-blue-600">Blogs</span>
           </div>
           {/* Desktop */}
           <div className="flex ">
-            <ul className="hidden md:flex space-x-4">
+            <motion.ul className="hidden md:flex space-x-4">
               <Link
                 className=" hover:text-blue-600 hover:tracking-wider hover:font-semibold transition-all duration-300 px-2 py-1 text-1.5xl md:text-base rounded"
                 to="/"
@@ -118,7 +119,7 @@ function Navbar() {
               >
                 CONTACT US
               </Link>
-            </ul>
+            </motion.ul>
           </div>
           <div className=" absolute right-[7.5rem]">
             <div className="hidden mr-8 lg:flex">
@@ -143,8 +144,7 @@ function Navbar() {
             </div>
           )} */}
 
-
-            {/* //Dashboard Navigation and Profile  */}
+          {/* //Dashboard Navigation and Profile  */}
           <div className="flex relative  items-center ">
             <div>
               {token ? (
@@ -165,7 +165,8 @@ function Navbar() {
                     <Link
                       onClick={() => setShow(!show)}
                       smooth="true"
-                      className={`${""
+                      className={`${
+                        ""
                         // !token ? "hidden" : "flex"
                       } flex  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2  text-sm md:text-base  rounded`}
                       to="/dashboard"
@@ -176,8 +177,9 @@ function Navbar() {
                     <Link
                       onClick={handleLogout}
                       smooth="true"
-                      className={`${""
-                        // !token ? "hidden" : "flex" 
+                      className={`${
+                        ""
+                        // !token ? "hidden" : "flex"
                       } flex items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2  text-sm md:text-base  rounded`}
                     >
                       <TbLogout size={14} />
@@ -185,14 +187,14 @@ function Navbar() {
                     </Link>
                   </ul>
                 </div>
-             ) : ( 
+              ) : (
                 <Link
                   to="/login"
                   className={`block text-base text-gray-900 tracking-wider md:border border-gray-900 md:font-semibold hover:text-white hover:bg-red-800 duration-300 px-2  rounded`}
                 >
                   LogIn
                 </Link>
-               )} 
+              )}
             </div>
 
             {/* //hamburger menu Button for mobile */}
@@ -225,95 +227,110 @@ function Navbar() {
         {/* Mobile */}
         {show && (
           <>
-            <div className={`absolute shadow-lg  w-full left-0 z-50 `}>
-              <ul className="z-50 flex flex-col px-4 pb-4 bg-slate-200 justify-center items-right md:hidden rounded-b-lg  text-xl space-y-1">
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className="hover:text-blue-600 flex  items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 py- text-base md:text-sm  rounded"
-                  to="/"
+            <motion.div
+              // initial={{y:"-100%"}}
+              // animate={{ y:0}}
+              // transition={{duration:0.5}}
+
+              className={`absolute shadow-lg  w-full left-0 z-[-10] `}
+            >
+              <div className="bg-slate-200 rounded-b-lg">
+                <motion.ul
+                  initial={{ y: "10px" }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.3 }}
+
+
+                  className=" flex flex-col px-4 pb-4  justify-center items-right md:hidden   text-xl space-y-1"
                 >
-                  <IoHome size={13} /> <span>HOME</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className="hover:text-blue-600 flex  items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
-                  to="/blogs"
-                >
-                  <ImBlogger size={12} /> <span> BLOGS</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className="hover:text-blue-600 flex items-center  gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
-                  to="/creators"
-                >
-                  <FaUsersLine size={14} />
-                  <span>CREATORS</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className="hover:text-blue-600 flex items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 py- text-base md:text-sm  rounded"
-                  to="/about"
-                >
-                  <IoMdInformationCircle size={14} />
-                  <span>ABOUT</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className="hover:text-blue-600 flex items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
-                  to="/contact"
-                >
-                  <FaPhoneVolume size={13} />
-                  <span>CONTACT US</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className={`${
-                    token ? "hidden" : "flex"
-                  } items-center  gap-2  text-green-800  duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 text-base md:text-sm  rounded`}
-                  to="/login"
-                >
-                  <FaRegCircleUser size={14} /> <span>Log In</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className={`${
-                    token ? "hidden" : "flex"
-                  }  items-center  gap-2  text-green-800 duration-150 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded`}
-                  to="/register"
-                >
-                  <FaRegCircleUser size={14} />
-                  <span>Sign Up</span>
-                </Link>
-                <Link
-                  onClick={() => setShow(!show)}
-                  smooth="true"
-                  className={`${
-                    !token ? "hidden" : "flex"
-                  }  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded`}
-                  to="/dashboard"
-                >
-                  <FaRegCircleUser size={14} />
-                  <span>Dashboard</span>
-                </Link>
-                <Link
-                  onClick={handleLogout}
-                  smooth="true"
-                  className={`${
-                    !token ? "hidden" : "flex"
-                  }  items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2 py- text-base md:text-sm  rounded`}
-                >
-                  <TbLogout size={14} />
-                  <span>Log Out</span>
-                </Link>
-              </ul>
-            </div>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className="hover:text-blue-600 flex  items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 py- text-base md:text-sm  rounded"
+                    to="/"
+                  >
+                    <IoHome size={13} /> <span>HOME</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className="hover:text-blue-600 flex  items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
+                    to="/blogs"
+                  >
+                    <ImBlogger size={12} /> <span> BLOGS</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className="hover:text-blue-600 flex items-center  gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
+                    to="/creators"
+                  >
+                    <FaUsersLine size={14} />
+                    <span>CREATORS</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className="hover:text-blue-600 flex items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 py- text-base md:text-sm  rounded"
+                    to="/about"
+                  >
+                    <IoMdInformationCircle size={14} />
+                    <span>ABOUT</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className="hover:text-blue-600 flex items-center gap-2 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded"
+                    to="/contact"
+                  >
+                    <FaPhoneVolume size={13} />
+                    <span>CONTACT US</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className={`${
+                      token ? "hidden" : "flex"
+                    } items-center  gap-2  text-green-800  duration-200 hover:font-semibold hover:tracking-wider hover:underline  px-2 text-base md:text-sm  rounded`}
+                    to="/login"
+                  >
+                    <FaRegCircleUser size={14} /> <span>Log In</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className={`${
+                      token ? "hidden" : "flex"
+                    }  items-center  gap-2  text-green-800 duration-150 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded`}
+                    to="/register"
+                  >
+                    <FaRegCircleUser size={14} />
+                    <span>Sign Up</span>
+                  </Link>
+                  <Link
+                    onClick={() => setShow(!show)}
+                    smooth="true"
+                    className={`${
+                      !token ? "hidden" : "flex"
+                    }  items-center  gap-2  text-green-800 duration-200 hover:font-semibold hover:tracking-wider hover:underline px-2 py- text-base md:text-sm  rounded`}
+                    to="/dashboard"
+                  >
+                    <FaRegCircleUser size={14} />
+                    <span>Dashboard</span>
+                  </Link>
+                  <Link
+                    onClick={handleLogout}
+                    smooth="true"
+                    className={`${
+                      !token ? "hidden" : "flex"
+                    }  items-center gap-2 text-red-800 duration-150 hover:font-semibold hover:underline hover:tracking-wider  px-2 py- text-base md:text-sm  rounded`}
+                  >
+                    <TbLogout size={14} />
+                    <span>Log Out</span>
+                  </Link>
+                </motion.ul>
+              </div>
+            </motion.div>
           </>
         )}
 
