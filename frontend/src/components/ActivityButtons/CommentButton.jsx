@@ -310,7 +310,7 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                           <>
                             {/* Reply Button */}
                             <button
-                              disabled={!isAuthor(comment)}
+                              // disabled={!isAuthor(comment)}
                               onClick={() => {
                                 //  (replyBox);
                                 setReplyBox({
@@ -406,11 +406,11 @@ const CommentButton = ({ values: { blogId, userId } }) => {
                               <div className="flex  w-full rounded focus-within:border-2 transition-all duration-100 focus-within:border-blue-800  border border-gray-800 overflow-auto justify-start items-center">
                                 <textarea
                                   name={newReply}
-                                  placeholder="Type a Comment"
+                                  placeholder="Type a Reply"
                                   value={newReply}
                                   rows={2}
                                   onChange={(e) => setNewReply(e.target.value)}
-                                  className="input resize-y h-7  flex-grow  rounded-md  "
+                                  className="resize-y h-7 px-2  flex-grow  rounded-md  "
                                 />
                               </div>
 
