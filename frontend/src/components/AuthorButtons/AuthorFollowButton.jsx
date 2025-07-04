@@ -31,14 +31,14 @@ const AuthorFollowButton = ({ values: { author } }) => {
   }, []);
 
   return (
-    <div className="ml-4 flex flex-col items-center">
+    <div className="ml-auto flex flex-col items-center">
       <button
         onClick={handleFollow}
         className={`${
           isFollowed
-            ? "bg-green-900/40 text-green-900 hover:bg-green-900/50"
-            : "bg-blue-800/90 "
-        } active:scale-95 flex items-center gap-1 text-xs  duration-30 rounded-[4px]  text-gray-200 px-2 py-1 lg:px-4`}
+            ? "bg-green-900/40 text-green-900 hover:bg-green-900/50 px-2 py-1"
+            : "bg-blue-800/90 px-4"
+        } active:scale-95 flex items-center gap-1 text-sm lg:text-base  duration-30 rounded-[4px]  text-gray-200  py-1 lg:px-4`}
       >
         {!loading ? (
           <>

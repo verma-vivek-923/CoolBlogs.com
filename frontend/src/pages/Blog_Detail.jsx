@@ -110,12 +110,13 @@ function Detail() {
                 </div>
 
                 {/* Blog Creator , Created Time and like comment seection */}
-                <div className="flex w-full flex-col md:flex-row items-start md:items-center justify-between mt-4">
-                  <div className="flex  space-x-1  items-center">
-                    <img
+                <div className="flex w-full flex-col  md:flex-row items-start md:items-center justify-between mt-4">
+                  <div className="flex w-full justify-between md:w-1/2 pr-6 space-x-1  items-center">
+                    <div className="flex space-x-1 items-center">
+                       <img
                       src={blogs?.adminPhoto}
                       alt="author_avatar"
-                      className="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
+                      className="w-8 h-8 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
                     />
                     <div className="flex items-start leading-none justify-center flex-col ">
                       <p className="text-xs  capitalize  text-gray-700 ">
@@ -131,7 +132,8 @@ function Detail() {
                         year: "numeric",
                       })}
                     </span>
-                    <div className="ml-auto">
+                    </div>
+                    <div className="  ">
                       <AuthorFollowButton values={{author:blogs?.createdBy}} />
                     </div>
                   </div>
