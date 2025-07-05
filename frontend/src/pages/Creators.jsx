@@ -38,6 +38,8 @@ function Creators() {
                     <p className="text-sm text-center text-gray-500 capitalize">
                       {element.role}
                     </p>
+                    <p>{"following"}</p>
+                    <p>"Followers"</p>
                     <h1
                       className="text-md capitalize truncate text-center bg-slate-300 px-1  py-1 bottom-1 left-3 text-gray-800  overflow-hidden  transition-all duration-300 group-hover:tracking-wider"
                       style={{ whiteSpace: "nowrap" }}
