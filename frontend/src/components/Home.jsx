@@ -24,7 +24,7 @@ function Home({setComponent}) {
       <Creators_home />
 
     { isAuthenticated &&
-     <div className=" fixed group bg-blue-600 hover:bg-blue-800 text-white rounded-lg right-10 lg:right-12  bottom-8">
+     <div className=" fixed group bg-blue-900/90  hover:bg-blue-800 text-white rounded-lg right-10 lg:right-12  bottom-8">
         <button onClick={handleClick} className="flex items-center p-2">
           <LuPlus size={32} />
           <p className="hidden lg:block transition-all duration-300 origin-left">

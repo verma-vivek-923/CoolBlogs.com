@@ -15,6 +15,9 @@ import LikeButton from "../components/ActivityButtons/LikeButton";
 import CommentButton from "../components/ActivityButtons/CommentButton";
 import ShareButton from "../components/ActivityButtons/ShareButton";
 import AuthorFollowButton from "../components/AuthorButtons/AuthorFollowButton";
+import { IoIosArrowDown, IoIosArrowDropdown } from "react-icons/io";
+import { RiArrowDownWideLine } from "react-icons/ri";
+import { SlArrowDown } from "react-icons/sl";
 
 function Detail() {
   const { id } = useParams();
@@ -22,7 +25,8 @@ function Detail() {
   const [isLiked, setIsLiked] = useState();
   const [show, setShow] = useState();
   const [loading, setLoading] = useState();
-  const [followers,setFollowers]= useState();
+  const [followers, setFollowers] = useState();
+  const [showMore, setShowMore] = useState();
 
   const { likeBlog } = useActivity();
 
@@ -48,25 +52,22 @@ function Detail() {
         console.log(data.find_blog);
         setblogs(data.find_blog);
 
-        setFollowers(data.find_blog?.createdBy?.followedBy?.length)
-    
+        setFollowers(data.find_blog?.createdBy?.followedBy?.length);
       } catch (error) {
         // console.log(error);
       }
     };
     fetchblogs();
-
   }, [id]);
 
   useEffect(() => {
-    if (blogs?.createdBy === profile?._id) {
+    console.log(blogs,profile)
+    if (blogs?.createdBy?._id === profile?._id) {
       setShow(true);
     } else {
       setShow(false);
     }
   }, [blogs, profile]);
-
-
 
   return (
     <div>
@@ -95,13 +96,24 @@ function Detail() {
               {/* Blog Meta Info Section */}
               <div>
                 {/* Blog  Tittle and Update Button */}
-                <div className="flex justify-between px-4">
-                  <h1 className="text-xl md:text-2xl lg:text-3xl capitalize font-semibold text-indigo-800">
+                <div className="flex gap-2 items-center  px-4">
+                  {/* <div> */}
+                     <h1 className="text-xl md:text-2xl lg:text-3xl capitalize font-semibold text-indigo-800">
                     {blogs?.tittle}
                   </h1>
+                  {/* <span className="font-light">|</span> */}
+                  <span className="text-[10px] lg:text-sm ">
+                    {new Date(blogs?.createdAt).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
+                  </span>
+                  {/* </div> */}
+                 
                   <Link
                     to={`/blog/update/${blogs._id}`}
-                    className={`border-2 ${
+                    className={`border-2 ml-auto ${
                       show ? "flex" : "hidden"
                     }  items-center text-sm gap-2 rounded-md px-2 py-1 bg-red-500 hover:bg-red-600 text-white duration-300`}
                   >
@@ -111,30 +123,37 @@ function Detail() {
 
                 {/* Blog Creator , Created Time and like comment seection */}
                 <div className="flex w-full flex-col  md:flex-row items-start md:items-center justify-between mt-4">
-                  <div className="flex w-full justify-between md:w-1/2 pr-6 space-x-1  items-center">
+                  <div className="flex w-full gap-2 justify-between md:justify-start md:w-2/3 pr-6 space-x-1  items-center">
                     <div className="flex space-x-1 items-center">
-                       <img
-                      src={blogs?.adminPhoto}
-                      alt="author_avatar"
-                      className="w-8 h-8 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
-                    />
-                    <div className="flex items-start leading-none justify-center flex-col ">
-                      <p className="text-xs  capitalize  text-gray-700 ">
-                        By: {blogs.adminName}
-                      </p>
-                      <span className="text-[10px]">{followers} Followers</span>
-                    </div>
-                    <span className="font-light">|</span>
-                    <span className="text-[10px] lg:text-sm ">
-                      {new Date(blogs?.createdAt).toLocaleDateString("en-GB", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                      })}
-                    </span>
+                      <img
+                        src={blogs?.adminPhoto}
+                        alt="author_avatar"
+                        className="w-8 h-8 md:w-8 md:h-8 object-cover rounded-full border-2 border-yellow-800"
+                      />
+                      <div className="flex items-start leading-none justify-center flex-col ">
+                        <p className="text-xs  capitalize  text-gray-700 ">
+                          By: {blogs.adminName}
+                        </p>
+                        <span className="text-[10px]">
+                          {followers} Followers
+                        </span>
+                      </div>
+                      <span className="font-light">|</span>
+                      {/* <span className="text-[10px] lg:text-sm ">
+                        {new Date(blogs?.createdAt).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "2-digit",
+                            year: "numeric",
+                          }
+                        )}
+                      </span> */}
                     </div>
                     <div className="  ">
-                      <AuthorFollowButton values={{author:blogs?.createdBy}} />
+                      <AuthorFollowButton
+                        values={{ author: blogs?.createdBy }}
+                      />
                     </div>
                   </div>
 
@@ -182,7 +201,26 @@ function Detail() {
                 <div className=" border-t border-gray-300" />
               </div>
 
-              <div className="mt-6 mb-12 text-gray-600">{blogs?.about}</div>
+              <div className="my-8 px-4 flex flex-col  text-justify">
+                <p
+                  className={` ${
+                    showMore ? "" : "line-clamp-4"
+                  }  text-gray-600`}
+                >
+                  {" "}
+                  {blogs?.about}
+                </p>
+                <button
+                  onClick={() => setShowMore(!showMore)}
+                  className="flex  text-blue-800 px-2 py-1 rounded-md font-semibold hover:underline items-center text-sm gap-[2px]  ml-auto mr-4"
+                >
+                  <IoIosArrowDown
+                    className={`${showMore ? "rotate-180" : ""} duration-500 `}
+                    size={20}
+                  />
+                  {showMore ? "Show Less" : "Show More"}{" "}
+                </button>
+              </div>
             </div>
           ) : (
             <div className="h-96 flex px-2 py-4 justify-center">
